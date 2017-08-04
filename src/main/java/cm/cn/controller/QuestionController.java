@@ -1,10 +1,13 @@
 package cm.cn.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cm.cn.po.JsQuesion;
@@ -12,23 +15,25 @@ import cm.cn.service.QuestionService;
 import cm.cn.util.ExcelUtil;
 
 @Controller
+@RequestMapping("/question")
 public class QuestionController {
 
 	@Autowired
 	QuestionService questionService;
 	
-	@RequestMapping("/test")
+	@RequestMapping("/addQuesBatch")
 	@ResponseBody
-	public int s(){
+	public Map<Integer, String> addQuesBatch(){
+		Map<Integer, String> map = new HashMap<>();
 		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\电工.xlsx";
 		List<JsQuesion> list = ExcelUtil.excelToQues(filePath);
-		return questionService.insertList(list);
-	}
-	@RequestMapping("/selectAllQues")
-	@ResponseBody
-	public List<JsQuesion> selectAllQues(){
-		List<JsQuesion> list = questionService.selectAllQuestion();
-		return list;
+		if (questionService.insertList(list)>0){
+			map.put(0, "success");
+		}
+		else{
+			map.put(1, "fail");
+		}
+		return map;
 	}
 	@RequestMapping("/selectCount")
 	@ResponseBody
@@ -36,16 +41,18 @@ public class QuestionController {
 		int num = questionService.selectCount(type_id);
 		return num;
 	}
-	@RequestMapping("/selectTypeQuestion")
-	@ResponseBody
-	public List<JsQuesion> selectTypeQuestion(int type_id){
-		List<JsQuesion> list = questionService.selectTypeQuestion(type_id);
-		return list;
-	}
 	@RequestMapping("/selectRandomQuestion")
 	@ResponseBody
-	public List<JsQuesion> selectRandomQuestion(int type_id,int begin,int total){
-		List<JsQuesion> list = questionService.selectRandomQuestion(type_id,begin,total);
+	public List<JsQuesion> selectRandomQuestion(int type_id,int total){
+		List<JsQuesion> list = questionService.selectRandomQuestion(type_id,total);
 		return list;
+	}
+	@RequestMapping("/selectExample")
+	@ResponseBody
+	public List<JsQuesion> selectExample(@RequestParam(value ="ques_type",required =false,defaultValue="0") int ques_type,@RequestParam(value ="difficult_type",required =false,defaultValue="0") int difficult_type){
+		List<JsQuesion> list= questionService.selectQues(ques_type, difficult_type);
+		System.out.println(list.size());
+		return list;
+//		return questionService.selectQues(ques_type, difficult_type);
 	}
 }

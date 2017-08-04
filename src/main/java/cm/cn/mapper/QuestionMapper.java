@@ -21,4 +21,6 @@ public interface QuestionMapper {
 	public int selectCount(int type_id);
 	//分类别查询所有题目
 	public List<JsQuesion> selectTypeQuestion(int type_id);
+	//根据主键 id 数组查询答案
+	public List<String> selectAnswer(String[] array);
 }

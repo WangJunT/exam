@@ -6,11 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import cm.cn.po.JsCasequestion;
 import cm.cn.po.JsQuesion;
+import cm.cn.po.JsUser;
 
 public class ExcelUtil {
 	/**
@@ -63,8 +66,93 @@ public class ExcelUtil {
 					jsQuesion.setAnswer(answer);
 					list.add(jsQuesion);
 				}
-//		System.out.println(list.size());
 		return list;
-		
 	}
+	/**
+	 * 批量导入学生
+	 * @param filePath
+	 * @return
+	 */
+	public static List<JsUser> excelToStu(String filePath) {
+		List<JsUser> list = new ArrayList<JsUser>();
+		FileInputStream excelFileInputStream;
+		XSSFWorkbook workbook = null;
+		try {
+			excelFileInputStream = new FileInputStream(filePath);
+			workbook = new XSSFWorkbook(excelFileInputStream);
+			excelFileInputStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		XSSFSheet sheet = workbook.getSheetAt(0);
+				for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+					JsUser jsUser = new JsUser();
+					XSSFRow row = sheet.getRow(rowIndex);
+					if (row == null) {
+					continue;
+					}
+					String name = row.getCell(0).getStringCellValue(); // 姓名
+					//先设置Cell的类型，然后就可以把纯数字作为String类型读进来了：
+					row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+					String phone = row.getCell(1).getStringCellValue(); // 电话
+					String id_card = row.getCell(2).getStringCellValue();//身份证
+					String class_num =  row.getCell(3).getStringCellValue();//班级
+					String stu_type = row.getCell(4).getStringCellValue();//学生类别
+					row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+					String pass = row.getCell(5).getStringCellValue();//密码
+					jsUser.setIdcard(id_card);
+					jsUser.setStuType(stu_type);
+					jsUser.setPassword(pass);
+					jsUser.setPhone(phone);
+					jsUser.setRealname(class_num);
+					jsUser.setUsername(name);
+					jsUser.setRoleId(3);
+					list.add(jsUser);
+				}
+		return list;
+	} 
+//	public static List<JsCasequestion> excelToJsCase(String path){
+//		List<JsCasequestion> list = new ArrayList<JsUser>();
+//		FileInputStream excelFileInputStream;
+//		XSSFWorkbook workbook = null;
+//		try {
+//			excelFileInputStream = new FileInputStream(path);
+//			workbook = new XSSFWorkbook(excelFileInputStream);
+//			excelFileInputStream.close();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}catch(IOException e){
+//			e.printStackTrace();
+//		}
+//		
+//		XSSFSheet sheet = workbook.getSheetAt(0);
+//				for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+//					JsUser jsUser = new JsUser();
+//					XSSFRow row = sheet.getRow(rowIndex);
+//					if (row == null) {
+//					continue;
+//					}
+//					String name = row.getCell(0).getStringCellValue(); // 姓名
+//					//先设置Cell的类型，然后就可以把纯数字作为String类型读进来了：
+//					row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+//					String phone = row.getCell(1).getStringCellValue(); // 电话
+//					String id_card = row.getCell(2).getStringCellValue();//身份证
+//					String class_num =  row.getCell(3).getStringCellValue();//班级
+//					String stu_type = row.getCell(4).getStringCellValue();//学生类别
+//					row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+//					String pass = row.getCell(5).getStringCellValue();//密码
+//					jsUser.setIdcard(id_card);
+//					jsUser.setStuType(stu_type);
+//					jsUser.setPassword(pass);
+//					jsUser.setPhone(phone);
+//					jsUser.setRealname(class_num);
+//					jsUser.setUsername(name);
+//					jsUser.setRoleId(3);
+//					list.add(jsUser);
+//				}
+//		return list;
+//	}
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="resource/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="resource/jquery/jquery.easyui.min.js"></script>
+	<!-- 使文字变成中文 -->
+<script type="text/javascript" src="resource/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="resource/ajaxfileupload.js"></script>
+<script type="text/javascript">
+$(function() {
+	//创建表格
+	$('#table').datagrid({    
+	    url:"stuList.action",
+		title:"试题列表",
+	    fit:true,
+		columns:[[    
+			{field:'',width:"20%",checkbox:'true'},
+	        {field:'stuid',title:'ID',width:"15%"}, 
+	        {field:'name',title:'姓名',width:"15%"}, 
+	        {field:'age',title:'年龄',width:"15%"},
+	        {field:'tName',title:'老师',width:"15%"},
+	        {field:'course',title:'课程',width:"15%"},
+	        {field:'image',title:'头像',width:"15%",
+	        	formatter:function(value,row,index){
+	        		return '<img src="/pic/'+row.image+'"width=70 height=50 />';
+	        	}
+	        },
+	    ]],
+	    iconCls : 'icon-ok',
+	    toolbar:"#tb",
+	    pageSize : 5,//默认选择的分页是每页5行数据
+	    pageList : [ 5, 10, 15],//可以选择的分页集合 
+	    pagination:true,
+	});
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>
