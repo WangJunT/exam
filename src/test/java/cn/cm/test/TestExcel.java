@@ -8,13 +8,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 
+import cm.cn.po.JsCase;
+import cm.cn.po.JsCasequestion;
+import cm.cn.po.JsQuesion;
 import cm.cn.po.JsUser;
+import cm.cn.util.ExcelUtil;
 
 public class TestExcel {
 
@@ -85,4 +92,64 @@ public class TestExcel {
 		}
 		System.out.println(stringBuilder.toString());
 	}
+	@Test
+	public void torray() {
+		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\材料员实务.xls";
+		FileInputStream excelFileInputStream;
+		HSSFWorkbook workbook = null;
+		try {
+			excelFileInputStream = new FileInputStream(filePath);
+			workbook = new HSSFWorkbook(excelFileInputStream);
+			excelFileInputStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		HSSFSheet sheet = workbook.getSheetAt(3);
+		JsCase jsCase = null;
+		JsCasequestion jsCasequestion = null;
+//		int id = 0;
+		for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+			HSSFRow row = sheet.getRow(rowIndex);
+			if (row == null) {
+				continue;
+			}
+			if ((row.getCell(0).getStringCellValue()).contains("、")) {
+				jsCasequestion  = new JsCasequestion();
+//				String case_id = row.getCell(1).getCellFormula();
+				String content = row.getCell(1).getStringCellValue();//题干
+				String an_A = row.getCell(2).getStringCellValue();
+				String an_B = row.getCell(3).getStringCellValue();
+				String an_C = row.getCell(4).getStringCellValue();
+				String an_D = row.getCell(5).getStringCellValue();
+				if (row.getCell(6)!=null){
+					String an_E = row.getCell(6).getStringCellValue();
+					jsCasequestion.setAnE(an_E);
+				}
+				String answer = row.getCell(7).getStringCellValue();
+				jsCasequestion.setContent(content);
+				jsCasequestion.setAnA(an_A);
+				jsCasequestion.setAnB(an_B);
+				jsCasequestion.setAnC(an_C);
+				jsCasequestion.setAnD(an_D);
+				jsCasequestion.setAnswer(answer);
+//				jsCasequestion.setCaseId(id);
+			}else{
+				jsCase = new JsCase();
+				String case_id = row.getCell(0).getStringCellValue();
+				String content = row.getCell(1).getStringCellValue();
+				jsCase.setContent(content);
+//				id = jsCase.getId();
+			}
+		}
+	
+	}
+	@Test
+	public void testD(){
+		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\电工.xlsx";
+		List<JsQuesion> list = ExcelUtil.excelToQues(filePath);
+		System.out.println(list.size());
+	}
+	
 }

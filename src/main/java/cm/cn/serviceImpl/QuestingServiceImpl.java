@@ -5,16 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cm.cn.mapper.JsCaseMapper;
+import cm.cn.mapper.JsCasequestionMapper;
 import cm.cn.mapper.JsQuesionMapper;
 import cm.cn.mapper.QuestionMapper;
+import cm.cn.po.JsCase;
+import cm.cn.po.JsCasequestion;
 import cm.cn.po.JsQuesion;
 import cm.cn.po.JsQuesionExample;
+import cm.cn.po.PageQuestion;
 import cm.cn.service.QuestionService;
 import cm.cn.util.RandomAndSpiltUtil;
 
 @Service
 public class QuestingServiceImpl implements QuestionService {
 
+	
 	@Autowired
 	QuestionMapper questionMapper;
 	@Autowired
@@ -59,6 +65,16 @@ public class QuestingServiceImpl implements QuestionService {
 			criteria.andDifficultTypeEqualTo(difficult_type);
 		}
 		return jsquestionMapper.selectByExample(jsQuesionExample);
+	}
+	@Override
+	public List<JsQuesion> selectJsQuestion(String[] array) {
+		// TODO Auto-generated method stub
+		return questionMapper.selectJsQuestion(array);
+	}
+	@Override
+	public List<JsQuesion> selectJsQuestionlimit(PageQuestion pageQuestion) {
+		// TODO Auto-generated method stub
+		return questionMapper.selectJsQuestionlimit(pageQuestion);
 	}
 
 }

@@ -13,6 +13,16 @@
     </properties>    
     <!-- 用到的jar包 -->    
     <dependencies>    
+    	<dependency>
+            <groupId>com.taobao</groupId>
+            <artifactId>taobao-api</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>com.taobao</groupId> -->
+<!--             <artifactId>taobao-source</artifactId> -->
+<!--             <version>1.0.0.RELEASE</version> -->
+<!--         </dependency> -->
       <!-- 单元测试 -->   
     	<dependency>
     		<groupId>junit</groupId>

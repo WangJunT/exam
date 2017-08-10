@@ -9,4 +9,10 @@ public interface StudentService {
 	public int insertStuList(List<JsUser> stu);
 	//单独添加
 	public int insertStu(JsUser stu);
+	//根据电话号码查询
+	public List<JsUser> selectStu(String phone);
+	//更改学生信息(根据电话号码更改验证码，登录时间)
+	public int updateStu(JsUser jsUser);
+	//根据电话号码更改密码
+	public int updateStuPass(JsUser jsUser);
 }

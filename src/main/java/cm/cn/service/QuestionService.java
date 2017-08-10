@@ -2,7 +2,10 @@ package cm.cn.service;
 
 import java.util.List;
 
+import cm.cn.po.JsCase;
+import cm.cn.po.JsCasequestion;
 import cm.cn.po.JsQuesion;
+import cm.cn.po.PageQuestion;
 
 public interface QuestionService {
 	//批量插入题目（除简答题）
@@ -28,8 +31,13 @@ public interface QuestionService {
 	/**
 	 * 
 	 * @param ques_type 题目类型（1单选2多选3判断）
-	 * @param difficult_type难度程度（1易2中3难）
+	 * @param  difficult_type难度程度（1易2中3难）
 	 * @return
 	 */
 	public List<JsQuesion> selectQues(int ques_type,int difficult_type);
+
+	//根据主键 id 查询JsQuestion
+	public List<JsQuesion> selectJsQuestion(String[] array);
+	//分页查询
+	public List<JsQuesion> selectJsQuestionlimit(PageQuestion pageQuestion);
 }

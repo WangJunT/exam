@@ -1,0 +1,73 @@
+package cm.cn.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cm.cn.po.JsUser;
+import cm.cn.service.StudentService;
+import cm.cn.util.GetCheckCode;
+
+@Controller
+@RequestMapping("/login")
+public class LoginController {
+	@Autowired
+	StudentService studentService;
+	@RequestMapping(value="/beforeLogin",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<Integer, String> beforelogin(String phone){
+		Map<Integer, String> map = new HashMap<>();
+		List<JsUser> list = studentService.selectStu(phone);
+		if(list.size()>0){
+			JsUser jsUser = list.get(0);
+			String check_code = String.valueOf((int)((Math.random()*9+1)*100000));
+			if(GetCheckCode.getCode(phone,check_code)){
+				jsUser.setCheckCode(check_code);
+				jsUser.setChenkTime(System.currentTimeMillis());
+				if(studentService.updateStu(jsUser)>0){
+					map.put(0, "验证码发送成功");
+				}
+				else{
+					map.put(1, "验证码发送发生错误");
+				}
+			}
+			else{
+				map.put(1, "验证码发送发生错误");
+			}
+			
+		}
+		else{
+			map.put(2, "号码不存在");
+		}
+		return map;
+	}
+	@RequestMapping(value="/doLogin",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<Integer, String> dologin(String phone,String chenk_code){
+		Map<Integer, String> map = new HashMap<>();
+		List<JsUser> list = studentService.selectStu(phone);
+		if(list.size()>0){
+			JsUser jsUser = list.get(0);
+			long nowTime = System.currentTimeMillis();
+			long cha = (nowTime-jsUser.getChenkTime())/1000;
+			if(jsUser.getCheckCode().equals(chenk_code)){
+				if(cha<=300)
+					map.put(0, "登陆成功");
+				else {
+					map.put(1, "验证码超时");
+				}
+			}
+			else
+				map.put(2, "验证码错误");
+		}else {
+			map.put(3, "号码不存在");
+		}
+		return map;
+	}
+}

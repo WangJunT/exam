@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cm.cn.po.JsQuesion;
+import cm.cn.po.PageQuestion;
 import cm.cn.service.QuestionService;
+import cm.cn.service.UpCaseQues;
 import cm.cn.util.ExcelUtil;
 
 @Controller
@@ -20,7 +22,16 @@ public class QuestionController {
 
 	@Autowired
 	QuestionService questionService;
-	
+	@Autowired
+	UpCaseQues upCaseQues;
+	@RequestMapping("/addCase")
+	@ResponseBody
+	public Map<Integer, String> addCase(){
+		Map<Integer, String> map = new HashMap<>();
+		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\材料员实务.xls";
+		upCaseQues.excelToJsCase(filePath);
+		return map ;
+	}
 	@RequestMapping("/addQuesBatch")
 	@ResponseBody
 	public Map<Integer, String> addQuesBatch(){
@@ -53,6 +64,12 @@ public class QuestionController {
 		List<JsQuesion> list= questionService.selectQues(ques_type, difficult_type);
 		System.out.println(list.size());
 		return list;
-//		return questionService.selectQues(ques_type, difficult_type);
+	}
+	@RequestMapping("/selectLimit")
+	@ResponseBody
+	public List<JsQuesion> selectLimit(PageQuestion pageQuestion){
+		List<JsQuesion> list= questionService.selectJsQuestionlimit(pageQuestion);
+//		System.out.println(list.size());
+		return list;
 	}
 }

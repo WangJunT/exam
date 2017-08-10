@@ -1,0 +1,60 @@
+{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+html,body{
+    width: 100%;
+    height: auto;
+    overflow-x:hidden;
+}
+.title{
+    width: auto;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.formBox{
+    width: auto;
+    height: auto;
+}
+.formBox .oneItem{
+    width: auto;
+    min-height: 40px;
+    font-size: 0;
+}
+.oneItem label{
+    display: inline-block;
+    height: 30px;
+    min-width: 50px;
+    padding: 0 5px 0 5px;
+    text-align: right;
+    line-height:40px;
+    font-size: 18px;
+}
+.desc{
+    vertical-align: top;
+}
+.input{
+    width: 200px;
+    outline: none;
+    height: 25px;
+    border-radius: 3px;
+    border: #ccc 1px solid;
+    color: #A8A8A8;
+    font-size: 18px;
+}
+.textTrea{
+    width: 300px;
+    min-height: 200px;
+}
+.minInput{
+    width: 60px;
+    outline: none;
+    height: 25px;
+    border-radius: 3px;
+    border: #ccc 1px solid;
+    color: #000;
+}
