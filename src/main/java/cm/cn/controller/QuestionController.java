@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cm.cn.po.JsQuesion;
 import cm.cn.po.PageQuestion;
+import cm.cn.po.RandomQuestion;
 import cm.cn.service.QuestionService;
 import cm.cn.service.UpCaseQues;
 import cm.cn.util.QuesExcelUtil;
@@ -75,6 +76,13 @@ public class QuestionController {
 	public List<JsQuesion> selectLimit(PageQuestion pageQuestion){
 		List<JsQuesion> list= questionService.selectJsQuestionlimit(pageQuestion);
 //		System.out.println(list.size());
+		return list;
+	}
+	@RequestMapping("/selectRan")
+	@ResponseBody
+	public List<JsQuesion> selectRan(RandomQuestion randomQuestion){
+		List<JsQuesion> list= questionService.selectRan(randomQuestion);
+		System.out.println(list.size());
 		return list;
 	}
 }

@@ -167,9 +167,8 @@
      </foreach>
   </select>
   <!-- 分页查询 -->
- 
   <select id="selectJsQuestionlimit" resultMap="BaseResultMap" parameterType="cm.cn.po.PageQuestion">
-  	 	SELECT
+  	SELECT
 		js.id 'id',
 		js.type_id 'typeId',
 		js.title 'title',
@@ -198,5 +197,36 @@
 	    </if>
   </where>
 	limit #{start},#{size}
+  </select>
+  <select id="selectRan" resultMap="BaseResultMap" parameterType="cm.cn.po.RandomQuestion">
+  	SELECT
+		js.id 'id',
+		js.type_id 'typeId',
+		js.title 'title',
+		js.an_A,
+		js.an_B,
+		js.an_C,
+		js.an_D,
+		js.answer 'answer'
+	FROM
+		js_quesion js
+	<where> 
+	    <if test="typeId != null">
+	         type_id = #{typeId}
+	    </if> 
+	    <if test="leibieType != null">
+	        AND leibie_type = #{leibieType}
+	    </if>
+	    <if test="exam_type != null ">
+	        AND exam_type = #{exam_type}
+	    </if>
+	    <if test="difficult_type != null ">
+	        AND difficult_type = #{difficult_type}
+	    </if>
+	    <if test="know_type != null ">
+	        AND know_type = #{know_type}
+	    </if>
+  </where>
+		ORDER BY RAND()  limit #{total}
   </select>
 </mapper>

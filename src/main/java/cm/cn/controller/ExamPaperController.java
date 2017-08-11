@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cm.cn.po.CaseAndQuestion;
 import cm.cn.po.JsExampaper;
 import cm.cn.po.JsQuesion;
+import cm.cn.po.RandomQuestion;
 import cm.cn.service.CaseQuestionService;
 import cm.cn.service.ExamPaperService;
 import cm.cn.service.QuestionService;
@@ -33,9 +34,12 @@ public class ExamPaperController {
 	@ResponseBody
 	public Map<Integer, String> addQuestion(@RequestBody JsExampaper jsExampaper){
 		Map<Integer, String> map = new HashMap<>();
+		RandomQuestion randomQuestion = new RandomQuestion();
 		int selectOneNum=jsExampaper.getSelectOneNum();
 		if (selectOneNum>0) {
-			List<JsQuesion> select_one = questionService.selectRandomQuestion(1, selectOneNum);
+			randomQuestion.setTypeId(1);
+			randomQuestion.setTotal(selectOneNum);
+			List<JsQuesion> select_one = questionService.selectRan(randomQuestion);
 			String select_one_questionId = RandomAndSpiltUtil.arrayToStr(ListTransfrom.listQuestionToArray(select_one, 1));
 			String select_one_questionAnswer = RandomAndSpiltUtil.arrayToStr(ListTransfrom.listQuestionToArray(select_one, 2));
 			jsExampaper.setSelectOne(select_one_questionId);
@@ -43,7 +47,9 @@ public class ExamPaperController {
 		}
 		int selectMoreNum=jsExampaper.getSelectMoreNum();
 		if (selectMoreNum>0) {
-			List<JsQuesion> select_more = questionService.selectRandomQuestion(2, selectMoreNum);
+			randomQuestion.setTypeId(2);
+			randomQuestion.setTotal(selectMoreNum);
+			List<JsQuesion> select_more = questionService.selectRan(randomQuestion);
 			String select_more_questionId = RandomAndSpiltUtil.arrayToStr(ListTransfrom.listQuestionToArray(select_more, 1));
 			String select_more_questionAnswer = RandomAndSpiltUtil.arrayToStr(ListTransfrom.listQuestionToArray(select_more, 2));
 			jsExampaper.setSelectMore(select_more_questionId);
@@ -51,7 +57,9 @@ public class ExamPaperController {
 		}
 		int judgeNum=jsExampaper.getSelectJudgeNum();
 		if (judgeNum>0) {
-			List<JsQuesion> judge = questionService.selectRandomQuestion(3, judgeNum);
+			randomQuestion.setTypeId(3);
+			randomQuestion.setTotal(judgeNum);
+			List<JsQuesion> judge = questionService.selectRan(randomQuestion);
 			String judge_questionId = RandomAndSpiltUtil.arrayToStr(ListTransfrom.listQuestionToArray(judge, 1));
 			String judge_questionAnswer = RandomAndSpiltUtil.arrayToStr(ListTransfrom.listQuestionToArray(judge, 2));
 			jsExampaper.setJudge(judge_questionId);

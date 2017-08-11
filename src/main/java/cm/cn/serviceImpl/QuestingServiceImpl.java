@@ -10,6 +10,7 @@ import cm.cn.mapper.QuestionMapper;
 import cm.cn.po.JsQuesion;
 import cm.cn.po.JsQuesionExample;
 import cm.cn.po.PageQuestion;
+import cm.cn.po.RandomQuestion;
 import cm.cn.service.QuestionService;
 import cm.cn.util.RandomAndSpiltUtil;
 
@@ -71,6 +72,11 @@ public class QuestingServiceImpl implements QuestionService {
 	public List<JsQuesion> selectJsQuestionlimit(PageQuestion pageQuestion) {
 		// TODO Auto-generated method stub
 		return questionMapper.selectJsQuestionlimit(pageQuestion);
+	}
+	@Override
+	public List<JsQuesion> selectRan(RandomQuestion randomQuestion) {
+		// TODO Auto-generated method stub
+		return questionMapper.selectRan(randomQuestion);
 	}
 
 }
