@@ -151,6 +151,7 @@
   	SELECT
 		js.id 'id',
 		js.title 'title',
+		js.type_id 'typeId',
 		js.an_A,
 		js.an_B,
 		js.an_C,

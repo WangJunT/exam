@@ -1,15 +1,15 @@
 package cm.cn.po;
+
 /**
- * 用于前端分页显示查询
+ * 用于随机组卷
  */
-public class PageQuestion {
+public class RandomQuestion {
 	private Integer typeId;//题目类型（1 单选 2 多选 3 判断）
 	private String leibieType;//A，B，C类
 	private Integer exam_type;//考试类别，必考（1）常规（2）
 	private Integer difficult_type;//试卷难易程度（1-易，2-中，3-难）
 	private Integer know_type;//知识点
-	private Integer start;//limit 前一个字段
-	private Integer size;//limit  后一个字段
+	private Integer total;//需要查询总数
 	public Integer getTypeId() {
 		return typeId;
 	}
@@ -40,16 +40,10 @@ public class PageQuestion {
 	public void setKnow_type(Integer know_type) {
 		this.know_type = know_type;
 	}
-	public Integer getStart() {
-		return start;
+	public Integer getTotal() {
+		return total;
 	}
-	public void setStart(Integer start) {
-		this.start = start;
-	}
-	public Integer getSize() {
-		return size;
-	}
-	public void setSize(Integer size) {
-		this.size = size;
+	public void setTotal(Integer total) {
+		this.total = total;
 	}
 }
