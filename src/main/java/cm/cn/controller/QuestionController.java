@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cm.cn.po.JsQuesion;
@@ -52,30 +51,16 @@ public class QuestionController {
 		}
 		return map;
 	}
-	@RequestMapping("/selectCount")
-	@ResponseBody
-	public int selectCount(int type_id){
-		int num = questionService.selectCount(type_id);
-		return num;
-	}
 	@RequestMapping("/selectRandomQuestion")
 	@ResponseBody
 	public List<JsQuesion> selectRandomQuestion(int type_id,int total){
 		List<JsQuesion> list = questionService.selectRandomQuestion(type_id,total);
 		return list;
 	}
-	@RequestMapping("/selectExample")
-	@ResponseBody
-	public List<JsQuesion> selectExample(@RequestParam(value ="ques_type",required =false,defaultValue="0") int ques_type,@RequestParam(value ="difficult_type",required =false,defaultValue="0") int difficult_type){
-		List<JsQuesion> list= questionService.selectQues(ques_type, difficult_type);
-		System.out.println(list.size());
-		return list;
-	}
 	@RequestMapping("/selectLimit")
 	@ResponseBody
 	public List<JsQuesion> selectLimit(PageQuestion pageQuestion){
 		List<JsQuesion> list= questionService.selectJsQuestionlimit(pageQuestion);
-//		System.out.println(list.size());
 		return list;
 	}
 	@RequestMapping("/selectRan")

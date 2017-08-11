@@ -49,4 +49,11 @@ public class StudentServiceImpl implements StudentService {
 		criteria.andPhoneEqualTo(jsUser.getPhone());
 		return jsUserMapper.updateByExample(jsUser, example);
 	}
+	@Override
+	public List<JsUser> selectBypass(String username) {
+		JsUserExample example = new JsUserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUsernameEqualTo(username);
+		return jsUserMapper.selectByExample(example);
+	}
 }

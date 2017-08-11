@@ -15,7 +15,7 @@ import cm.cn.service.StudentService;
 import cm.cn.util.GetCheckCode;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/index")
 public class LoginController {
 	@Autowired
 	StudentService studentService;
@@ -69,5 +69,24 @@ public class LoginController {
 			map.put(3, "号码不存在");
 		}
 		return map;
+	}
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer, String> login(String username,String pass){
+		Map<Integer, String> map = new HashMap<>();
+		List<JsUser> list = studentService.selectBypass(username);
+		if (list.size()>0) {
+			JsUser jsUser = list.get(0);
+			if (pass.equals(jsUser.getPassword())) {
+				map.put(0, "登陆成功");
+			}
+			else{
+				map.put(1, "密码错误");
+			}
+		}
+		else {
+			map.put(2, "该用户不存在");
+		}
+		return map ;
 	}
 }

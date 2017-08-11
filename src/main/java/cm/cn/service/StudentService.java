@@ -15,4 +15,6 @@ public interface StudentService {
 	public int updateStu(JsUser jsUser);
 	//根据电话号码更改密码
 	public int updateStuPass(JsUser jsUser);
+	//使用用户密码的方式登陆
+	public List<JsUser> selectBypass(String username);
 }
