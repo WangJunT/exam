@@ -5,12 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cm.cn.mapper.JsCaseMapper;
-import cm.cn.mapper.JsCasequestionMapper;
 import cm.cn.mapper.JsQuesionMapper;
 import cm.cn.mapper.QuestionMapper;
-import cm.cn.po.JsCase;
-import cm.cn.po.JsCasequestion;
 import cm.cn.po.JsQuesion;
 import cm.cn.po.JsQuesionExample;
 import cm.cn.po.PageQuestion;

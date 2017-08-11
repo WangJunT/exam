@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import cm.cn.mapper.JsExampaperMapper;
 import cm.cn.po.JsExampaper;
 import cm.cn.po.JsExampaperExample;
-import cm.cn.po.JsExampaperExample.Criteria;
 
 @Service
 public class ExamPaperServiceImpl implements cm.cn.service.ExamPaperService {
@@ -24,7 +23,6 @@ public class ExamPaperServiceImpl implements cm.cn.service.ExamPaperService {
 	public List<JsExampaper> selectAll() {
 		// TODO Auto-generated method stub
 		JsExampaperExample example = new JsExampaperExample();
-		Criteria criteria = example.createCriteria();
 		return jsExampaperMapper.selectByExample(example);
 	}
 	@Override

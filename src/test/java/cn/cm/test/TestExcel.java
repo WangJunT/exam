@@ -20,8 +20,7 @@ import org.junit.Test;
 import cm.cn.po.JsCase;
 import cm.cn.po.JsCasequestion;
 import cm.cn.po.JsQuesion;
-import cm.cn.po.JsUser;
-import cm.cn.util.ExcelUtil;
+import cm.cn.util.QuesExcelUtil;
 
 public class TestExcel {
 
@@ -42,7 +41,7 @@ public class TestExcel {
 		
 		XSSFSheet sheet = workbook.getSheetAt(0);
 				for (int rowIndex = 1; rowIndex <= 3; rowIndex++) {
-					JsUser jsUser = new JsUser();
+//					JsUser jsUser = new JsUser();
 					XSSFRow row = sheet.getRow(rowIndex);
 					if (row == null) {
 					continue;
@@ -137,7 +136,7 @@ public class TestExcel {
 //				jsCasequestion.setCaseId(id);
 			}else{
 				jsCase = new JsCase();
-				String case_id = row.getCell(0).getStringCellValue();
+//				String case_id = row.getCell(0).getStringCellValue();
 				String content = row.getCell(1).getStringCellValue();
 				jsCase.setContent(content);
 //				id = jsCase.getId();
@@ -148,7 +147,7 @@ public class TestExcel {
 	@Test
 	public void testD(){
 		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\ต็นค.xlsx";
-		List<JsQuesion> list = ExcelUtil.excelToQues(filePath);
+		List<JsQuesion> list = QuesExcelUtil.excelToQues(filePath);
 		System.out.println(list.size());
 	}
 	

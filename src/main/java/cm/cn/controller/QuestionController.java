@@ -14,7 +14,7 @@ import cm.cn.po.JsQuesion;
 import cm.cn.po.PageQuestion;
 import cm.cn.service.QuestionService;
 import cm.cn.service.UpCaseQues;
-import cm.cn.util.ExcelUtil;
+import cm.cn.util.QuesExcelUtil;
 
 @Controller
 @RequestMapping("/question")
@@ -37,12 +37,17 @@ public class QuestionController {
 	public Map<Integer, String> addQuesBatch(){
 		Map<Integer, String> map = new HashMap<>();
 		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\电工.xlsx";
-		List<JsQuesion> list = ExcelUtil.excelToQues(filePath);
-		if (questionService.insertList(list)>0){
-			map.put(0, "success");
+		List<JsQuesion> list = QuesExcelUtil.excelToQues(filePath);
+		if (list.size()>0) {
+			if (questionService.insertList(list)>0){
+				map.put(0, "上传成功");
+			}
+			else{
+				map.put(1, "添加失败");
+			}
 		}
 		else{
-			map.put(1, "fail");
+			map.put(2, "文件格式错误或数据有误");
 		}
 		return map;
 	}

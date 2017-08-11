@@ -2,8 +2,6 @@ package cm.cn.service;
 
 import java.util.List;
 
-import cm.cn.po.JsCase;
-import cm.cn.po.JsCasequestion;
 import cm.cn.po.JsQuesion;
 import cm.cn.po.PageQuestion;
 
