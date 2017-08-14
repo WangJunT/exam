@@ -93,25 +93,28 @@ public class ExamPaperController {
 			String[] selectOneid = RandomAndSpiltUtil.strToArray(selectOne);
 			List<JsQuesion> selectOnelist = questionService.selectJsQuestion(selectOneid);
 			map.put(0, selectOnelist);
+			map.put(4, jsExampaper.getSelectOneScore());
 		}
 		String selectMore = jsExampaper.getSelectMore();
 		if (selectMore!=null) {
 			String[] selectMoreid = RandomAndSpiltUtil.strToArray(selectMore);
 			List<JsQuesion> selectMorelist = questionService.selectJsQuestion(selectMoreid);
 			map.put(1, selectMorelist);
+			map.put(5, jsExampaper.getSelectMoreScore());
 		}
 		String judges = jsExampaper.getJudge();
 		if (judges!=null){
 			String[] judge = RandomAndSpiltUtil.strToArray(judges);
 			List<JsQuesion> selectJudgelist = questionService.selectJsQuestion(judge);
 			map.put(2, selectJudgelist);
+			map.put(6, jsExampaper.getSelectJudgeScore());
 		}
 		String caseStr = jsExampaper.getCaseques();
 		if(caseStr!=null){
 			String caseArray[] = RandomAndSpiltUtil.strToArray(caseStr);
 			List<CaseAndQuestion> caseQues = caseQuestionService.selectCaseAndQues(caseArray);
 			map.put(3, caseQues);
-			
+			map.put(7, jsExampaper.getCasequesNum());
 		}
 		return map;
 	}

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 //import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,7 +54,7 @@ public class LoginController {
 	}
 	@RequestMapping(value="/doLogin",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<Integer, String> dologin(String phone,String chenk_code){
+	public Map<Integer, String> dologin(String phone,String chenk_code,HttpSession session){
 		Map<Integer, String> map = new HashMap<>();
 		List<JsUser> list = studentService.selectStu(phone);
 		if(list.size()>0){
@@ -60,8 +62,10 @@ public class LoginController {
 			long nowTime = System.currentTimeMillis();
 			long cha = (nowTime-jsUser.getChenkTime())/1000;
 			if(jsUser.getCheckCode().equals(chenk_code)){
-				if(cha<=300)
+				if(cha<=300){
+					session.setAttribute("user", jsUser);
 					map.put(0, "登陆成功");
+				}
 				else {
 					map.put(1, "验证码超时");
 				}
@@ -75,13 +79,12 @@ public class LoginController {
 	}
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<Integer, String> login(String username,String pass){
+	public Map<Integer, String> login(String username,String pass,HttpSession session){
 		Map<Integer, String> map = new HashMap<>();
 		String str =null;
 		try {
 			str=new String(username.getBytes("ISO-8859-1"),"UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<JsUser> list = studentService.selectBypass(str);
@@ -89,6 +92,7 @@ public class LoginController {
 			JsUser jsUser = list.get(0);
 			String password = Base64.encode(("zjedu"+pass+"cn").getBytes());
 			if (password.equals(jsUser.getPassword())) {
+				session.setAttribute("user", jsUser);
 				map.put(0, "登陆成功");
 			}
 			else{
