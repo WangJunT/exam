@@ -35,7 +35,19 @@ public class StudentController {
 		else{
 			map.put(2, "文件未上传成功,请仔细检查文件格式");
 		}
-		
 		return map;
 	}
+	@RequestMapping("/change")
+	@ResponseBody
+	public Map<Integer, String> updatePass(JsUser jsUser){
+		Map<Integer, String> map = new HashMap<>();
+		if (studentService.updateStuPass(jsUser)>0) {
+			map.put(0, "更改密码成功");
+		}
+		else{
+			map.put(1,"电话号码有误");
+		}
+		return map ;
+	}
+	
 }

@@ -1,9 +1,11 @@
 package cm.cn.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cm.cn.po.JsUser;
 import cm.cn.service.StudentService;
+import cm.cn.util.Base64;
 import cm.cn.util.GetCheckCode;
 
 @Controller
@@ -70,14 +73,22 @@ public class LoginController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@RequestMapping(value="/login",method=RequestMethod.GET)
 	@ResponseBody
 	public Map<Integer, String> login(String username,String pass){
 		Map<Integer, String> map = new HashMap<>();
-		List<JsUser> list = studentService.selectBypass(username);
+		String str =null;
+		try {
+			str=new String(username.getBytes("ISO-8859-1"),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<JsUser> list = studentService.selectBypass(str);
 		if (list.size()>0) {
 			JsUser jsUser = list.get(0);
-			if (pass.equals(jsUser.getPassword())) {
+			String password = Base64.encode(("zjedu"+pass+"cn").getBytes());
+			if (password.equals(jsUser.getPassword())) {
 				map.put(0, "登陆成功");
 			}
 			else{

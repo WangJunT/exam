@@ -115,4 +115,17 @@ public class ExamPaperController {
 		}
 		return map;
 	}
+	@RequestMapping(value="/delExam")
+	@ResponseBody
+	public Map<Integer, Object> delExam(int[] intarray){
+		Map<Integer,Object> map = new HashMap<>();
+		int num = examPaperService.delExam(intarray);
+		if (num>0) {
+			map.put(0, "删除"+num+"条数据");
+		}
+		else{
+			map.put(1, "删除失败");
+		}
+		return map;
+	}
 }
