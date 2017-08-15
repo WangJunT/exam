@@ -26,7 +26,7 @@ public class LoginController {
 	StudentService studentService;
 	@RequestMapping(value="/first")
 	public String first(){
-		return "";
+		return "index";
 	}
 	@RequestMapping(value="/beforeLogin",method=RequestMethod.GET)
 	@ResponseBody
@@ -107,6 +107,13 @@ public class LoginController {
 			map.put(2, "该用户不存在");
 		}
 		return map ;
+	}
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session){
+		//session失效
+		session.invalidate();
+		//重定向到商品查询页面
+		return "redirect:/index/first.action";
 	}
 	
 }

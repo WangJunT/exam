@@ -26,8 +26,8 @@ public class LoginInterceptor implements HandlerInterceptor{
         if(jsUser != null){  
             return true;  
         }  
-        //不符合条件的，跳转到登录界面  
-//        request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);  
+//        不符合条件的，跳转到登录界面  
+        request.getRequestDispatcher("/index/first.action").forward(request, response);  
           
 		return false;
 	}  

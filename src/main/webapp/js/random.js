@@ -56,7 +56,7 @@ var caseques = '';
             }
             data = JSON.stringify(data);
             $.ajax({
-                url: 'http://localhost:8080/SSMDemo/exam/addExam.action',
+                url: '../../../SSMDemo/exam/addExam.action',
                 contentType: "application/json ;charset=utf-8",
                 type: 'POST',
                 crossDomain: true,

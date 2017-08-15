@@ -10,7 +10,9 @@
                    str = key+'='+encodeURI(encodeURI(ob[key]))+';';
                    if (timeout) {
                        var date=new Date(); //获取当前时间
-                       str += 'expires='+(date.getTime() + timeout*24*3600*1000);
+                       if (timeout){
+                           str += 'expires='+(date.getTime() + timeout*24*3600*1000);
+                       }
                    }
                    document.cookie = str;
                }

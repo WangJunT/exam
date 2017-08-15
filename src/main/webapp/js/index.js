@@ -11,11 +11,12 @@
         opCookie.remove('isLoad');
         window.location.href = 'index.html';
     }
-    if (ls === undefined) {
+    if (ls == 'undefined') {
         login = false;
     } else {
         login = true;
     }
+    //alert(login);
     if (!login) {
         $('#user').css('display','none');
         $('#log').html('登录');
@@ -91,7 +92,7 @@
         if (!login) {
             $('#log').click();
         } else {
-            window.location.href = 'page/exam/sequenceExam.html?type='+ 0;
+            window.location.href = '../page/exam/sequenceExam.html?type='+ 0;
         }
     });
     // 去考试
@@ -99,13 +100,13 @@
         if (!login) {
             $('#log').click();
         } else {
-            window.location.href = 'page/exam/examList.html';
+            window.location.href = '../page/exam/examList.html';
         }
     });
     // 自定义方法
     function  getTheCode(phone) {
         // var url = 'http://192.168.1.120:8080/SSMDemo/login/doLogin.action'+'?phone=' + phone;
-        var url = 'http://localhost:8080/SSMDemo/index/beforeLogin.action?phone='+phone;
+        var url = '../../../SSMDemo/index/beforeLogin.action?phone='+phone;
         $('#getCode').html('验证码发送中...');
         $.get(url ,function (data) {
             if (data[0] === undefined) {
@@ -128,7 +129,7 @@
     }
     // 提交数据
     function Submit(phone, yzm) {
-        var url = 'http://localhost:8080/SSMDemo/index/doLogin.action?phone='+phone+'&chenk_code='+yzm;
+        var url = '../../../SSMDemo/index/doLogin.action?phone='+phone+'&chenk_code='+yzm;
         $.get(url,function (data) {
             if (data[1] != undefined) {
                 alert('登录失败，验证码已失效');
@@ -151,7 +152,7 @@
     // 以账号密码登录
     function sub(phone,yzm) {
         // var pData = {username:phone,pass:yzm};
-        var url = 'http://localhost:8080/SSMDemo/index/login.action?username=' +encodeURI(phone)+'&pass='+ yzm;
+        var url = '/SSMDemo/index/login.action?username=' +encodeURI(phone)+'&pass='+ yzm;
          // pData = JSON.stringify(pData);
         //console.log(pData);
         $.get(url,function (data) {
@@ -169,30 +170,7 @@
                 alert('用户不存在，请输入正确账号');
             }
         });
-        // $.ajax({
-        //     url: 'http://localhost:8080/SSMDemo/index/login.action',
-        //     contentType: "application/json ;charset=utf-8",
-        //     type: 'POST',
-        //     crossDomain: true,
-        //     data: 'username='+phone+'&pass='+yzm,
-        //     success: function (data) {
-        //         if (data[0] != undefined){
-        //             $('#wall').remove();
-        //             //保存一天登录状态
-        //             login = true;
-        //             opCookie.add({loader:phone,isLoad: 'success'},24);
-        //             $('#user').css('display','block');
-        //             $('#log').html('退出');
-        //         } else if (data[1] != undefined) {
-        //             alert('密码错误');
-        //         } else if (data[2] != undefined) {
-        //             alert('用户不存在，请输入正确账号');
-        //         }
-        //     },
-        //     error: function (msg) {
-        //         alert('请求错误: ' + msg.status);
-        //     }
-        // });
+
     }
     //获得url数据
     function getQueryString(name) {

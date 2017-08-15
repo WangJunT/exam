@@ -16,10 +16,10 @@
     from = getQueryString('type');
     examId= getQueryString('id');
     if (from == 0) {// 练习
-        url = 'http://localhost:8080/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
+        url = '../../../SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
     } else {
         window.history.forward(1);
-        url = 'http://localhost:8080/SSMDemo/exam/beginExam.action?id='+ examId;
+        url = '../../../SSMDemo/exam/beginExam.action?id='+ examId;
     }
     if(from == 0) {
         $('#title').html('顺序练习');
@@ -110,7 +110,7 @@
         start = start*1 + length;
         exam = [];
         tureAns = [];
-        url = 'http://localhost:8080/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
+        url = '../../../SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
         $.get(url,function (data){
             examData = data;
             sequence(data);
@@ -147,9 +147,11 @@
                  width: 250,
                  height: 160,
                  yes: function () {
-                     dia.remove();
-                     alert('分数已提交,本次得分:'+getResult());
-                     window.location.href = 'examList.html';
+                     //dia.remove();
+                     dia.changeContent('正在提交分数...');
+                     getResult(dia);
+                     // alert('分数已提交,本次得分:'+getResult());
+                     // window.location.href = 'examList.html';
                       //dia.content = '本次得分:'+getResult();
                  },
                  No: function () {
@@ -165,8 +167,9 @@
                  height: 160,
                  yes: function () {
                      dia.remove();
+                     console.log(tureAns);
                      alert('分数已提交,本次得分:'+getResult());
-                     window.location.href = 'examList.html';
+                     // window.location.href = 'examList.html';
                  },
                  No: function () {
                      dia.remove();
@@ -191,28 +194,28 @@
         if (data[0] != undefined ) {
             ls ='';
             ls ='<div class="examType">单选题</div>';
-            ls += linkExam(data[0] ,1);
+            ls += linkExam(data[0] ,1,data[4]);
             examData = examData.concat(data[0]);
             all += ls;
         }
         if (data[1] != undefined) {
             ls = '';
             ls ='<div class="examType">多选题</div>';
-            ls += linkExam(data[1] ,2);
+            ls += linkExam(data[1] ,2,data[5]);
             examData = examData.concat(data[1]);
             all += ls;
         }
         if (data[2] != undefined) {
             ls ='';
             ls ='<div class="examType">判断题</div>';
-            ls += linkExam(data[2] ,1);
+            ls += linkExam(data[2] ,1,data[6]);
             examData = examData.concat(data[2]);
             all += ls;
         }
         if (data[3] != undefined) {
             ls = '';
             ls = '<div class="examType">简答题</div>';
-            ls += linkCase(data[3],1);
+            ls += linkCase(data[3],1,data[7]);
             for (var i =0; i < data[3].length; i++) {
                 examData = examData.concat(data[3][i].list);
             }
@@ -223,7 +226,7 @@
         $('#allExam').html(all);
     }
     // 拼接当个试题
-    function linkExam(data,type) {
+    function linkExam(data,type,score) {
         var theType,examItem = [];
         if (type == 1) {
             theType ='radio';
@@ -239,7 +242,7 @@
                 if (!data[i][sx]){
                     break;
                 } else {
-                    op += '<li><div class="check"><input name="'+data[i].id+'" value="'+option[j]+'" type="'+theType+'"></div><div class="theOption">'+option[j]+'.'+data[i][sx]+'</div> </li>';
+                    op += '<li><div class="check"><input name="'+data[i].id+'" value="'+option[j]+'" type="'+theType+'" score = "'+score+'"></div><div class="theOption">'+option[j]+'.'+data[i][sx]+'</div> </li>';
                 }
             }
             //console.log(op);
@@ -252,7 +255,7 @@
         return examItem.join('');
     }
     // 拼接简答题
-    function linkCase(data,type) {
+    function linkCase(data,type,score) {
         var theType, examItem = [];
         if (type == 1) {
             theType = 'radio';
@@ -276,7 +279,9 @@
                     if (!data[x].list[i][sx]) {
                         break;
                     } else {
-                        op += '<li><div class="check"><input name="' + data[x].list[i].id + '" value="' + option[j] + '" type="' + theType + '"></div><div class="theOption">' + option[j] + '.' + data[x].list[i][sx] + '</div> </li>';
+                        var theScore =score / data[x].list.length;
+                        theScore = theScore.toFixed(2); //取两位小数
+                        op += '<li><div class="check"><input name="' + data[x].list[i].id + '" value="' + option[j] + '" type="' + theType + '" score="'+theScore+'"></div><div class="theOption">' + option[j] + '.' + data[x].list[i][sx] + '</div> </li>';
                     }
                 }
                 str += model.replace(/\{\{type\}\}/g, type).replace(/\{\{item\}\}/,i+1).replace(/\{\{index\}\}/,tureAns.length - 1).replace(/\{\{title\}\}/, data[x].list[i].content).replace(/\{\{id\}\}/g, data[x].list[i].id).replace(/\{\{option\}\}/g, op);
@@ -351,43 +356,61 @@
         return true;
     }
     // 获取分数
-    function getResult() {
+    function getResult(dialog) {
         var num = 0;
         TheChoose = [];
         for (var i =0; i < examData.length; i++) {
             var TYPE = examData[i].typeId;
-            if (type == 1 || type == 3 ){
+            if (TYPE == 1 || TYPE == 3 ){
                 var choose = $('input[name=' + examData[i].id + ']:checked').val();
-                if (choose == undefined || choose == null) {// 题目未作
+                if (choose == undefined || choose == null) {// 题目未做
                     TheChoose.push(0);
                 } else {
                     TheChoose.push(choose);
+                    var score = Number($('input[name=' + examData[i].id + ']:checked').attr('score'));
+                    if (choose == tureAns[TheChoose.length - 1]) { // 答题正确
+                        num += score;
+                    }
+                    // TheChoose.push(choose);
                 }
             } else { // 多选题
                 var cstr = '';
+                var score;
                 // console.log(examData[i].id);
                 $('[name='+examData[i].id+']:checked').each(function () {
                     cstr += $(this).val();
+                    score = Number($(this).attr('score'));
                 });
                 if (cstr == '') {
                     TheChoose.push(0);
                 } else {
                     TheChoose.push(cstr);
+                    if (cstr == tureAns[TheChoose.length - 1]) { // 做对
+                        num += score;
+                    }
                 }
             }
         }
         // 判断分数
-        for (var i = 0; i < TheChoose.length; i++) {
-            if (TheChoose[i] == tureAns[i]){
-                num += 1;
-            }
-        }
-        return num;
+        // for (var i = 0; i < TheChoose.length; i++) {
+        //     if (TheChoose[i] == tureAns[i]){
+        //         num += 1;
+        //     }
+        // }
+        // return num;
+        // alert('分数已提交,本次得分:'+getResult());
+        // window.location.href = 'examList.html';
+        console.log(num);
+        $.get('../../../SSMDemo/sexam/sorup.action?exampaperId='+Number(examId)+'&score='+num,function (data) {
+            dialog.remove();
+            alert('分数已提交,本次得分:'+num);
+            // window.location.href = 'examList.html';
+        });
     }
-    // 确认跳转
+    // 确认跳转 
     function skip(id) {
         switch (id) {
-            case 'toFirst':window.location.href = '../../index.html'; break;
+             //case 'toFirst':window.location.href = '../../index.html'; break;
         }
     }
 })($,window);

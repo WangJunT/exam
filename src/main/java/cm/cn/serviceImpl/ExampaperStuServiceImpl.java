@@ -34,11 +34,10 @@ public class ExampaperStuServiceImpl implements ExampaperStuService {
 
 	@Override
 	public int updateStuExam(JsExampaperStu examStu) {
-		JsExampaperStuExample jStuExample = new JsExampaperStuExample();
-		JsExampaperStuExample.Criteria criteria = jStuExample.createCriteria();
-		criteria.andExampaperIdEqualTo(examStu.getExampaperId());
 //		criteria.andStuIdEqualTo(examStu.getStuId());
-		return jsExampaperStuMapper.updateByExample(examStu, jStuExample);
+//		return jsExampaperStuMapper.updateByExample(examStu, jStuExample);
+//		return jsExampaperStuMapper.updateByExampleSelective(examStu, jStuExample);
+		return jsExampaperStuMapper.updateByPrimaryKeySelective(examStu);
 	}
 
 	@Override

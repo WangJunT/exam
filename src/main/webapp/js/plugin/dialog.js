@@ -21,7 +21,7 @@
     }
     Dialog.prototype.init = function () {
         var lsDiv = document.createElement('div');
-        var box = '<div style="'+wall+'" id="dialogWall"><div style="'+theBox+'" id="DialogBox"><div style="'+titles+'">'+this.title+'</div><div style="'+contents+'">'+this.content+'</div><div style="'+csBox+'"><a href="javascript:void(0)" style="'+choose1+'" id="dialogSure">确定</a> <a href="javascript:void(0)" style="'+choose1+'" id="dialogOut">取消</a></div></div></div>';
+        var box = '<div style="'+wall+'" id="dialogWall"><div style="'+theBox+'" id="DialogBox"><div style="'+titles+'">'+this.title+'</div><div style="'+contents+'" id="content">'+this.content+'</div><div style="'+csBox+'"><a href="javascript:void(0)" style="'+choose1+'" id="dialogSure">确定</a> <a href="javascript:void(0)" style="'+choose1+'" id="dialogOut">取消</a></div></div></div>';
         lsDiv.innerHTML = box;
         document.getElementsByTagName('body')[0].appendChild(lsDiv.firstElementChild);
         if (this.width != undefined && this.width > 100){
@@ -43,6 +43,11 @@
     }
     Dialog.prototype.yes = function () {
         
+    }
+    // 改变内容
+    Dialog.prototype.changeContent = function (cont) {
+        this.content = cont;
+        document.getElementById('content').innerHTML = this.content;
     }
     // 私有方法
 

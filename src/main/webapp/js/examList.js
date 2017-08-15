@@ -9,7 +9,7 @@
     }
     $('#user').html(opCookie.get('loader'));
     // 获取试卷
-    $.get('http://localhost:8080/SSMDemo/exam/selectAll.action',function (data) {
+    $.get('../../../SSMDemo/exam/selectAll.action',function (data) {
         var con='';
         for (var i = 0; i < data.length; i++) {
             con += '<li>'+data[i].name+'<a href="javascript:void(0)" id="goTo" data-ExamId="'+data[i].id+'">去考试</a></li>';
