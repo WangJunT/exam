@@ -12,5 +12,5 @@ public interface ExampaperStuService {
 	//如果存在则更改学生考试信息
 	public int updateStuExam(JsExampaperStu examStu);
 	//当删除试卷时，删除与之有关的考试信息
-	public int delStuExam();
+	public int delStuExam(int[] arrays);
 }

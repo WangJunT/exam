@@ -33,9 +33,7 @@ public class CaseQuestionServiceImpl implements CaseQuestionService {
 	}
 	@Override
 	public List<JsCase> selectAll() {
-		// TODO Auto-generated method stub
 		JsCaseExample example = new JsCaseExample();
-//		JsCaseExample.Criteria criteria = example.createCriteria();
 		return jsCaseMapper.selectByExample(example);
 	}
 	@Override

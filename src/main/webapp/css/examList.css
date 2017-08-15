@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    width: 100%;
+    height: 60px;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    border-top: 1px #ccc solid;
+    border-bottom: 1px #ccc solid;
+    position: relative;
+}
+.header ul{
+    width: 100%;
+    height: 100%;
+    display: block;
+    list-style: none;
+    text-align: center;
+}
+.header ul li{
+    width: auto;
+    height: 100%;
+    line-height: 60px;
+    display: inline-block;
+}
+.header a{
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    color: #000;
+    padding: 0 10px 0 10px;
+    font-size: 17px;
+    font-weight: 500;
+}
+.header .loginBox{
+    width: 160px;
+    height: 60px;
+    top: 0;
+    position: absolute;
+    right: 0;
+}
+.header .loginBox a{
+    width: 80px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    float: right;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+/*列表*/
+.examListBox{
+    width: 80%;
+    margin: 0 auto;
+}
+.examListBox ul{
+    width: 100%;
+    height: auto;
+    list-style: none;
+}
+.examListBox li{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: left;
+    border-bottom: 1px #999 solid;
+}
+.examListBox a {
+    float: right;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    background: #3498DB;
+}

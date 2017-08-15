@@ -24,6 +24,10 @@ import cm.cn.util.GetCheckCode;
 public class LoginController {
 	@Autowired
 	StudentService studentService;
+	@RequestMapping(value="/first")
+	public String first(){
+		return "";
+	}
 	@RequestMapping(value="/beforeLogin",method=RequestMethod.GET)
 	@ResponseBody
 	public Map<Integer, String> beforelogin(String phone){
@@ -104,4 +108,5 @@ public class LoginController {
 		}
 		return map ;
 	}
+	
 }

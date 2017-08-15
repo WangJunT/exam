@@ -22,9 +22,9 @@
                 <option value="登高架设">登高架设</option>
             </select>
         </div>
-        <div class="oneItem">
-            <label>试题总分:</label><input type="text" class="input" id="total">
-        </div>
+        <!--<div class="oneItem">-->
+            <!--<label>试题总分:</label><input type="text" class="input" id="total">-->
+        <!--</div>-->
         <div class="oneItem">
             <label>&nbsp;&nbsp;&nbsp;及格分:</label><input type="text" class="input" id="passScore">
         </div>
@@ -44,7 +44,12 @@
             <label>判断题:共</label><input type="text" class="minInput" id="selectJudgeNum"><label>题,每题</label><input type="text" class="minInput" id="selectJudgeScore">
             <label>分</label>
         </div>
-
+        <!--简答题-->
+        <div class="oneItem">
+            <label>简答题: 每题</label><input type="text" class="minInput" id="caseScore"><label>分</label>
+            <br><input type="button" value="选择" id="chooseCase">
+            <div id="theChoose"></div>
+        </div>
         <input type="button" value="提交" id="submit">
     </form>
     <script src="../js/jquery-3.2.1.min.js"></script>
