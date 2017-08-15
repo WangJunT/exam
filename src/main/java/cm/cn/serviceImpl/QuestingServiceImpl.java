@@ -65,17 +65,14 @@ public class QuestingServiceImpl implements QuestionService {
 	}
 	@Override
 	public List<JsQuesion> selectJsQuestion(String[] array) {
-		// TODO Auto-generated method stub
 		return questionMapper.selectJsQuestion(array);
 	}
 	@Override
 	public List<JsQuesion> selectJsQuestionlimit(PageQuestion pageQuestion) {
-		// TODO Auto-generated method stub
 		return questionMapper.selectJsQuestionlimit(pageQuestion);
 	}
 	@Override
 	public List<JsQuesion> selectRan(RandomQuestion randomQuestion) {
-		// TODO Auto-generated method stub
 		return questionMapper.selectRan(randomQuestion);
 	}
 

@@ -8,19 +8,20 @@
     var model = '<div class="examItem"><div class="itemTitle">{{item}}，{{title}} <br><a href="javascript:void(0)" id="showAns" data-itemId="{{index}}" data-id="{{id}}" typeId="{{type}}"class="dif">查看答案</a></div> <ul>{{option}}</ul></div>';
     //判断是否登录
     var ls = opCookie.get('isLoad');
-    if (ls === undefined) { //未登录不可访问
-        window.location.href = '../../index.html?out=yes';
+    if (ls == 'undefined') { //未登录不可访问
+        window.location.href = '/SSMDemo/index/first.action';
     }
+    window.history.forward(1);
     $('#user').html(opCookie.get('loader'));
     // 解析url
     from = getQueryString('type');
     examId= getQueryString('id');
     if (from == 0) {// 练习
-        url = '../../../SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
+        url = '/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
     } else {
-        window.history.forward(1);
-        url = '../../../SSMDemo/exam/beginExam.action?id='+ examId;
+        url = '/SSMDemo/exam/beginExam.action?id='+ examId;
     }
+    window.history.forward(1);
     if(from == 0) {
         $('#title').html('顺序练习');
     } else {
@@ -37,10 +38,10 @@
                 height: 160,
                 yes: function () {
                     skip(navId);
-                    this.removes();
+                    this.remove();
                 },
                 No: function () {
-                    this.removes();
+                    this.remove();
                 }
             });
         } else {
@@ -98,7 +99,9 @@
     });
     // 退出登录
     $('#log').click(function () {
-        window.location.href = '../../index.html?out=yes';
+        opCookie.remove('isLoad');
+        logOut();
+        // window.location.href = '/SSMDemo/index/first.action';
     });
     // 下一页
     $(document).on('click','#next',function () {
@@ -107,10 +110,10 @@
             return;
         }
         // console.log(TheChoose);
-        start = start*1 + length;
+        start = start + length;
         exam = [];
         tureAns = [];
-        url = '../../../SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
+        url = '/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
         $.get(url,function (data){
             examData = data;
             sequence(data);
@@ -121,10 +124,10 @@
     // 上一页
     $(document).on('click','#last',function () {
         position = position - 20;
-        start = start*1 - length;
+        start = start - length;
         exam = [];
         tureAns = [];
-        url = 'http://localhost:8080/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
+        url = '/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
         $.get(url,function (data){
             examData = data;
             sequence(data);
@@ -168,7 +171,8 @@
                  yes: function () {
                      dia.remove();
                      console.log(tureAns);
-                     alert('分数已提交,本次得分:'+getResult());
+                     getResult(dia);
+                     // alert('分数已提交,本次得分:'+getResult());
                      // window.location.href = 'examList.html';
                  },
                  No: function () {
@@ -400,17 +404,22 @@
         // return num;
         // alert('分数已提交,本次得分:'+getResult());
         // window.location.href = 'examList.html';
-        console.log(num);
-        $.get('../../../SSMDemo/sexam/sorup.action?exampaperId='+Number(examId)+'&score='+num,function (data) {
+        $.get('/SSMDemo/sexam/sorup.action?exampaperId='+Number(examId)+'&score='+num,function (data) {
             dialog.remove();
             alert('分数已提交,本次得分:'+num);
-            // window.location.href = 'examList.html';
+            window.location.href = 'examList.html';
         });
     }
     // 确认跳转 
     function skip(id) {
         switch (id) {
-             //case 'toFirst':window.location.href = '../../index.html'; break;
+             case 'toFirst':window.location.href = '/SSMDemo/index/first.action'; break;
         }
+    }
+    //// 退出登录
+    function logOut() {
+        $.get('/SSMDemo/index/logout.action',function (data) {
+            window.location.href = '/SSMDemo/index/first.action';
+        });
     }
 })($,window);

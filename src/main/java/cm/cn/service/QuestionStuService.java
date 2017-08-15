@@ -11,4 +11,5 @@ public interface QuestionStuService {
 	//如果数据库没有该学生做题记录，登录时从首页开始，退出时将学生最后做题地方记录,并插到数据库中
 	public int insertRecord(JsQuestionStu jsQuestionStu);
 	//退出时与学生上次做题记录相比较，大于则更改，小于则不管。
+	public int updateRecord(JsQuestionStu jsQuestionStu);
 }

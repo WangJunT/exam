@@ -7,7 +7,7 @@
            var str = '';
            for (key in ob) {
                if (ob.hasOwnProperty(key)) {//
-                   str = key+'='+encodeURI(encodeURI(ob[key]))+';';
+                   str = key+'='+encodeURI(encodeURI(ob[key]))+';'+'path=/;';
                    if (timeout) {
                        var date=new Date(); //获取当前时间
                        if (timeout){
@@ -21,7 +21,7 @@
        remove: function (key) {
            var date = new Date(); //获取当前时间
            date.setTime(date.getTime()-10000); //将date设置为过去的时间
-           document.cookie = key + "=v; expires =" + date.toGMTString();//设置cookie
+           document.cookie = key + '='+this.get(key)+'; expires =' + date.toGMTString()+';path=/';//设置cookie
        },
        get:function(key) {//获取cookie方法
            /*获取cookie参数*/

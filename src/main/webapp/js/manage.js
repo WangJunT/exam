@@ -40,7 +40,7 @@
 function chooseCase() {
     $('body').append('<div class="wall"><div class="caseBox" id="case"><div class="caseTitle" id="caseT">加载中...<a href="javascript:void(0)" id="out">+</a> </div></div></div>');
     // 载入简答
-    $.get('../../../SSMDemo/caseQues/allCase.action',function (data) {
+    $.get('/SSMDemo/caseQues/allCase.action',function (data) {
         var str = '';
         for (var i = 0; i < data.length; i++) {
             var ls = '<div class="caseItem"><input type="checkbox" case-id="'+data[i].id+'" name="case"><div class="textBox">'+data[i].content+'</div></div>';
