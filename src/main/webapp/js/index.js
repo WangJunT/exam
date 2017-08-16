@@ -3,15 +3,10 @@
  */
 (function ($) {
     var login = false,code = 0, how = 0;
-    var ls = opCookie.get('isLoad');
+    //var ls = opCookie.get('isLoad');
+    ls = sessionStorage.getItem('isLoad');
     var ip = returnCitySN.cip;//获得ip
-    // 判断是否
-    var out = getQueryString('out');
-    if (out) {
-        opCookie.remove('isLoad');
-        window.location.href = 'index.html';
-    }
-    if (ls == 'undefined' || ls == 'filed') {
+    if (ls == 'undefined'|| ls == null) {
         login = false;
     } else {
         login = true;
@@ -21,7 +16,7 @@
         $('#user').css('display','none');
         $('#log').html('登录');
     }
-    $('#user').html(opCookie.get('loader'));
+    $('#user').html(sessionStorage.getItem('loader'));
     // 登录或退出
     $('#log').click(function () {
         if (!login) {
@@ -33,7 +28,7 @@
             $('body').append(wall);
             $('#getCode').css('display','none');
         } else { //退出登录
-        	opCookie.remove('isLoad');
+        	sessionStorage.removeItem('isLoad');
             logOut();
             // opCookie.remove('isLoad');
             window.location.reload(true);
@@ -96,8 +91,8 @@
         if (!login) {
             $('#log').click();
         } else {
-            window.location.replace('../page/exam/sequenceExam.html?type='+ 0);
-            // window.location.href = '../page/exam/sequenceExam.html?type='+ 0;
+            //window.location.replace('../page/exam/sequenceExam.html?type='+ 0);
+            window.location.href = '../page/exam/sequenceExam.html?type='+ 0;
         }
     });
     // 去考试
@@ -105,8 +100,8 @@
         if (!login) {
             $('#log').click();
         } else {
-        	window.location.replace('../page/exam/examList.html');
-            // window.location.href = '../page/exam/examList.html';
+        	//window.location.replace('../page/exam/examList.html');
+            window.location.href = '../page/exam/examList.html';
         }
     });
     // 自定义方法
@@ -148,7 +143,9 @@
                     $('#wall').remove();
                     //保存一天登录状态
                     login = true;
-                    opCookie.add({loader:phone,isLoad: 'success'},24);
+                    //opCookie.add({loader:phone,isLoad: 'success'},24);
+                    sessionStorage.setItem('loader',phone);
+                    sessionStorage.setItem('isLoad','success');
                     $('#user').css('display','block');
                     $('#log').html('退出');
                 }
@@ -166,7 +163,9 @@
                 $('#wall').remove();
                 //保存一天登录状态
                 login = true;
-                opCookie.add({loader:phone,isLoad: 'success'},24);
+                //opCookie.add({loader:phone,isLoad: 'success'},24);
+                sessionStorage.setItem('loader',phone);
+                sessionStorage.setItem('isLoad','success');
                 $('#user').css('display','block');
                 $('#user').html(phone);
                 $('#log').html('退出');

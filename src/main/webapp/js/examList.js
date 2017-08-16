@@ -3,13 +3,14 @@
  */
 (function ($) {
     var str = '<ul>';
-    var ls = opCookie.get('isLoad');
+    //var ls = opCookie.get('isLoad');
+    var ls = sessionStorage.getItem('isLoad');
     console.log(ls);
-    if (ls == 'undefined') { //未登录不可访问
+    if (ls == 'undefined' || ls == null) { //未登录不可访问
         window.location.href = '/SSMDemo/index/first.action';
     }
-    window.history.forward(1);
-    $('#user').html(opCookie.get('loader'));
+    //window.history.forward(1);
+    $('#user').html(sessionStorage.getItem('loader'));
     // 获取试卷
     $.get('/SSMDemo/exam/selectAll.action',function (data) {
         var con='';
@@ -27,7 +28,8 @@
     //
     // 退出登录
     $('#log').click(function () {
-        opCookie.remove('isLoad');
+        //opCookie.remove('isLoad');
+        sessionStorage.removeItem('isLoad');
         logOut();
         // window.location.href = '/SSMDemo/index/first.action';
     });

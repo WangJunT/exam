@@ -17,4 +17,6 @@ public interface StudentService {
 	public int updateStuPass(JsUser jsUser);
 	//使用用户密码的方式登陆
 	public List<JsUser> selectBypass(String username);
+	//查询所有的学生（用于导出）
+	public List<JsUser> selectAll();
 }

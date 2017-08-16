@@ -56,4 +56,9 @@ public class StudentServiceImpl implements StudentService {
 		criteria.andUsernameEqualTo(username);
 		return jsUserMapper.selectByExample(example);
 	}
+	@Override
+	public List<JsUser> selectAll() {
+		JsUserExample example = new JsUserExample();
+		return jsUserMapper.selectByExample(example);
+	}
 }

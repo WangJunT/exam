@@ -4,29 +4,49 @@
 (function ($,window) {
     var tureAns = [],exam=[],type = 'radio',option=['A','B','C','D','E','F','G'],from,examId,url,examData;
     var position = 1,TheChoose = [];//记录用户选项
-    var start = 0, length = 10;
+    var start = 0, length = 10,beginStart = 0;
     var model = '<div class="examItem"><div class="itemTitle">{{item}}，{{title}} <br><a href="javascript:void(0)" id="showAns" data-itemId="{{index}}" data-id="{{id}}" typeId="{{type}}"class="dif">查看答案</a></div> <ul>{{option}}</ul></div>';
     //判断是否登录
-    var ls = opCookie.get('isLoad');
-    if (ls == 'undefined') { //未登录不可访问
+    //var ls = opCookie.get('isLoad');
+    var ls = sessionStorage.getItem('isLoad');
+    if (ls == 'undefined' || ls == null) { //未登录不可访问
         window.location.href = '/SSMDemo/index/first.action';
     }
-    window.history.forward(1);
-    $('#user').html(opCookie.get('loader'));
+    //window.history.forward(1);
+    $('#user').html(sessionStorage.getItem('loader'));
     // 解析url
     from = getQueryString('type');
     examId= getQueryString('id');
     if (from == 0) {// 练习
-        url = '/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
+        //getFirst();
+        // url = '/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
+        url = '/SSMDemo/question/orderPractice.action';
     } else {
         url = '/SSMDemo/exam/beginExam.action?id='+ examId;
     }
-    window.history.forward(1);
+    //window.history.forward(1);
     if(from == 0) {
         $('#title').html('顺序练习');
     } else {
         $('#title').html('模拟考试');
     }
+    // 获得数据
+    $.get(url,function (data){
+        // console.log(data);
+        if (from == 0) {
+            examData = data[1];
+            start = Number(data[0]);
+            beginStart = start;
+            position += start;
+           sequence(data[1]);
+        } else if (from == 1){
+            examData = data;
+            showExam(data);
+        }
+        if (from == 1) {
+            $('.dif').css('display','none');
+        }
+    });
     // 导航栏点击
     $('#navBox a').click(function () {
         var navId = $(this).attr('id');
@@ -42,7 +62,7 @@
                 },
                 No: function () {
                     this.remove();
-                }
+                 } 
             });
         } else {
             var dia = new Dialog({
@@ -56,21 +76,8 @@
                 },
                 No: function () {
                     dia.remove();
-                }
+                } 
             });
-        }
-    });
-    // 获得数据
-    $.get(url,function (data){
-        examData = data;
-        // console.log(data);
-        if (from == 0) {
-            sequence(data);
-        } else if (from == 1){
-            showExam(data);
-        }
-        if (from == 1) {
-            $('.dif').css('display','none');
         }
     });
     // 答题模式显示答案
@@ -99,13 +106,14 @@
     });
     // 退出登录
     $('#log').click(function () {
-        opCookie.remove('isLoad');
+        sessionStorage.removeItem('isLoad');
+        //opCookie.remove('isLoad');
         logOut();
         // window.location.href = '/SSMDemo/index/first.action';
     });
     // 下一页
     $(document).on('click','#next',function () {
-        if (!isOver()) {
+        if (!isOver() && beginStart > start) {
             alert('当前页有题目未完成!');
             return;
         }
@@ -181,7 +189,23 @@
              });
          }
     });
-    // 自定义方法
+    // 完成练习
+    $(document).on('click','#finishTest',function () {
+        if (isOver()) {
+            start = start + length;
+        } else {
+
+        }
+        $.get('/SSMDemo/question/quitPractice.action?start='+start,function(data){
+            console.log(data[0]);
+            alert('交卷');
+        });
+    })
+    /*
+    * *****
+    * funct
+    * ****
+    * */
     //获得url数据
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -229,6 +253,7 @@
         all += '<div class="submitExam"><a href="javascript:void(0)" id="submitExam">交卷</a></div>';
         $('#allExam').html(all);
     }
+
     // 拼接当个试题
     function linkExam(data,type,score) {
         var theType,examItem = [];
@@ -328,9 +353,13 @@
             exam.push(str);
             tureAns.push(data[i].answer);
         }
-        var all = exam.join('')+'<div class="seqbox"><a href="javascript:void(0)" id="last">上一页</a> <a href="javascript:void(0)">结束练习</a> <a href="javascript:void(0)" id="next">下一页</a></div>';
+        var all = exam.join('')+'<div class="seqbox"><a href="javascript:void(0)" id="last">上一页</a> <a href="javascript:void(0)" id="finishTest">结束练习</a> <a href="javascript:void(0)" id="next">下一页</a></div>';
         $('#allExam').html(all);
-        $('#last').css('display','none');
+        if (start > 0){
+            $('#last').css('display','inline-block');
+        } else {
+            $('#last').css('display','none');
+        }
     }
     // 判断当前题目是否做完
     function isOver() {
@@ -420,6 +449,12 @@
     function logOut() {
         $.get('/SSMDemo/index/logout.action',function (data) {
             window.location.href = '/SSMDemo/index/first.action';
+        });
+    }
+    // 获得初始练习数据
+    function getFirst(){
+        $.get('/SSMDemo/question/orderPractice.action',function (data) {
+            console.log(data);
         });
     }
 })($,window);
