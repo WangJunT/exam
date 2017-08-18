@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>文件上传</title>
+</head>
+<style type="text/css">
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  html,body{
+    width: 100%;
+    height: 100%;
+  }
+  #uploadFile{
+    display: none;
+  }
+  .uploadBox{
+    width: 400px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -40px;
+    text-align: center;
+  }
+  .fileName{
+    width: 100%;
+    color:#999;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+  .uploadButton{
+    display: inline-block;
+    width: 170px;
+    height: 50px;
+    border-radius: 3px;
+    outline: none;
+    background: #88bbd6;
+    color: #fff;
+    border: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 17px;
+  }
+</style>
+<body>
+  <!--文件上传内容-->
+  <input type="file" id="uploadFile">
+  <div class="uploadBox">
+    <div class="fileName" id="fileName">选择文件</div>
+    <input type="button" id="upLoad" class="uploadButton" value="上传文件" disabled>
+    <input type="button" id="choose" class="uploadButton" value="选择文件">
+  </div>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script>
+//  监听文件框变化
+var can = false;
+$('#upLoad').css('background','#a9a9a9');
+$(document).on('change','#uploadFile',function () {
+      var file = $(this).val();
+      console.log(file);
+      if (file != null || file != undefined){ // 不为空
+        can = true;
+        $('#upLoad').removeAttr('disabled');
+        $('#upLoad').css('background','#88bbd6');
+        $('#fileName').text(file);
+      } else {
+          can = false;
+          $('#fileName').text(file);
+      }
+  });
+  // 点击上传
+  $('#upLoad').click(function(){
+      if (can) {
+          var formData = new FormData();
+          formData.append('file', $('#uploadFile')[0].files[0]);
+          $(this).val('文件上传中...');
+          $.ajax({
+              url: '/SSMDemo/stu/addStuBatch.action',
+              type: 'POST',
+              cache: false,
+              data: formData,
+              processData: false,
+              contentType: false,
+              success: function (data) {
+                  alert('上传成功');
+                  can = false;
+                  $('#uploadFile').val('');
+                  $('#fileName').html('选择页面');
+                  $('#upLoad').css('background','#a9a9a9');
+                  $(this).val('上传文件');
+              },
+              error: function (data) {
+                  alert('上传失败,状态码:'+data.status+';请稍后重试');
+                  $('#upLoad').css('background','#a9a9a9');
+                  $(this).val('上传文件');
+              }
+          });
+      }
+  });
+  // 选择文件
+  $('#choose').click(function () {
+      $('#uploadFile').click();
+  });
+</script>
+</body>
+</html>

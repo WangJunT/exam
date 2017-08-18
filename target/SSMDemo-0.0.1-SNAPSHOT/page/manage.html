@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link href="../css/manage.css" rel="stylesheet">
+</head>
+<body>
+<!--头部-->
+    <header class="header">
+        <ul>
+            <li><a href="javascript:void(0)">网站首页</a> </li>
+            <li><a href="javascript:void(0)">试题管理</a> </li>
+            <li><a href="javascript:void(0)">题库管理</a> </li>
+            <li><a href="javascript:void(0)">视频教程管理</a> </li>
+            <li><a href="javascript:void(0)">用户管理</a> </li>
+        </ul>
+    </header>
+    <!--主体部分-->
+    <div class="mainbox">
+        <!--菜单区块-->
+        <div class="menu">
+            <ul>
+                <li><a href="javascript:void(0)" id="examManager">试卷管理</a></li>
+                <li><a href="javascript:void(0)" id="random">随机组卷</a></li>
+                <li><a href="javascript:void(0)" id="handwork">手工组卷</a></li>
+                <li><a href="javascript:void(0)" id="addExam">添加试题</a></li>
+            </ul>
+        </div>
+        <!--主体内容-->
+        <div class="contentBox">
+            <iframe class="frame" frameborder="0" src="examManage.html" id="frameBox"></iframe>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/manage.js"></script>
+</html>

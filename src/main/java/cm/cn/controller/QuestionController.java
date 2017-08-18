@@ -1,8 +1,11 @@
 package cm.cn.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import cm.cn.po.JsQuesion;
 import cm.cn.po.JsQuestionStu;
@@ -41,9 +45,23 @@ public class QuestionController {
 	}
 	@RequestMapping("/addQuesBatch")
 	@ResponseBody
-	public Map<Integer, String> addQuesBatch(){
+	public Map<Integer, String> addQuesBatch(MultipartFile file){
 		Map<Integer, String> map = new HashMap<>();
-		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\电工.xlsx";
+		 //获取文件名  
+	    String fileName = file.getOriginalFilename();  
+	    //文件扩展名  
+	    String newFileName = "ques"+UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));  
+	    // 存储文件的物理路径
+	 	String video_path = "D:\\";
+	 	String filePath = video_path + newFileName;
+	 	// 新文件,存到磁盘
+		File newFile = new File(filePath);
+		try {
+			file.transferTo(newFile);
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		List<JsQuesion> list = QuesExcelUtil.excelToQues(filePath);
 		if (list.size()>0) {
 			if (questionService.insertList(list)>0){

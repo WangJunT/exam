@@ -30,9 +30,9 @@ public class StudentController {
 		 //获取文件名  
 	    String fileName = file.getOriginalFilename();  
 	    //文件扩展名  
-	    String newFileName = UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));  
-	    // 存储视屏的物理路径
- 	 	String video_path = "D:\\FFOutput\\";
+	    String newFileName = "stu"+UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));  
+	    // 存储文件的物理路径
+ 	 	String video_path = "D:\\";
  	 	String filePath = video_path + newFileName;
  	 	// 新文件
  		File newFile = new File(filePath);

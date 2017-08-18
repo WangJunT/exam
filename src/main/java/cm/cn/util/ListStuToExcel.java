@@ -16,7 +16,7 @@ import cm.cn.po.JsUser;
 
 public class ListStuToExcel {
 	//将 sql 导出到 Excel 中
-	public static void questionToExcel(List<JsUser> list){
+	public static XSSFWorkbook questionToExcel(List<JsUser> list){
 		  // 创建一个Excel文件
 	    XSSFWorkbook workbook = new XSSFWorkbook();
 	    // 创建一个工作表
@@ -92,5 +92,6 @@ public class ListStuToExcel {
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	    }
+	    return workbook;
 	}
 }

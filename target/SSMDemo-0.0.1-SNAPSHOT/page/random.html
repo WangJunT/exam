@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>随机试题</title>
+    <link href="../css/random.css" rel="stylesheet">
+</head>
+<body>
+    <div class="title">随机试题</div>
+    <!--表单-->
+    <form class="formBox">
+        <div class="oneItem">
+            <label>试题名称:</label><input type="text" class="input" id="name">
+        </div>
+        <div class="oneItem">
+            <label>试题科目:</label>
+            <select class="input" id="select">
+                <option value="不限">不限</option>
+                <option value="低压电工">低压电工</option>
+                <option value="熔化焊与热切割">熔化焊与热切割</option>
+                <option value="高处作业维护与安装拆除">高处作业维护与安装拆除</option>
+                <option value="登高架设">登高架设</option>
+            </select>
+        </div>
+        <!--<div class="oneItem">-->
+            <!--<label>试题总分:</label><input type="text" class="input" id="total">-->
+        <!--</div>-->
+        <div class="oneItem">
+            <label>&nbsp;&nbsp;&nbsp;及格分:</label><input type="text" class="input" id="passScore">
+        </div>
+        <div class="oneItem">
+            <label class="desc">知识分类:</label><textarea class="textTrea" id="description"></textarea>
+        </div>
+        <!--题型数量-->
+        <div class="oneItem">
+            <label>单选题:共</label><input type="text" class="minInput" id="selectOneNum"><label>题,每题</label><input type="text" class="minInput" id="selectOneScore">
+            <label>分</label>
+        </div>
+        <div class="oneItem">
+            <label>多选题:共</label><input type="text" class="minInput" id="selectMoreNum"><label>题,每题</label><input type="text" class="minInput" id="selectMoreScore">
+            <label>分</label>
+        </div>
+        <div class="oneItem">
+            <label>判断题:共</label><input type="text" class="minInput" id="selectJudgeNum"><label>题,每题</label><input type="text" class="minInput" id="selectJudgeScore">
+            <label>分</label>
+        </div>
+        <!--简答题-->
+        <div class="oneItem">
+            <label>简答题: 每题</label><input type="text" class="minInput" id="caseScore"><label>分</label>
+            <br><input type="button" value="选择" id="chooseCase">
+            <div id="theChoose"></div>
+        </div>
+        <input type="button" value="提交" id="submit">
+    </form>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/random.js"></script>
+</body>
+</html>
