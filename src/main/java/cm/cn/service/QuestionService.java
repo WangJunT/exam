@@ -41,4 +41,6 @@ public interface QuestionService {
 	public List<JsQuesion> selectJsQuestionlimit(PageQuestion pageQuestion);
 	//随机选题
 	public List<JsQuesion> selectRan(RandomQuestion randomQuestion);
+	//查询各种类别试卷总数
+	public int selAllCount(JsQuesion jsQuesion);
 }

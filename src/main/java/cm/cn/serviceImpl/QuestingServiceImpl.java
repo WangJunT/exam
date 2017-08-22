@@ -75,5 +75,26 @@ public class QuestingServiceImpl implements QuestionService {
 	public List<JsQuesion> selectRan(RandomQuestion randomQuestion) {
 		return questionMapper.selectRan(randomQuestion);
 	}
+	@Override
+	public int selAllCount(JsQuesion jsQuesion) {
+		JsQuesionExample jsQuesionExample = new JsQuesionExample();
+		JsQuesionExample.Criteria criteria = jsQuesionExample.createCriteria();
+		if (jsQuesion.getTypeId()!=0) {
+			criteria.andTypeIdEqualTo(jsQuesion.getTypeId());
+		}
+		if (jsQuesion.getDifficultType()!=0) {
+			criteria.andDifficultTypeEqualTo(jsQuesion.getDifficultType());
+		}
+		if (jsQuesion.getKnowType()!=null) {
+			criteria.andKnowTypeEqualTo(jsQuesion.getKnowType());
+		}
+		if (jsQuesion.getExamType()!=null) {
+			criteria.andExamTypeEqualTo(jsQuesion.getExamType());
+		}
+		if (jsQuesion.getLeibieType()!=null) {
+			criteria.andLeibieTypeEqualTo(jsQuesion.getLeibieType());
+		}
+		return jsquestionMapper.countByExample(jsQuesionExample);
+	}
 
 }

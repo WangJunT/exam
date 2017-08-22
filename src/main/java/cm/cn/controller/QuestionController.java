@@ -43,6 +43,7 @@ public class QuestionController {
 		upCaseQues.excelToJsCase(filePath);
 		return map ;
 	}
+	//批量添加题目
 	@RequestMapping("/addQuesBatch")
 	@ResponseBody
 	public Map<Integer, String> addQuesBatch(MultipartFile file){
@@ -95,6 +96,7 @@ public class QuestionController {
 //		map.put(1, list);
 //		return map;
 //	}
+	//进入顺序练习
 	@RequestMapping("/orderPractice")
 	@ResponseBody
 	public Map<Integer, Object> orderPractice(HttpSession session){
@@ -116,6 +118,7 @@ public class QuestionController {
 		map.put(1, list);
 		return map;
 	}
+	//分页显示
 	@RequestMapping("/selectLimit")
 	@ResponseBody
 	public List<JsQuesion> selectLimit(PageQuestion pageQuestion,HttpSession session){
@@ -130,6 +133,7 @@ public class QuestionController {
 		List<JsQuesion> list= questionService.selectJsQuestionlimit(pageQuestion);
 		return list;
 	}
+	//退出顺序练习
 	@RequestMapping("/quitPractice")
 	@ResponseBody
 	public Map<Integer, String> quitPractice(int start,HttpSession session){

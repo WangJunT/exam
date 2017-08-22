@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import cm.cn.mapper.JsVideoMapper;
 import cm.cn.po.JsVideo;
+import cm.cn.po.JsVideoExample;
 import cm.cn.service.VideoService;
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -21,8 +22,14 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public List<JsVideo> allVideo() {
+		JsVideoExample example = new JsVideoExample();
+		return jsVideoMapper.selectByExample(example);
+	}
+
+	@Override
+	public JsVideo selById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return jsVideoMapper.selectByPrimaryKey(id);
 	}
 
 }

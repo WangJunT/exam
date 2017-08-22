@@ -30,6 +30,7 @@ public class ExamPaperController {
 	ExamPaperService examPaperService;
 	@Autowired
 	CaseQuestionService caseQuestionService;
+	//随机组卷
 	@RequestMapping(value="/addExam",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<Integer, String> addQuestion(@RequestBody JsExampaper jsExampaper){
@@ -77,6 +78,13 @@ public class ExamPaperController {
 		}
 		return map;
 	}
+	//手动组卷（未完成）------------------------------------------
+	@RequestMapping(value="addExamByhand")
+	@ResponseBody
+	public Map<Integer, String> addExamByhand(@RequestBody JsExampaper jsExampaper){
+		Map<Integer, String> map = new HashMap<>();
+		return map;
+	}
 	@RequestMapping(value="/selectAll")
 	@ResponseBody
 	public List<JsExampaper> selectAll(){
@@ -122,6 +130,7 @@ public class ExamPaperController {
 	@ResponseBody
 	public Map<Integer, Object> delExam(int[] intarray){
 		Map<Integer,Object> map = new HashMap<>();
+		//先删除与之关联的试卷学生关系
 		int num = examPaperService.delExam(intarray);
 		if (num>0) {
 			map.put(0, "删除"+num+"条数据");

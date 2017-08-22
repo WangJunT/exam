@@ -104,7 +104,7 @@
 	WHERE
 		js.type_id = #{type_id}
   </select>
-  <!--   分类随机查询 -->
+  <!--   分类随机查询 ,不用这方法-->
   <select id="selectRandomQuestion" resultMap="BaseResultMap">
   	SELECT
   		a.id 'id',
@@ -124,7 +124,7 @@
 				ques.type_id = #{0}
 		) a limit #{1},#{2}
   </select>
-   <!--   根据题目类别查询各种类别题目总数 -->
+   <!--   根据题目类别查询各种类别题目总数,不用这个 -->
   <select id="selectCount" parameterType="int" resultType="int">
   	SELECT
 		COUNT(*)
