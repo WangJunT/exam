@@ -20,7 +20,7 @@ import cm.cn.service.ExampaperStuService;
 public class ExamPaperStuController {
 	@Autowired
 	ExampaperStuService exampaperStuService;
-	@RequestMapping("sorup")
+	@RequestMapping("/sorup")
 	@ResponseBody
 	public Map<Integer , String> sorup(JsExampaperStu jsExampaperStu,HttpSession session){
 		Map<Integer, String> map = new HashMap<>();

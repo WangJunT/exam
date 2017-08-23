@@ -19,7 +19,7 @@ import cm.cn.po.JsVideo;
 import cm.cn.service.VideoService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/video")
 public class VideoController {
 	@Autowired
 	VideoService videoService;
@@ -33,7 +33,7 @@ public class VideoController {
 	public List<JsVideo> allVideo(){
 		return videoService.allVideo();
 	}
-	@RequestMapping("/addVideo")
+	@RequestMapping("/admin/addVideo")
 	public Map<Integer, String> addVideo( JsVideo jsVideo ){
 		Map<Integer, String> map = new HashMap<>();
 		if (videoService.insertVideo(jsVideo)>0) {
@@ -45,7 +45,7 @@ public class VideoController {
 		return map ;
 	}
 	//获取上传图片，视屏路径
-	@RequestMapping("/upVideoAndPic")
+	@RequestMapping("/admin/upVideoAndPic")
 	@ResponseBody
 	public List<String> upVideoAndPic(@RequestParam MultipartFile[] file){
 		List<String> list = new ArrayList<>();
