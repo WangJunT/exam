@@ -1,11 +1,8 @@
 package cm.cn.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import cm.cn.po.JsQuesion;
 import cm.cn.po.JsQuestionStu;
@@ -23,7 +19,6 @@ import cm.cn.po.RandomQuestion;
 import cm.cn.service.QuestionService;
 import cm.cn.service.QuestionStuService;
 import cm.cn.service.UpCaseQues;
-import cm.cn.util.QuesExcelUtil;
 
 @Controller
 @RequestMapping("/question")
@@ -35,6 +30,11 @@ public class QuestionController {
 	QuestionService questionService;
 	@Autowired
 	UpCaseQues upCaseQues;
+	@RequestMapping("/selAll")
+	@ResponseBody
+	public List<JsQuesion> selAll(){
+		return questionService.selectAllQuestion();
+	}
 	@RequestMapping("/addCase")
 	@ResponseBody
 	public Map<Integer, String> addCase(){
@@ -42,40 +42,6 @@ public class QuestionController {
 		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\材料员实务.xls";
 		upCaseQues.excelToJsCase(filePath);
 		return map ;
-	}
-	//批量添加题目
-	@RequestMapping("/addQuesBatch")
-	@ResponseBody
-	public Map<Integer, String> addQuesBatch(MultipartFile file){
-		Map<Integer, String> map = new HashMap<>();
-		 //获取文件名  
-	    String fileName = file.getOriginalFilename();  
-	    //文件扩展名  
-	    String newFileName = "ques"+UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));  
-	    // 存储文件的物理路径
-	 	String video_path = "D:\\";
-	 	String filePath = video_path + newFileName;
-	 	// 新文件,存到磁盘
-		File newFile = new File(filePath);
-		try {
-			file.transferTo(newFile);
-		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<JsQuesion> list = QuesExcelUtil.excelToQues(filePath);
-		if (list.size()>0) {
-			if (questionService.insertList(list)>0){
-				map.put(0, "上传成功");
-			}
-			else{
-				map.put(1, "添加失败");
-			}
-		}
-		else{
-			map.put(2, "文件格式错误或数据有误");
-		}
-		return map;
 	}
 //	@RequestMapping("/orderPractice")
 //	@ResponseBody

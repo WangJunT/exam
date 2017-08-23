@@ -1,10 +1,6 @@
 package cm.cn.util;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -80,18 +76,18 @@ public class ListStuToExcel {
 		    headCell.setCellStyle(cellStyle);
 	    }
 	    // 保存Excel文件
-	    try {
+//	    try {
 		 //文件扩展名  
-		 String newFileName = UUID.randomUUID()+""+new Date().getTime()+".xlsx";  
+//		 String newFileName = UUID.randomUUID()+""+new Date().getTime()+".xlsx";  
 		    
 		 // 存储视屏的物理路径
-		 String video_path = "D:\\FFOutput\\";
-		 OutputStream outputStream = new FileOutputStream(video_path+newFileName);
-		 workbook.write(outputStream);
-		 outputStream.close();
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	    }
+//		 String video_path = "D:\\";
+//		 OutputStream outputStream = new FileOutputStream(video_path+newFileName);
+//		 workbook.write(outputStream);
+//		 outputStream.close();
+//	    } catch (Exception e) {
+//	      e.printStackTrace();
+//	    }
 	    return workbook;
 	}
 }

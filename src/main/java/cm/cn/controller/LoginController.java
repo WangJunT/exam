@@ -68,7 +68,11 @@ public class LoginController {
 			if(jsUser.getCheckCode().equals(chenk_code)){
 				if(cha<=300){
 					session.setAttribute("user", jsUser);
-					map.put(0, "登陆成功");
+					if(jsUser.getRoleId()==3){
+						map.put(0, "学生");
+					}else{
+						map.put(0, "老师");
+					}
 				}
 				else {
 					map.put(1, "验证码超时");
@@ -97,7 +101,11 @@ public class LoginController {
 			String password = Base64.encode(("zjedu"+pass+"cn").getBytes());
 			if (password.equals(jsUser.getPassword())) {
 				session.setAttribute("user", jsUser);
-				map.put(0, "登陆成功");
+				if(jsUser.getRoleId()==3){
+					map.put(0, "学生");
+				}else{
+					map.put(0, "老师");
+				}
 			}
 			else{
 				map.put(1, "密码错误");

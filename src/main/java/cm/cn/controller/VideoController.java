@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import cm.cn.po.JsVideo;
 import cm.cn.service.VideoService;
 
 @Controller
+@RequestMapping("/admin")
 public class VideoController {
 	@Autowired
 	VideoService videoService;
@@ -53,11 +53,11 @@ public class VideoController {
 	    String videoFileName = file[0].getOriginalFilename(); 
 	    String picName = file[1].getOriginalFilename();
 	    //文件扩展名  
-	    String newvideoFileName = UUID.randomUUID()+videoFileName.substring(videoFileName.lastIndexOf("."));  
-	    String newPicName = UUID.randomUUID()+picName.substring(picName.lastIndexOf("."));
+	    String newvideoFileName = "video"+UUID.randomUUID()+videoFileName.substring(videoFileName.lastIndexOf("."));  
+	    String newPicName = "pic"+UUID.randomUUID()+picName.substring(picName.lastIndexOf("."));
 	 // 存储视屏的物理路径
-	 	 	String video_path = "D:\\video\\";
-	 	 	String pic_path = "D:\\pic\\";
+	 	 	String video_path = "D:\\";
+	 	 	String pic_path = "D:\\";
 	 	// 新视屏
 			File videoFile = new File(video_path + newvideoFileName);
 			File picFile = new File(pic_path+newPicName);
@@ -71,35 +71,5 @@ public class VideoController {
 				e.printStackTrace();
 			}
 		return list;
-	}
-	@RequestMapping("/upVideo")
-	public ModelAndView upVideo(@RequestParam MultipartFile[] file) throws IllegalStateException, IOException{
-		 //获取文件名  
-	    String videoFileName = file[0].getOriginalFilename(); 
-	    String picName = file[1].getOriginalFilename();
-	    //文件扩展名  
-	    String newvideoFileName = UUID.randomUUID()+videoFileName.substring(videoFileName.lastIndexOf("."));  
-	    String newPicName = UUID.randomUUID()+picName.substring(picName.lastIndexOf("."));
-	    // 存储视屏的物理路径
-	 	String video_path = "D:\\video\\";
-	 	String pic_path = "D:\\pic\\";
-	 	// 新视屏
-		File videoFile = new File(video_path + newvideoFileName);
-		File picFile = new File(pic_path+newPicName);
-		file[0].transferTo(videoFile);
-		file[1].transferTo(picFile);
-	    ModelAndView modelAndView = new ModelAndView();
-		JsVideo video = new JsVideo();
-		video.setUrl(video_path+newvideoFileName);
-		video.setPic(pic_path+newPicName);
-//		videoService.insertVideo(video);
-		modelAndView.setViewName("testss/index");
-		modelAndView.addObject("url",video.getUrl());
-		modelAndView.addObject("pic",video.getPic());
-		return modelAndView;
-	}
-	@RequestMapping("/s")
-	public String s(){
-		return "testss/index";
 	}
 }
