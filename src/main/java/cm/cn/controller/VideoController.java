@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,7 +35,8 @@ public class VideoController {
 		return videoService.allVideo();
 	}
 	@RequestMapping("/admin/addVideo")
-	public Map<Integer, String> addVideo( JsVideo jsVideo ){
+	@ResponseBody
+	public Map<Integer, String> addVideo(@RequestBody JsVideo jsVideo ){
 		Map<Integer, String> map = new HashMap<>();
 		if (videoService.insertVideo(jsVideo)>0) {
 			map.put(1, "视频上传成功");
@@ -63,6 +65,8 @@ public class VideoController {
 			File picFile = new File(pic_path+newPicName);
 			list.add(videoFile.getAbsolutePath());
 			list.add(picFile.getAbsolutePath());
+			list.add(newvideoFileName);
+			list.add(newPicName);
 			try {
 				file[0].transferTo(videoFile);
 				file[1].transferTo(picFile);

@@ -69,9 +69,9 @@ public class LoginController {
 				if(cha<=300){
 					session.setAttribute("user", jsUser);
 					if(jsUser.getRoleId()==3){
-						map.put(0, "学生");
+						map.put(0, "student");
 					}else{
-						map.put(0, "老师");
+						map.put(0, "teacher");
 					}
 				}
 				else {
@@ -102,9 +102,9 @@ public class LoginController {
 			if (password.equals(jsUser.getPassword())) {
 				session.setAttribute("user", jsUser);
 				if(jsUser.getRoleId()==3){
-					map.put(0, "学生");
+					map.put(0, "student");
 				}else{
-					map.put(0, "老师");
+					map.put(0, "teacher");
 				}
 			}
 			else{
