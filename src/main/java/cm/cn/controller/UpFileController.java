@@ -31,10 +31,9 @@ public class UpFileController {
 	@Autowired
 	UpCaseQues upCaseQues;
 	//批量添加题目
-		@RequestMapping("/addQuesBatch")
+		@RequestMapping("/addQuesFile")
 		@ResponseBody
-		public Map<Integer, String> addQuesBatch(MultipartFile file){
-			Map<Integer, String> map = new HashMap<>();
+		public String addQuesFile(MultipartFile file){
 			 //获取文件名  
 		    String fileName = file.getOriginalFilename();  
 		    //文件扩展名  
@@ -50,7 +49,13 @@ public class UpFileController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<JsQuesion> list = QuesExcelUtil.excelToQues(filePath);
+			return filePath;
+		}
+		@RequestMapping("/addQuesBatch")
+		@ResponseBody
+		public Map<Integer, String> addQuesBatch(String filePath,String reserveFive,String reserveSix){
+			Map<Integer, String> map = new HashMap<>();
+			List<JsQuesion> list = QuesExcelUtil.excelToQues(filePath,reserveFive,reserveSix);
 			if (list.size()>0) {
 				if (questionService.insertList(list)>0){
 					map.put(0, "上传成功");
@@ -87,10 +92,11 @@ public class UpFileController {
 			upCaseQues.excelToJsCase(filePath);
 			return map ;
 		}
+		//添加学生
 		@RequestMapping("/addStuBatch")
 		@ResponseBody
-		public Map<Integer, String> addStuBatch(MultipartFile file){
-			Map<Integer, String> map = new HashMap<>();
+		public String addStuBatch(MultipartFile file){
+//			Map<Integer, String> map = new HashMap<>();
 			 //获取文件名  
 		    String fileName = file.getOriginalFilename();  
 		    //文件扩展名  
@@ -106,7 +112,13 @@ public class UpFileController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<JsUser> list = StuExcelUtil.excelToStu(filePath);
+			return filePath;
+		}
+		@RequestMapping("/addStuFile")
+		@ResponseBody
+		public Map<Integer, String> addStuFile(String filePath,String reserveFive,String reserveSix){
+			Map<Integer, String> map = new HashMap<>();
+			List<JsUser> list = StuExcelUtil.excelToStu(filePath,reserveFive,reserveSix);
 			if (list.size()>0) {
 				if (studentService.insertStuList(list)>0){
 					map.put(0, "上传成功");

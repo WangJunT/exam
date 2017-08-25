@@ -23,7 +23,7 @@ public class StuExcelUtil {
 	 * @return
 	 * 导入的是第一张表
 	 */
-	public static List<JsUser> excelToStu(String filePath) {
+	public static List<JsUser> excelToStu(String filePath,String reserveFive,String reserveSix) {
 		List<JsUser> list = new ArrayList<JsUser>();
 		FileInputStream excelFileInputStream;
 		String filetype = filePath.substring(filePath.lastIndexOf(".") + 1);
@@ -62,6 +62,8 @@ public class StuExcelUtil {
 				jsUser.setRealname(class_num);
 				jsUser.setUsername(name);
 				jsUser.setRoleId(3);
+				jsUser.setReserveFive(reserveFive);
+				jsUser.setReserveSix(reserveSix);
 				list.add(jsUser);
 			}
 		}
@@ -99,6 +101,8 @@ public class StuExcelUtil {
 				jsUser.setRealname(class_num);
 				jsUser.setUsername(name);
 				jsUser.setRoleId(3);
+				jsUser.setReserveFive(reserveFive);
+				jsUser.setReserveSix(reserveSix);
 				list.add(jsUser);
 			}
 		}

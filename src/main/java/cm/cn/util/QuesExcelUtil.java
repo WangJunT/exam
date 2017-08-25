@@ -22,7 +22,7 @@ public class QuesExcelUtil {
 	 * @return
 	 * 导入的是第二张表
 	 */
-	public static List<JsQuesion> excelToQues(String filePath) {
+	public static List<JsQuesion> excelToQues(String filePath,String reserveFive,String reserveSix) {
 		List<JsQuesion> list = new ArrayList<JsQuesion>();
 		FileInputStream excelFileInputStream;
 		String filetype = filePath.substring(filePath.lastIndexOf(".") + 1);
@@ -68,6 +68,8 @@ public class QuesExcelUtil {
 //				jsQuesion.setExamType(exam_type);
 				jsQuesion.setTypeId(type_id);
 				jsQuesion.setAnswer(answer);
+				jsQuesion.setReserveFive(reserveFive);
+				jsQuesion.setReserveSix(reserveSix);
 				list.add(jsQuesion);
 			}
 		}
@@ -123,6 +125,8 @@ public class QuesExcelUtil {
 //				jsQuesion.setExamType(exam_type);
 				jsQuesion.setTypeId(type_id);
 				jsQuesion.setAnswer(answer);
+				jsQuesion.setReserveFive(reserveFive);
+				jsQuesion.setReserveSix(reserveSix);
 				list.add(jsQuesion);
 			}
 		}

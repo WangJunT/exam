@@ -1,5 +1,6 @@
 package cm.cn.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class LevelController {
 	public List<JsLevel> selOne(){
 		return levelService.selOne();
 	}
-	@RequestMapping("/selOne")
+	@RequestMapping("/selTwo")
 	@ResponseBody
 	public List<JsLevel> selTwo(int id){
 		return levelService.selTwo(id);
@@ -40,16 +41,24 @@ public class LevelController {
 		return map;
 	}
 	//前端需要传入上一层级 ID ，该层级名称，层级已在 实现层设为 2
-	@RequestMapping("/addTwo")
-	@ResponseBody
-	public Map<Integer, String> addTwo(JsLevel level){
-		Map<Integer, String> map = new HashMap<>();
-		if (levelService.inLevel(level)>0) {
-			map.put(0, "删除成功");
+		@RequestMapping("/addTwo")
+		@ResponseBody
+		public Map<Integer, String> addTwo(JsLevel level){
+			String name = null;
+			try {
+				name = new String(level.getName().getBytes("ISO-8859-1"),"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			level.setName(name);
+			Map<Integer, String> map = new HashMap<>();
+			if (levelService.inLevel(level)>0) {
+				map.put(0, "添加成功");
+			}
+			else {
+				map.put(1, "添加失败");
+			}
+			return map;
 		}
-		else {
-			map.put(1, "删除失败");
-		}
-		return map;
-	}
 }
