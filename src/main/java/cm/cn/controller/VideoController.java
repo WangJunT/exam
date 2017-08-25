@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import cm.cn.po.JsVideo;
+import cm.cn.po.Page;
 import cm.cn.service.VideoService;
 
 @Controller
@@ -24,6 +25,13 @@ import cm.cn.service.VideoService;
 public class VideoController {
 	@Autowired
 	VideoService videoService;
+	@RequestMapping("/pageVideo")
+	@ResponseBody
+	public Page<JsVideo> addVideo(int current,int pageSize){
+		List<JsVideo> list = videoService.allVideo();;
+		Page<JsVideo> page= new Page<JsVideo>(current, pageSize,list);
+		return page;
+	}
 	@RequestMapping("/watchVideo")
 	@ResponseBody
 	public JsVideo watchVideo(int id){
