@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="../../css/manage/uploadVideo.css" rel="stylesheet">
+  <title>视频上传</title>
+</head>
+<body>
+<!--选择文件-->
+<input type="file" id="uploadVideo" accept=".mp4,.webm,.ogg" style="display: none" name="file">
+<input type="file" id="uploadImg" accept=".jpg,.jpeg,.png" style="display: none" name="file">
+<!--头部标识-->
+<div class="title">上传视频课程</div>
+<div class="videoMessageBox">
+  <div class="oneItemBox"><div id="videoMsg">选择视频文件(支持mp4,webm,ogg文件，小于240)</div><a href="javascript:void(0)" id="chooseVideo">选择</a> </div>
+  <div class="oneItemBox"><div id="imgMsg">选择封面图片(支持jpg,jpeg,png文件)</div><a href="javascript:void(0)" id="chooseImg">选择</a> </div>
+  <input type="text" class="nameBox" placeholder="输入课程名称" id="name">
+  <div class="oneItemBox">课程描述</div>
+  <textarea class="desc" id="desc"></textarea>
+  <div class="uploadMsg" id="msg"></div>
+  <input type="button" value="上传" class="upload" id="upload">
+</div>
+<!--视频上传-->
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/manage/uploadVideo.js"></script>
+</body>
+</html>

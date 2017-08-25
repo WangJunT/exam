@@ -1,0 +1,171 @@
+*{
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-shadow:0px 0px 0px rgba(0,0,0,0);
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color: #4d4d4d;
+}
+html,body{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+html{
+    font-size: 20px;
+}
+.mainBox{
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    margin:0.88rem 0 0.98rem 0;
+    overflow: hidden;
+}
+.header{
+    width: 100%;
+    height: 0.88rem;
+    background: #88bbd6;
+    color: #4d4d4d;
+    font-size: 0.32rem;
+    line-height: 0.88rem;
+    text-align: center;
+    font-weight: 500;
+    position: fixed;
+    top:0;
+    z-index: 99;
+}
+/*具体信息*/
+.headBox{
+    width: 100%;
+    height: 2.4rem;
+    margin: 0.45rem 0.65rem;
+    overflow: hidden;
+}
+.headBox .headIcon{
+    width: 1.5rem;
+    height: 1.5rem;
+    float: left;
+    border: 0.01rem #494949 solid;
+    border-radius: 50%;
+    background: url(../../image/mobile/adminHead.jpg) no-repeat 100% / 100%;
+}
+.headBox .msgBox{
+    float: left;
+    width: 3.94rem;
+    height: 1.5rem;
+    margin-left:0.25rem;
+    position: relative;
+}
+.msgBox .theUser{
+    width: 100%;
+    height: 100%;
+    line-height: 1.5rem;
+    font-size: 0.3rem;
+    color: #4d4d4d;
+}
+.msgBox .goTo{
+    display: block;
+    width: 0.25rem;
+    height:0.25rem;
+    border-top: .02rem #494949 solid;
+    border-right: .02rem #494949 solid;
+    transform: rotate(45deg);
+    position: absolute;
+    right: -0.3rem;
+    top: 0.6rem;
+}
+.interval{
+    width: 100%;
+    height: 0.2rem;
+    background: #e6e6e6;
+}
+.historyHead{
+    width: 6.75rem;
+    margin: 0.2rem auto;
+    box-sizing: border-box;
+    background: url(../../image/mobile/history.png) no-repeat center left;
+    background-size: 0.4rem auto;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    color:#4d4d4d;
+    padding-left: 0.5rem;
+    font-size: 0.3rem;
+}
+.historyList{
+    width: 6.75rem;
+    margin: 0.45rem auto;
+    height: auto;
+}
+.historyList ul{
+    width: 100%;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    list-style: none;
+    text-align: left;
+    font-size: 0;
+}
+.historyList li{
+    display: inline-block;
+    width: 33.3%;
+    height: 0.3rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #4d4d4d;
+    font-size: 0.27rem;
+    line-height: 0.3rem;
+}
+/*底部导航条*/
+.bottomNav{
+    width: 100%;
+    height: 0.98rem;
+    line-height: 0.98rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 0.15rem 0.83rem;
+    border-top: 1px #bbb solid;
+}
+.bottomNav .navBox{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 0;
+}
+.navBox a{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 0.5rem;
+    min-width: 24px;
+    height: 100%;
+    color: #4d4d4d;
+    line-height: 0.2rem;
+    font-size: 0.1rem;
+    padding-top: 0.48rem;
+    margin-left: 1rem;
+}
+.navBox a:first-child{
+    margin-left: 0;
+}
+.navBox .A1{
+    background: url(../../image/mobile/home1.jpg) center top no-repeat;
+    background-size: auto 0.4rem;
+}
+.navBox .A2{
+    background: url(../../image/mobile/exam1.png) center top no-repeat;
+    background-size: auto 0.4rem;
+}
+.navBox .A3{
+    background: url(../../image/mobile/video1.png) center top no-repeat;
+    background-size: auto 0.4rem;
+}
+.navBox .A4{
+    background: url(../../image/mobile/person.jpg) center top no-repeat;
+    background-size: auto 0.4rem;
+}

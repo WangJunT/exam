@@ -1,0 +1,117 @@
+.wall{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    background: rgba(0,0,0,.4);
+    z-index: 999;
+}
+.loginBox{
+    width: 6rem;
+    height: 4.42rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -2.21rem;
+    margin-left: -3rem;
+    border-radius: 0.05rem;
+    background: #fff;
+}
+.loginBox .loginHead{
+    width: 5rem;
+    height: 0.3rem;
+    margin: 0.4rem auto 0.2rem auto;
+    font-size: 0;
+}
+.loginHead a{
+    display: inline-block;
+    width: 50%;
+    height: 0.3rem;
+    color: #000;
+    font-size: 0.27rem;
+    text-align: center;
+}
+.loginCurst{
+    width: 2.5rem;
+    height: 0.06rem;
+    background: #88bbd6;
+    margin-left: 0.5rem;
+    transition: transform 0.3s;
+}
+.loginForm{
+    width: 4.6rem;
+    margin: 0 auto 0.45rem auto;
+    height: auto;
+}
+.loginBox .inputBox{
+    width: 100%;
+    height: 0.6rem;
+    margin: 0.15rem 0;
+    position: relative;
+}
+.inputBox .loginIcon1{
+    float: left;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url(../../image/mobile/user.png) no-repeat;
+    background-size: auto 100%;
+}
+.inputBox .loginIcon2{
+    float: left;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url(../../image/mobile/password.png) no-repeat;
+    background-size: auto 100%;
+}
+.loginBox input{
+    display: block;
+    outline: none;
+    border: 0;
+    float: right;
+    width: 4.1rem;
+    font-size: 0.27rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+}
+.loginBox .getCode{
+    position: absolute;
+    display: block;
+    right: 0;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    padding: 0.05rem;
+    font-size: 0.17rem;
+    color: #4d4d4d;
+    background: #88bbd6;
+    border-radius: 3px;
+}
+.lastLoadBox{
+    width: 4.6rem;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    box-sizing: border-box;
+    padding-left: 0.4rem;
+    font-size: 0.27rem;
+    position: relative;
+    margin-top: 0.45rem;
+}
+.loginBox .lastLoadBox input{
+    width: 0.2rem;
+    height: 0.2rem;
+    position: absolute;
+    left: 0;
+    border: 1px solid #4d4d4d;
+    top: 0.05rem;
+}
+.loginBox .loginForm .loginSubmit{
+    width: 5rem;
+    height: 0.5rem;
+    border-radius: 5px;
+    line-height: 0.5rem;
+    background: #88bbd6;
+    font-size: 0.27rem;
+    color: #4d4d4d;
+    margin: 0.4rem auto;
+    border: 0;
+    outline: none;
+}

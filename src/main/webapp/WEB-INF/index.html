@@ -7,11 +7,6 @@
     <link href="../css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-<!--标注-->
-<div class="pageTitle">
-    <span>考试练习系统</span>
-    <span>浙江建设职业技能培训学校</span>
-</div>
 <!--头部-->
 <header class="headBox">
     <img class="logo" src="../image/index/logo.png">
@@ -19,9 +14,8 @@
         <!--导航条-->
         <ul>
             <li><a href="javascript:void(0)">网站首页</a> </li>
-            <li><a href="javascript:void(0)">考试练习</a> </li>
-            <li><a href="javascript:void(0)">视频教程</a> </li>
-            <li><a href="javascript:void(0)">用户中心</a> </li>
+            <li><a href="javascript:void(0)" id="toVideo">视频教程</a> </li>
+            <li><a href="javascript:void(0)" id="toUser">用户中心</a> </li>
         </ul>
         <div class="loginBox">
             <a href="javascript:void(0)" id="log">退出登录</a>
@@ -51,16 +45,16 @@
     </div>
     <div class="chooseBox">
         <!--练习-->
-        <div class="test" >
+        <div class="test" id="goTest">
             <img src="../image/index/test.png" class="icon">
-            <span>顺序练习</span>
-            <a href="javascript:void(0)" id="goTest"></a>
+            <span>练习模块</span>
+            <a href="javascript:void(0)" ></a>
         </div>
         <!--考试-->
-        <div class="exam" >
+        <div class="exam" id="goExam">
             <img src="../image/index/exam.png" class="icon">
             <span>模拟考试</span>
-            <a href="javascript:void(0)" id="goExam"></a>
+            <a href="javascript:void(0)" ></a>
         </div>
     </div>
 </div>

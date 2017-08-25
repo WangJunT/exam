@@ -3,7 +3,6 @@
  */
 (function ($) {
     var nowPage = 0;
-    var frame = document.getElementById('frameBox');
     // 试卷管理
     $('#examManager').click(function () {
         if (nowPage != 0) {

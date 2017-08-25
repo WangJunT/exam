@@ -3,17 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <script src="../../js/mobile/init.js"></script>
   <link href="../../css/mobile/index.css" rel="stylesheet">
   <title>考试首页</title>
 </head>
 <body>
-<header class="header">首页</header>
-<!--轮播图-->
-<div class="slideBox"></div>
+<section class="mainBox">
+  <header class="header">首页</header>
+  <!--轮播图-->
+  <div class="slideBox"></div>
 <!--选择去考试-->
-<div class="chooseBox">
-  <div class="selectBox s1"><a href="javascript:void(0)"></a><label>进入练习</label> </div>
-  <div class="selectBox s2"><a href="javascript:void(0)"></a><label>进入考试</label> </div>
+  <div class="chooseBox">
+    <div class="selectBox" id="toTest"><a href="javascript:void(0)" class="a1"></a><label>进入练习</label> </div>
+    <div class="selectBox s2" id="toExam"><a href="javascript:void(0)" class="a2"></a><label>进入考试</label> </div>
+  </div>
+<!--视频课程-->
+  <div class="videoTitle">
+    课程列表
+    <a href="javascript:void(0)" id="moreVideo">更多&nbsp;></a>
+  </div>
+<!--具体视频课程-->
+  <div class="listBox">
+    <div class="oneItem"></div>
+    <div class="oneItem item2"></div>
+  </div>
+</section>
+<!--底部导航条-->
+<div class="bottomNav">
+    <div class="navBox" id="nav">
+      <a href="javascript:void(0)" class="A1">首页</a>
+      <a href="javascript:void(0)" class="A2" id="exam">考试</a>
+      <a href="javascript:void(0)" class="A3" id="video">课程</a>
+      <a href="javascript:void(0)" class="A4" id="set">设置</a>
+    </div>
 </div>
 <script src="../../js/jquery-3.2.1.min.js"></script>
 <script src="../../js/mobile/base-gesture.js"></script>

@@ -5,7 +5,6 @@
     var str = '<ul>';
     //var ls = opCookie.get('isLoad');
     var ls = sessionStorage.getItem('isLoad');
-    console.log(ls);
     if (ls == 'undefined' || ls == null) { //未登录不可访问
         window.location.href = '/SSMDemo/index/first.action';
     }
@@ -26,7 +25,8 @@
     });
     $(document).on('click','#goTo',function (e) {
         var theId = e.target.getAttribute('data-ExamId');
-        var url = 'sequenceExam.html?type=1&id='+theId;
+        var t = new Date();
+        var url = 'sequenceExam.html?type=1&id='+ theId + '&t='+t.getTime().toString();
         window.location.href = url;
     });
     //

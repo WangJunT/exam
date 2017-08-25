@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.header{
+    width: 100%;
+    min-width: 1000px;
+    height: 40px;
+    z-index: 100;
+    background: #88bbd6;
+    position: relative;
+    font-size: 17px;
+    color: #4d4d4d;
+    text-align: center;
+    line-height: 40px;
+}
+.header a{
+    display: block;
+    float: right;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #4d4d4d;
+}
+/*登录区块*/
+.loginBox{
+    width: 350px;
+    height: auto;
+    padding: 20px;
+    border: 1px #a9a9a9 solid;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -175px;
+    transform: translateY(-50%);
+}
+.loginBox .loginTitle{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #000000;
+    font-size: 16px;
+}
+.loginBox form{
+    width: 100%;
+}
+.loginBox .putbox{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    outline: none;
+    border: 1px #a9a9a9 solid;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+.putbox:focus{
+    border: 1px #88bbd6 solid;
+}
+.loginBox .login{
+    width: 100%;
+    height: 40px;
+    border: 0;
+    outline: none;
+    line-height: 40px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    background: #88bbd6;
+}
+.loginBox .msgBox{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    font-size: 15px;
+    text-align: left;
+    color: #d67675;
+}

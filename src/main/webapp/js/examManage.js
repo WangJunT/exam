@@ -31,7 +31,8 @@
     * */
  // 自定义方法
     function getList() {
-        $.get('/SSMDemo/exam/selectAll.action',function(data){
+        var d = new Date();
+        $.get('/SSMDemo/exam/selectAll.action?t='+ d.getTime().toString(),function(data){
             var all ='';
             for (var i = 0; i < data.length; i++) {
                 var ls = '<li><input type="checkbox" exam-id="'+data[i].id+'" name="option"></li><li>'+data[i].name+'</li><li>XX</li><li>XXXX</li><li>XXX</li><li>XXX</li><li>xxx</li>';
@@ -39,7 +40,6 @@
                 all += str;
             }
             $('#examList').html(all);
-            window.parent.changeFrame($(document).height()+20);
         });
     }
 })($,window);

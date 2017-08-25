@@ -3,6 +3,7 @@ package cm.cn.service;
 import java.util.List;
 
 import cm.cn.po.JsExampaperStu;
+import cm.cn.po.StuDoneExam;
 
 public interface ExampaperStuService {
 	//查看先前该考生是否考试过该科目
@@ -13,4 +14,6 @@ public interface ExampaperStuService {
 	public int updateStuExam(JsExampaperStu examStu);
 	//当删除试卷时，删除与之有关的考试信息
 	public int delStuExam(int[] arrays);
+	//查看当前学生做试卷情况
+	public List<StuDoneExam> seleDone(int stuid); 
 }

@@ -34,7 +34,7 @@ public class VideoController {
 	public List<JsVideo> allVideo(){
 		return videoService.allVideo();
 	}
-	@RequestMapping("/admin/addVideo")
+	@RequestMapping("/addVideo")
 	@ResponseBody
 	public Map<Integer, String> addVideo(@RequestBody JsVideo jsVideo ){
 		Map<Integer, String> map = new HashMap<>();
@@ -57,7 +57,7 @@ public class VideoController {
 	    //文件扩展名  
 	    String newvideoFileName = "video"+UUID.randomUUID()+videoFileName.substring(videoFileName.lastIndexOf("."));  
 	    String newPicName = "pic"+UUID.randomUUID()+picName.substring(picName.lastIndexOf("."));
-	 // 存储视屏的物理路径
+	 // 存储视屏的物理路径"/tmp/"
 	 	 	String video_path = "D:\\";
 	 	 	String pic_path = "D:\\";
 	 	// 新视屏

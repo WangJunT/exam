@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=8">
   <title>考试页面</title>
   <link href="../../css/sequenceExam.css" rel="stylesheet">
+  <link href="../../css/plugin/alert.css" rel="stylesheet">
 </head>
 <body>
 <!--头部-->
 <header class="header">
   <ul id="navBox">
-    <li><a href="javascript:void(0)" id="toFirst">网站首页</a> </li>
-    <li><a href="javascript:void(0)" id="toExam">考试练习</a> </li>
-    <li><a href="javascript:void(0)" id="toVideo">视频教程</a> </li>
-    <li><a href="javascript:void(0)" id="toUser">用户中心</a> </li>
+    <li><a href="/SSMDemo/index/first.action" id="toFirst">网站首页</a> </li>
+    <li><a href="../videoCenter.html" id="toVideo">视频教程</a> </li>
+    <li><a href="../studentCenter.html" id="toUser">用户中心</a> </li>
   </ul>
   <div class="loginBox">
     <a href="javascript:void(0)" id="log">退出登录</a>
@@ -24,14 +23,52 @@
 <div class="examBox">
   <div class="examTitle" id="title">模拟考试</div>
   <!--具体题目-->
-  <div class="allExam" id="allExam">
+  <div class="allExam" >
     <!--单个题目-->
+    <div id="exam">
+      <div class="theExamBox">
+      <!--左边区块-->
+        <div class="leftMenu" id="leftBox">
+          <ul id="menu"></ul>
+        </div>
+      <!--右边区块-->
+        <div class="oneItemBox" id="rightBox">
+          <div class="itemTitle" id="itemType"></div>
+          <div class="theItem" id="itemTitle">试题加载中.....</div>
+          <div class="optionBox">
+            <ul id="option"></ul>
+          </div>
+          <!--简答题小题区块-->
+          <div id="minItem">
 
+          </div>
+          <!--信息提示-->
+          <div class="anMsg" id="anMsg"></div>
+        </div>
+        <!---->
+      </div>
+      <!--底部区块-->
+      <div class="itemFooter">
+        <!--左边时间区块-->
+        <div class="timeBox">
+          <div class="timeTitle" id="timeTitle">考试消耗时间</div>
+          <div class="time" id="time"></div>
+        </div>
+        <!--右边按钮区块-->
+        <div class="controlBox">
+          <a href="javascript:void(0)" id = 'last'>上一题</a>
+          <a href="javascript:void(0)" id = 'next'>下一题</a>
+          <a href="javascript:void(0)" id = "handIn">交卷</a>
+        </div>
+      </div>
+      <!--底部结束-->
+    </div>
+   <!--题目区块结束-->
   </div>
 
 </div>
-  <script src="../../js/jquery-3.2.1.min.js"></script>
-<script src="../../js/plugin/dialog.js"></script>
-  <script src="../../js/sequenceExam.js"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/plugin/alert.js"></script>
+<script src="../../js/sequenceExam1.js"></script>
 </body>
 </html>

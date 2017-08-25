@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>文件上传</title>
+</head>
+<style type="text/css">
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  html,body{
+    width: 100%;
+    height: 100%;
+  }
+  .title{
+    width: auto;
+    height: 30px;
+    font-size: 20px;
+    padding-left: 6px;
+    line-height: 30px;
+    border-left: 8px #88bbd6 solid;
+    font-weight: bold;
+  }
+  #uploadFile{
+    display: none;
+  }
+  .uploadBox{
+    width: 400px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -40px;
+    text-align: center;
+  }
+  .fileName{
+    width: 100%;
+    color:#999;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+  .uploadButton{
+    display: inline-block;
+    width: 170px;
+    height: 50px;
+    border-radius: 3px;
+    outline: none;
+    background: #88bbd6;
+    color: #fff;
+    border: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  .wall{
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+    line-height: 200px;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    background: rgba(0,0,0,.4);
+  }
+</style>
+<body>
+<div class="title">上传试题</div>
+  <!--文件上传内容-->
+  <input type="file" id="uploadFile" accept=".xlsx" name="file">
+  <div class="uploadBox">
+    <div class="fileName" id="fileName">选择文件</div>
+    <input type="button" id="upLoad" class="uploadButton" value="上传文件" disabled>
+    <input type="button" id="choose" class="uploadButton" value="选择文件">
+  </div>
+<script src="../../js/jquery-3.2.1.min.js"></script>
+<script>
+    // 判断ie版本
+    var browser = uaMatch(navigator.userAgent.toLowerCase());
+    if (browser.browser.toLowerCase() == 'ie' && Number(browser.version) < 10){
+        $('body').append('<div class="wall">上传功能，需IE版本在9以上</div>');
+    }
+//  监听文件框变化
+var can = false;
+$('#upLoad').css('background','#a9a9a9');
+$(document).on('change','#uploadFile',function () {
+      var file = $(this).val();
+      if (file != null || file != undefined){ // 不为空
+          if (isExcel(file)) {
+              can = true;
+              $('#upLoad').removeAttr('disabled').css('background','#88bbd6');
+              $('#fileName').text(file);
+          } else {
+              can = false;
+              $('#upLoad').removeAttr('disabled').css('background','#a9a9a9');
+              $('#fileName').text('请选择excel文件上传');
+          }
+      } else {
+          can = false;
+          $('#fileName').text(file);
+      }
+  });
+  // 点击上传
+  $('#upLoad').click(function(){
+      if (can) {
+          var formData = new FormData();
+          formData.append('file', $('#uploadFile')[0].files[0]);
+          //var byteSize  = $('#uploadFile')[0].files[0].size;
+          //console.log(byteSize);
+          $(this).val('文件上传中...').attr('disabled','true').css('background','#a9a9a9');
+          $.ajax({
+              url: '/SSMDemo/admin/addQuesBatch.action',
+              type: 'POST',
+              cache: false,
+              data: formData,
+              processData: false,
+              contentType: false,
+              success: function (data) {
+                  if (data[0] != undefined) {
+                      alert('上传成功');
+                      can = false;
+                      $('#uploadFile').val('');
+                      $('#fileName').html('选择文件');
+                      $('#upLoad').val('上传文件');
+                  } else if (data[1] != undefined || data[2] != undefined) {
+                      alert('上传失败，请确定文件格式');
+                      $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
+                  }
+              },
+              error: function (data) {
+                  alert('上传失败,状态码:'+data.status+';请稍后重试');
+                  $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
+              }
+          });
+      }
+  });
+  // 选择文件
+  $('#choose').click(function () {
+      $('#uploadFile').click();
+  });
+  // 判断文间类型
+  function isExcel(name) {
+      var n = name.split('.');
+      if (n[n.length - 1] == 'xlsx') {
+        return true;
+      } else {
+          return false;
+      }
+  }
+    // 判断版本
+    // 判断banb
+    function uaMatch(ua){
+        var rMsie = /(msie\s|trident.*rv:)([\w.]+)/,
+            rFirefox = /(firefox)\/([\w.]+)/,
+            rOpera = /(opera).+version\/([\w.]+)/,
+            rChrome = /(chrome)\/([\w.]+)/,
+            rSafari = /version\/([\w.]+).*(safari)/;
+        var match = rMsie.exec(ua);
+        if(match != null){
+            return { browser : "IE", version : match[2] || "0" };
+        }
+        var match = rFirefox.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rOpera.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rChrome.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rSafari.exec(ua);
+        if (match != null) {
+            return { browser : match[2] || "", version : match[1] || "0" };
+        }
+        if (match != null) {
+            return { browser : "", version : "0" };
+        }
+    }
+</script>
+</body>
+</html>

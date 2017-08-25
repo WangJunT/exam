@@ -118,9 +118,6 @@ var caseques = '';
     }
     // 多选题个数
 })($);
-window.onload = function () {
-    window.parent.changeFrame($(document).height()+2*1);
-};
 function getCase(str) {
     caseques = str;
     $('#theChoose').text('已选择：'+caseques);

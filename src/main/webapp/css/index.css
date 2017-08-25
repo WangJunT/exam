@@ -55,6 +55,7 @@ html,body{
 }
 .header ul li{
     width: auto;
+    padding: 0 30px;
     height: 100%;
     line-height: 60px;
     display: inline-block;
@@ -184,7 +185,7 @@ html,body{
     border-radius: 3px ;
     color: #999;
 }
-/*杞挱鍥�*/
+/*录播图*/
 .slideBox{
     width: 1200px;
     margin: 0 auto;
@@ -266,10 +267,11 @@ html,body{
     float: left;
     width: 50%;
     height: 100%;
+    cursor: pointer;
 }
 .chooseBox .icon{
     display: block;
-    width: 76px;
+    width: 110px;
     height: auto;
     margin: 60px auto 0 auto;
 }
@@ -278,6 +280,7 @@ html,body{
     width: 50%;
     height: 100%;
     background: #88bbd6;
+    cursor: pointer;
 }
 .test span{
     display: block;

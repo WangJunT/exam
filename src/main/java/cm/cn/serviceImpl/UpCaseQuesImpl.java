@@ -22,6 +22,9 @@ public class UpCaseQuesImpl implements UpCaseQues {
 
 	@Autowired
 	CaseQuestionService caseQuestionService;
+	/**
+	 * 导入第三张表
+	 */
 	@Override
 	public void excelToJsCase(String path) {
 		FileInputStream excelFileInputStream;

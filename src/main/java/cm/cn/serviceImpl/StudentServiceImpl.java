@@ -11,6 +11,7 @@ import cm.cn.po.JsUser;
 import cm.cn.po.JsUserExample;
 import cm.cn.po.JsUserExample.Criteria;
 import cm.cn.service.StudentService;
+import cm.cn.util.Base64;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -43,11 +44,13 @@ public class StudentServiceImpl implements StudentService {
 		return jsUserMapper.updateByExample(jsUser, example);
 	}
 	@Override
-	public int updateStuPass(JsUser jsUser) {
+	public int updateStuPass(String pass,JsUser dqyh) {
+		String password = Base64.encode(("zjedu"+pass+"cn").getBytes());
 		JsUserExample example = new JsUserExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andPhoneEqualTo(jsUser.getPhone());
-		return jsUserMapper.updateByExample(jsUser, example);
+		criteria.andPhoneEqualTo(dqyh.getPhone());
+		dqyh.setPassword(password);
+		return jsUserMapper.updateByExample(dqyh, example);
 	}
 	@Override
 	public List<JsUser> selectBypass(String username) {

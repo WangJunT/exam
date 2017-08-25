@@ -101,14 +101,14 @@
             });
         }
         if (check === undefined || check === '') {
-            e.target.innerHTML= '请做题后再查看答案' ;
+            e.target.innerHTML = '请做题后再查看答案' ;
             (function (e) {
                 setTimeout(function () {
-                    e.target.innerHTML= '查看答案' ;
+                    e.target.innerHTML = '查看答案' ;
                 },1400);
             })(e);
         } else {
-            e.target.innerHTML= '正确答案：' + tureAns[id];
+            e.target.innerHTML = '正确答案：' + tureAns[id];
         }
     });
     // 退出登录
@@ -221,6 +221,10 @@
         if (r != null) return decodeURIComponent(r[2]);
         return null;
     }
+    // 显示单个试题
+    function showOne(data) {
+
+    }
     // 显示试题
     function showExam(data){
         //console.log(data);
@@ -262,7 +266,7 @@
         $('#allExam').html(all);
     }
 
-    // 拼接当个试题
+    // 拼接单个试题
     function linkExam(data,type,score) {
         var theType,examItem = [];
         if (type == 1) {

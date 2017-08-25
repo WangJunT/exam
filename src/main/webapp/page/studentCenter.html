@@ -3,9 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>学生中心</title>
-  <link href="../css/studentCenter.css" type="text/css">
+  <link href="../css/studentCenter.css" type="text/css" rel="stylesheet">
 </head>
-
 <body>
+<!--头部-->
+<header class="header">
+  <ul id="nav">
+    <li><a href="/SSMDemo/index/first.action" id="toFirst">网站首页</a> </li>
+    <li><a href="videoCenter.html" id="toVideo">视频教程</a> </li>
+    <li><a href="javascript:void(0)">用户中心</a> </li>
+  </ul>
+  <div class="loginBox">
+    <a href="javascript:void(0)" id="log">退出登录</a>
+    <a href="javascript:void(0)" id="user">用户</a>
+  </div>
+</header>
+<!--信息区块-->
+<div class="controlBox">
+  <div class="leftMenu">
+    <a href="javascript:void(0)" id="personMsg" class="menuItem">个人信息</a>
+    <a href="javascript:void(0)" id="change" class="menuItem">修改密码</a>
+  </div>
+  <div class="frameBox">
+    <iframe id="frameBox" frameborder="0" src="student/studentMsg.html"></iframe>
+  </div>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/studentCenter.js"></script>
 </body>
 </html>

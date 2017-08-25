@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cm.cn.po.JsExampaperStu;
 import cm.cn.po.JsUser;
+import cm.cn.po.StuDoneExam;
 import cm.cn.service.ExampaperStuService;
 
 @Controller
@@ -39,5 +40,13 @@ public class ExamPaperStuController {
 			map.put(1, "试卷提交成功");
 		}
 		return map;
+	}
+	//学生考试关系
+	@RequestMapping("/selDone")
+	@ResponseBody
+	public List<StuDoneExam> stuExample(HttpSession session){
+		JsUser jsUser = (JsUser) session.getAttribute("user");
+		List<StuDoneExam> list = exampaperStuService.seleDone(jsUser.getId());
+		return list;
 	}
 }

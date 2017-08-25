@@ -4,7 +4,7 @@
 (function ($) {
     var login = false,code = 0, how = 0;
     //var ls = opCookie.get('isLoad');
-    ls = sessionStorage.getItem('isLoad');
+    var ls = sessionStorage.getItem('isLoad');
     var ip = returnCitySN.cip;//获得ip
     if (ls == 'undefined'|| ls == null) {
         login = false;
@@ -15,8 +15,9 @@
     if (!login) {
         $('#user').css('display','none');
         $('#log').html('登录');
+    } else {
+        $('#user').html(sessionStorage.getItem('loader'));
     }
-    $('#user').html(sessionStorage.getItem('loader'));
     // 登录或退出
     $('#log').click(function () {
         if (!login) {
@@ -32,6 +33,22 @@
             logOut();
             // opCookie.remove('isLoad');
             window.location.reload(true);
+        }
+    });
+    ///去视频中心
+    $('#toVideo').click(function () {
+        if (login) {
+            window.location.href ='../page/videoCenter.html';
+        } else {
+           $('#log').click();
+        }
+    });
+    ///// 去用户中心
+    $('#toUser').click(function () {
+        if (login) {
+            window.location.href ='../page/studentCenter.html';
+        } else {
+            $('#log').click();
         }
     });
     //监听输入账户框
@@ -94,17 +111,23 @@
     });
     // 去顺序练习
     $('#goTest').click(function () {
-        if (!login) {
+        var browser = uaMatch(navigator.userAgent.toLowerCase());
+        if (browser.browser == 'IE' && Number(browser.version) < 9){
+            alert('为了保证系统正常使用，请确保IE的浏览器版本至少在9以上！');
+        }
+        else if (!login) {
             $('#log').click();
         } else {
-            //window.location.replace('../page/exam/sequenceExam.html?type='+ 0);
             var d =  new Date();
             window.location.href = '../page/exam/sequenceExam.html?type='+ 0+'&t='+d.getTime().toString();
         }
     });
     // 去考试
     $('#goExam').click(function () {
-        if (!login) {
+        var browser = uaMatch(navigator.userAgent.toLowerCase());
+        if (browser.browser == 'IE' && Number(browser.version) < 9){
+            alert('为了保证系统正常使用，请确保IE的浏览器版本至少在9以上！');
+        }else if (!login) {
             $('#log').click();
         } else {
         	//window.location.replace('../page/exam/examList.html');
@@ -114,7 +137,6 @@
     });
     // 自定义方法
     function  getTheCode(phone) {
-        // var url = 'http://192.168.1.120:8080/SSMDemo/login/doLogin.action'+'?phone=' + phone;
         var url = '/SSMDemo/index/beforeLogin.action?phone='+phone;
         $('#getCode').html('验证码发送中...');
         $.get(url ,function (data) {
@@ -123,7 +145,7 @@
                 $('#getCode').html('获取验证码.');
             } else {
                 code = 60;
-                $(this).html('60s后重新获取');
+                $('#getCode').html('60s后重新获取');
                 var t = setInterval(function () {
                     code -- ;
                     $('#getCode').html(code+'s后重新获取');
@@ -154,15 +176,21 @@
                 $('#submit').val('登录');
             }else{
                 if (data[0] != undefined) {
-                    $('#wall').remove();
-                    //保存一天登录状态
-                    login = true;
-                    //opCookie.add({loader:phone,isLoad: 'success'},24);
-                    sessionStorage.setItem('loader',phone);
-                    sessionStorage.setItem('isLoad','success');
-                    $('#user').html(phone);
-                    $('#user').css('display','block');
-                    $('#log').html('退出登录');
+                    if (data[0] == 'student') {
+                        $('#wall').remove();
+                        //保存一天登录状态
+                        login = true;
+                        //opCookie.add({loader:phone,isLoad: 'success'},24);
+                        sessionStorage.setItem('loader',phone);
+                        sessionStorage.setItem('isLoad','success');
+                        $('#user').html(phone);
+                        $('#user').css('display','block');
+                        $('#log').html('退出登录');
+                    } else {
+                        alert('当前用户非学生用户。');
+                        $('#submit').removeAttr("disabled");
+                        $('#submit').val('登录');
+                    }
                 }
             }
         });
@@ -170,20 +198,28 @@
     // 以账号密码登录
     function sub(phone,yzm) {
         // var pData = {username:phone,pass:yzm};
+        // encodeURI
         var url = '/SSMDemo/index/login.action?username=' +encodeURI(phone)+'&pass='+ yzm;
          // pData = JSON.stringify(pData);
         //console.log(pData);
         $.get(url,function (data) {
             if (data[0] != undefined){
-                $('#wall').remove();
-                //保存一天登录状态
-                login = true;
-                //opCookie.add({loader:phone,isLoad: 'success'},24);
-                sessionStorage.setItem('loader',phone);
-                sessionStorage.setItem('isLoad','success');
-                $('#user').css('display','block');
-                $('#user').html(phone);
-                $('#log').html('退出');
+                if (data[0] == 'student') {
+                    $('#wall').remove();
+                    //保存一天登录状态
+                    login = true;
+                    //opCookie.add({loader:phone,isLoad: 'success'},24);
+                    sessionStorage.setItem('loader',phone);
+                    sessionStorage.setItem('isLoad','success');
+                    $('#user').css('display','block');
+                    $('#user').html(phone);
+                    $('#log').html('退出');
+                } else {
+                    alert('当前用户非学生用户。');
+                    $('#submit').removeAttr("disabled");
+                    $('#submit').val('登录');
+                }
+
             } else if (data[1] != undefined) {
                 alert('密码错误');
                 $('#submit').removeAttr("disabled");
@@ -206,7 +242,37 @@
     // 退出登录 
     function logOut() {
         $.get('/SSMDemo/index/logout.action',function () {
-
         });
+    }
+    // 判断banb
+    function uaMatch(ua){
+            var rMsie = /(msie\s|trident.*rv:)([\w.]+)/,
+            rFirefox = /(firefox)\/([\w.]+)/,
+            rOpera = /(opera).+version\/([\w.]+)/,
+            rChrome = /(chrome)\/([\w.]+)/,
+            rSafari = /version\/([\w.]+).*(safari)/;
+        var match = rMsie.exec(ua);
+        if(match != null){
+            return { browser : "IE", version : match[2] || "0" };
+        }
+        var match = rFirefox.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rOpera.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rChrome.exec(ua);
+        if (match != null) {
+            return { browser : match[1] || "", version : match[2] || "0" };
+        }
+        var match = rSafari.exec(ua);
+        if (match != null) {
+            return { browser : match[2] || "", version : match[1] || "0" };
+        }
+        if (match != null) {
+            return { browser : "", version : "0" };
+        }
     }
 })($);

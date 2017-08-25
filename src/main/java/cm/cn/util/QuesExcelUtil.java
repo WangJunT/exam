@@ -57,8 +57,8 @@ public class QuesExcelUtil {
 				row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
 				String an_D = row.getCell(5).getStringCellValue();
 				String answer = row.getCell(6).getStringCellValue();
-				int difficult_id = (int)row.getCell(8).getNumericCellValue(); // 难易程度
-				String exam_type = String.valueOf((int) row.getCell(9).getNumericCellValue());//常规必考
+				int difficult_id = (int)row.getCell(7).getNumericCellValue(); // 难易程度
+				String exam_type = String.valueOf((int) row.getCell(8).getNumericCellValue());//常规必考
 				jsQuesion.setTitle(title_center);
 				jsQuesion.setAnA(an_A);
 				jsQuesion.setAnB(an_B);

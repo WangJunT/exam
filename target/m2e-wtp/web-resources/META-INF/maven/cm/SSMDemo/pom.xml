@@ -13,21 +13,21 @@
     </properties>    
     <!-- 用到的jar包 -->    
     <dependencies>    
-<!--     	<dependency> -->
-<!--             <groupId>com.taobao</groupId> -->
-<!--             <artifactId>taobao-api</artifactId> -->
-<!--             <version>1.0.0.RELEASE</version> -->
-<!--         </dependency> -->
     	<dependency>
             <groupId>com.taobao</groupId>
-            <artifactId>duanxin-core</artifactId>
+            <artifactId>taobao-api</artifactId>
             <version>1.0.0.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>com.taobao</groupId>
-            <artifactId>duanxin-dysmsapi</artifactId>
-            <version>1.0.0.RELEASE</version>
-        </dependency>
+<!--     	<dependency> -->
+<!--             <groupId>com.taobao</groupId> -->
+<!--             <artifactId>duanxin-core</artifactId> -->
+<!--             <version>1.0.0.RELEASE</version> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>com.taobao</groupId> -->
+<!--             <artifactId>duanxin-dysmsapi</artifactId> -->
+<!--             <version>1.0.0.RELEASE</version> -->
+<!--         </dependency> -->
 <!--         <dependency> -->
 <!--             <groupId>com.taobao</groupId> -->
 <!--             <artifactId>taobao-source</artifactId> -->
