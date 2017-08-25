@@ -4,7 +4,6 @@
 (function ($) {
     var ls = sessionStorage.getItem('isLoad');
     if (ls == 'undefined'|| ls == null) {
-        login = false;
         window.location.href = 'mobileIndex.html';
     } else {
     }
@@ -26,7 +25,7 @@
     // 去考试
     $(document).on('click','#goTo',function (e) {
         var theId = e.target.getAttribute('data-ExamId');
-        // var url = 'sequenceExam.html?type=1&id='+theId;
-        // window.location.href = url;
+        var url = 'testAndExam.html?type=1&id='+theId;
+        window.location.href = url;
     });
 })($);

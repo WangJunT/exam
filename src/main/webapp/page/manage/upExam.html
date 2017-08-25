@@ -136,7 +136,7 @@ $(document).on('change','#uploadFile',function () {
                   }
               },
               error: function (data) {
-                  alert('上传失败,状态码:'+data.status+';请稍后重试');
+                  alert('上传失败,请稍后重试');
                   $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
               }
           });

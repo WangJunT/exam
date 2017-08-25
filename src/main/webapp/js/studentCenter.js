@@ -17,7 +17,22 @@
     // 学生信息
     $('#personMsg').click(function () {
         if (status != 0) {
-
+            status = 0;
+            $('#frameBox').attr('src','student/studentMsg.html');
+        }
+    });
+    // 练习历史
+    $('#history').click(function () {
+        if(status != 2){
+            status = 2;
+            $('#frameBox').attr('src','student/historyList.html');
+        }
+    });
+    // 修改密码
+    $('#change').click(function () {
+        if (status != 1) {
+            status = 1;
+            $('#frameBox').attr('src','student/change.html');
         }
     });
     // 退出登录

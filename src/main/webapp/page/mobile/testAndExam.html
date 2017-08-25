@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="../../js/mobile/init.js"></script>
   <link href="../../css/mobile/testAndTest.css" rel="stylesheet">
+  <link href="../../css/plugin/alert.css" rel="stylesheet">
   <title>考试与练习</title>
 </head>
 <body>
@@ -15,10 +16,27 @@
   </header>
   <div class="allExam" id="allExam">
     <!--单个题目-->
+    <div class="itemTitle" id="itemType"></div>
+    <div class="theItem" id="itemTitle">试题加载中.....</div>
+    <div class="optionBox">
+      <ul id="option"></ul>
+    </div>
+    <!--简答题小题区块-->
+    <div id="minItem">
 
+    </div>
+    <!--信息提示-->
+    <div class="anMsg" id="anMsg"></div>
   </div>
 </section>
+<!--底部按钮-->
+<div class="bottomBox">
+  <a href="javascript:void(0)" id="last">《</a>
+  <a href="javascript:void(0)" id="handIn" class="sub">结束练习</a>
+  <a href="javascript:void(0)" id="next">》</a>
+</div>
 <script src="../../js/jquery-3.2.1.min.js"></script>
+<script src="../../js/plugin/alert.js"></script>
 <script src="../../js/mobile/testAndExam.js"></script>
 </body>
 </html>

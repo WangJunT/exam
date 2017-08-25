@@ -32,7 +32,9 @@
 <!-- 	        pic, -->
 	        phone,
 	        idcard,
-	        stu_type,
+	        reserve_five,
+	        reserve_six,
+<!-- 	        stu_type, -->
 <!-- 	        reserve_two, -->
 <!-- 	        reserve_three, -->
 <!-- 	        reserve_four, -->
@@ -49,7 +51,9 @@
 <!-- 	        #{pic,jdbcType=VARCHAR}, -->
 	        #{item.phone,jdbcType=VARCHAR},
 	        #{item.idcard,jdbcType=VARCHAR},
-	        #{item.stuType,jdbcType=VARCHAR},
+	        #{item.reserveFive,jdbcType=VARCHAR},
+	        #{item.reserveSix,jdbcType=VARCHAR},
+<!-- 	        #{item.stuType,jdbcType=VARCHAR}, -->
 <!-- 	        #{reserveTwo,jdbcType=VARCHAR}, -->
 <!-- 	        #{reserveThree,jdbcType=VARCHAR}, -->
 <!-- 	        #{reserveFour,jdbcType=VARCHAR}, -->

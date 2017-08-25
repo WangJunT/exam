@@ -18,8 +18,6 @@
     from = getQueryString('type');
     examId= getQueryString('id');
     if (from == 0) {// 练习
-        //getFirst();
-        // url = '/SSMDemo/question/selectLimit.action?start='+start+'&size='+length;
         var d =  new Date();
         url = '/SSMDemo/question/selAll.action?t='+d.getTime().toString();
         $('#handIn').html('结束练习');
@@ -96,7 +94,7 @@
     // 点击交卷
     $('#handIn').click(function () {
         if (from == 0){
-        		window.location.href = '/SSMDemo/index/first.action';
+            window.location.href = '/SSMDemo/index/first.action';
         } else { // 考试提交
             var num = 0;
             // ........

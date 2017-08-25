@@ -9,12 +9,15 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import cm.cn.po.JsQuesion;
 import cm.cn.po.JsUser;
+import cm.cn.po.UpCondition;
 import cm.cn.service.QuestionService;
 import cm.cn.service.StudentService;
 import cm.cn.service.UpCaseQues;
@@ -53,9 +56,9 @@ public class UpFileController {
 		}
 		@RequestMapping("/addQuesBatch")
 		@ResponseBody
-		public Map<Integer, String> addQuesBatch(String filePath,String reserveFive,String reserveSix){
+		public Map<Integer, String> addQuesBatch(@RequestBody UpCondition asd){
 			Map<Integer, String> map = new HashMap<>();
-			List<JsQuesion> list = QuesExcelUtil.excelToQues(filePath,reserveFive,reserveSix);
+			List<JsQuesion> list = QuesExcelUtil.excelToQues(asd.getFilePath(),asd.getReserveFive(),asd.getReserveSix());
 			if (list.size()>0) {
 				if (questionService.insertList(list)>0){
 					map.put(0, "上传成功");
@@ -114,11 +117,13 @@ public class UpFileController {
 			}
 			return filePath;
 		}
-		@RequestMapping("/addStuFile")
+		@RequestMapping(value="/addStuFile",method=RequestMethod.POST)
 		@ResponseBody
-		public Map<Integer, String> addStuFile(String filePath,String reserveFive,String reserveSix){
+		public Map<Integer, String> addStuFile(@RequestBody
+				UpCondition asd){
+//			asd.setReserveFive("1");
 			Map<Integer, String> map = new HashMap<>();
-			List<JsUser> list = StuExcelUtil.excelToStu(filePath,reserveFive,reserveSix);
+			List<JsUser> list = StuExcelUtil.excelToStu(asd.getFilePath(),asd.getReserveFive(),asd.getReserveSix());
 			if (list.size()>0) {
 				if (studentService.insertStuList(list)>0){
 					map.put(0, "上传成功");

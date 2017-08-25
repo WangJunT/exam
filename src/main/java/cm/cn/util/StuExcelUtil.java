@@ -52,8 +52,8 @@ public class StuExcelUtil {
 				String id_card = row.getCell(2).getStringCellValue();//身份证
 				String class_num =  row.getCell(3).getStringCellValue();//班级
 //				String stu_type = row.getCell(4).getStringCellValue();//学生类别
-				row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
-				String pass = row.getCell(5).getStringCellValue();//密码
+				row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+				String pass = row.getCell(4).getStringCellValue();//密码
 				String password = Base64.encode(("zjedu"+pass+"cn").getBytes());
 				jsUser.setIdcard(id_card);
 //				jsUser.setStuType(stu_type);

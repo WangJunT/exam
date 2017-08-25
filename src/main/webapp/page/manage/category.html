@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="../../css/manage/category.css" rel="stylesheet">
+  <title>类别管理</title>
+</head>
+<body>
+<div class="title">类别管理</div>
+<div class="allBox">
+  <div class="titles">一级菜单</div>
+  <select class="firstSelect" id="first"></select>
+  <div class="titles">二级菜单</div>
+  <div class="listBox">
+    <ul id="list"></ul>
+  </div>
+  <!--添加区块-->
+  <div class="addCate" id="cate">
+    <input type="text" placeholder="输入二级菜单名称" id="name">
+    <a href="javacript:void(0)" id="add">添加</a>
+  </div>
+  <!--控制区块-->
+  <div class="controlBox"><a href="javascript:void (0)" id="delete">删除</a><a href="javscript:void(0)" id="show">增加</a> </div>
+</div>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/manage/category.js"></script>
+</body>
+</html>

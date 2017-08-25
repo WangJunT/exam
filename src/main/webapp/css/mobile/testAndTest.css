@@ -53,63 +53,127 @@ html{
     margin-top: 0.3rem;
     box-sizing: border-box;
 }
-.allExam .submitExam{
-    width: 100%;
-    height: 1rem;
-}
-.allExam .seqbox{
-    width: 100%;
-    height: 1rem;
-    text-align: center;
-}
-.allExam .examItem{
+.oneItemBox{
     width: 100%;
     height: auto;
 }
-.examItem .itemTitle{
+.itemTitle{
+    color: #000;
+    font-size: 0.36rem;
+    font-weight: 500;
+    height: 0.3rem;
+    line-height: 0.3rem;
+}
+ .theItem{
     width: 100%;
-    height: auto;
-    line-height: 25px;
-    font-size: 20px;
+    color: #000;
+    font-size: 0.36rem;
+    font-weight: 500;
+    box-sizing: border-box;
+    padding: 0.5rem 0.2rem;
+     margin-top: 0.2rem;
 }
-.itemTitle a{
-    display: block;
-    width: 130px;
-    color: #999;
-    font-size: 20px;
-    line-height: 30px;
-    text-align: left;
+.optionBox{
+    width: 90%;
+    margin: 0 auto;
 }
-.examItem ul{
+.optionBox ul{
     width: 100%;
     height: auto;
     list-style: none;
 }
-.examItem li{
+.optionBox li{
     width: 100%;
     height: auto;
-    margin: 5px 0 0 0;
+    margin: 0.2rem 0 0 0;
     padding: 0;
     overflow: hidden;
 }
-.examItem .check{
-    width: 30px;
-    height: 30px;
+.optionBox .check{
+    width: 0.4rem;
+    height: 0.4rem;
     float: left;
     margin: 0;
     padding: 0;
+    font-size: 0;
 }
-.examItem .theOption{
+.optionBox .theOption{
     height: auto;
-    line-height: 25px;
-    font-size: 20px;
+    line-height: 0.4rem;
+    font-size: 0.38rem;
     overflow:hidden;
 }
-.examItem .caseTitle{
-    width: 100%;
+/*小题目*/
+#minItem{
+    padding: 0 0.3rem;
+}
+.minTitle{
     height: auto;
-    border-radius: 5px;
-    background: #ccc;
-    padding: 5px;
-    margin: 10px auto 10px auto;
+    padding: 0.1rem 0;
+    font-size: 0.36rem;
+}
+.anMsg{
+    margin-top: 1rem;
+    font-size: 0.4rem;
+    font-weight: bold;
+    color: #000;
+}
+.anMsg span{
+    font-size: 0.4rem;
+    color: #88bbd6;
+    font-weight: bold;
+}
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    background-repeat:no-repeat;
+    background: #fff url(../../image/nocheck.png);
+    background-size: 100%;
+    height: 0.3rem;
+    vertical-align: middle;
+    width: 0.3rem;
+}
+
+input[type="checkbox"]:checked {
+    background: #fff url(../../image/check.png);
+    background-repeat:no-repeat;
+    background-size: 100%;
+    outline: none;
+}
+input[type="radio"] {
+    -webkit-appearance: none;
+    background: #fff url(../../image/nocheck.png);
+    background-repeat:no-repeat;
+    background-size: 100%;
+    height: 0.3rem;
+    vertical-align: middle;
+    width: 0.3rem;
+}
+input[type="radio"]:checked {
+    background: #fff url(../../image/check.png);
+    background-repeat:no-repeat;
+    background-size: 100%;
+    outline: none;
+}
+/*底部按钮*/
+.bottomBox{
+    width: 100%;
+    height: 0.88rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
+    font-size: 0;
+    border-top: 1px #a9a9a9 solid;
+}
+.bottomBox a{
+    display: inline-block;
+    width: 33.3%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    color: #4d4d4d;
+    background: rgba(255,255,255,.8);
+    font-size: 0.36rem;
+}
+.bottomBox .sub{
+    background: #88bbd6;
 }

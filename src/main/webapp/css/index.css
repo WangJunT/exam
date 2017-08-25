@@ -20,7 +20,6 @@ html,body{
 .pageTitle span{
     vertical-align: top;
     display: inline-block;
-    width: auto;
     margin-left: 8px;
     font-size: 14px;
     color: #666;
@@ -195,9 +194,10 @@ html,body{
     overflow: hidden;
 }
 .theSlide{
-    width: 1020px;
+    width: 1200px;
     height: 100%;
     background: url(../image/index/timg.jpg) 100% no-repeat;
+    background-size: 100% auto;
     position: relative;
     margin: 0 auto;
     overflow: hidden;

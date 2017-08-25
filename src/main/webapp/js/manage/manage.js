@@ -57,12 +57,19 @@
             $('#frameBox').attr('src','downExam.html');
         }
     })
+    // 类别管理
+    $('#category').click(function () {
+        if (nowPage != 7) {
+            nowPage = 7;
+            $('#frameBox').attr('src','category.html');
+        }
+    });
     // 退出后台管理
     $('#outManage').click(function () {
         $.get('/SSMDemo/index/logout.action',function () {
+            sessionStorage.removeItem('manageLoader');
+            window.location.href = 'loginManage.html';
         });
-        sessionStorage.removeItem('manageLoader');
-        window.location.href = 'loginManage.html';
     });
     // 确认多选题
     $(document).on('click','#sureCase',function () {

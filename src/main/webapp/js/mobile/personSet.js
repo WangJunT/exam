@@ -2,6 +2,8 @@
  * Created by Admin on 2017/8/18.
  */
 (function () {
+
+    //////////////////////////////////////////////
     var login = false,
         code = 0,
         how = 0,
@@ -37,9 +39,27 @@
     $(document).click(function () {
         $('.wall').remove();
     });
+    // 获得练习历史
+    if (login) {
+        getHistory();
+    }
     /*
     * ******自定义方法*********
     * */
+    // 获得历史】
+    function getHistory() {
+        $.get('/SSMDemo/sexam/selDone.action',function (data,status,xhr) {
+            if (status == 'success'){ // 请求成功
+                var str = '';
+                for (var i = 0 ; i < data.length; i++) {
+                    str += '<li><span>'+data[i].name+'</span><span>'+data[i].score+'分</span></li>';
+                }
+                $('#history').append(str);
+            } else {
+                alert('请求错误，类型:'+status+'状态:'+xhr.status);
+            }
+        });
+    }
     // 初始化登录
     function initLogin() {
         if (addCSS){
@@ -54,7 +74,7 @@
         var str = '<div class="wall"><div class="loginBox"><div class="loginHead"><a href="javascript:void(0)" id="mobileLogin">手机号登录</a> <a href="javascript:void(0)" id="otherLogin">账号登录</a></div>' +
             '<div class="loginCurst" id="curst"></div> <form class="loginForm"><div class="inputBox">' +
             '<div class="loginIcon1"></div><input type="text" id="account" placeholder="请输入账号或手机号"></div><div class="inputBox"><div class="loginIcon2"></div><input type="text" id="password" placeholder="请输入密码或账号"><a href="javascript:void(0)" class="getCode" id="getCode">获取验证码</a> </div> ' +
-            '<div class="lastLoadBox"><input type="radio" name="lastAuto">下次自动登录</div> <input type="button" class="loginSubmit" value="登录" id="submit"></form></div></div>';
+            '<div class="lastLoadBox"><input type="radio" name="lastAuto">下次自动登录</div> </form><input type="button" class="loginSubmit" value="登录" id="submit"></div></div>';
         $('body').append(str);
         $('.loginBox').children().click(function (e) {
             e.stopPropagation();
@@ -158,6 +178,7 @@
                 if (data[0] != undefined) {
                     $('.wall').remove();
                     //保存一天登录状态
+                    getHistory();
                     login = true;
                     //opCookie.add({loader:phone,isLoad: 'success'},24);
                     sessionStorage.setItem('loader',phone);
@@ -175,6 +196,7 @@
             if (data[0] != undefined){
                 $('.wall').remove();
                 //保存一天登录状态
+                getHistory();
                 login = true;
                 //opCookie.add({loader:phone,isLoad: 'success'},24);
                 sessionStorage.setItem('loader',phone);

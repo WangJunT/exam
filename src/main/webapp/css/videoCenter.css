@@ -121,3 +121,8 @@ html,body{
     font-weight: bold;
     color: #d68ba2;
 }
+.pagingBox{
+    width: 80%;
+    height: auto;
+    margin-top: 30px;
+}

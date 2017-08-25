@@ -32,7 +32,6 @@
         	sessionStorage.removeItem('isLoad');
             logOut();
             // opCookie.remove('isLoad');
-            window.location.reload(true);
         }
     });
     ///去视频中心
@@ -43,6 +42,14 @@
            $('#log').click();
         }
     });
+    //////
+    $('#play').click(function(){
+        if (login) {
+            window.location.href ='../page/videoCenter.html';
+        } else {
+            $('#log').click();
+        }
+        } );
     ///// 去用户中心
     $('#toUser').click(function () {
         if (login) {
@@ -241,7 +248,12 @@
     }
     // 退出登录 
     function logOut() {
-        $.get('/SSMDemo/index/logout.action',function () {
+        $.get('/SSMDemo/index/logout.action',function (data,status) {
+            if (status == 'success') {
+                window.location.reload(true);
+            } else {
+                alert('发生错误,状态:'+status);
+            }
         });
     }
     // 判断banb

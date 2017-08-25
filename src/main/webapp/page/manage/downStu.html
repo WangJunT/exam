@@ -2,37 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="../../css/manage/downExam.css" rel="stylesheet">
   <title>导出学生信息表</title>
 </head>
-<style type="text/css">
-  .title{
-    width: auto;
-    height: 30px;
-    font-size: 20px;
-    padding-left: 6px;
-    line-height: 30px;
-    border-left: 8px #88bbd6 solid;
-    font-weight: bold;
-  }
-  .downButton{
-    display: block;
-    width: 200px;
-    height: 50px;
-    line-height: 50px;
-    color: #fff;
-    border-radius: 3px;
-    background: #88bbd6;
-    text-align: center;
-    font-size: 17px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -25px 0 0 -100px;
-    text-decoration: none;
-  }
-</style>
+
 <body>
-<div class="title">导出学生信息</div>
-<a href="/SSMDemo/admin/downStu.action" class="downButton">导出学生信息</a>
+<div class="title">导出试题</div>
+<div class="allBox">
+  <div class="selectBox">
+    <select id="firstSelect" class="oneSelect" data-Id="0"></select>
+    <select id="secondSelect" class="oneSelect"></select>
+  </div>
+  <a href="javascript:void(0)" class="downButton" id="down">导出学生信息</a>
+</div>
+<script src="../../js/jquery.min.js"></script>
 </body>
 </html>

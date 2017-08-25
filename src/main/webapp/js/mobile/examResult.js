@@ -2,14 +2,35 @@
  * Created by Admin on 2017/8/17.
  */
 (function () {
+    // 登录验证
+    var ls = sessionStorage.getItem('isLoad');
+    if (ls == null || ls == undefined) {
+        window.location.href = 'mobileIndex.html';
+    }
+    history.forward(1);
     var width = $('html').width(),
         ratio = width / 750,// 用于计算比例
         canvas = document.getElementById('static'),
         context = canvas.getContext('2d');
-    var all = 100, finish = 70,angle = 0;
+    var all = Number(getQueryString('all')), finish = Number(getQueryString('finish')),angle = 0,score=Number(getQueryString('score'));
     angle = Math.PI*2*( 1 - finish/all) - Math.PI/2;
     // $('html').css('font-size',ratio*20+'px');
+    $('#score').html('你的总得分为:&nbsp;'+score+'分');
     // 开始绘制
+    $('#last').click(function () {
+        window.location.href = 'examList.html';
+    });
+    // 导航条
+    $('#nav').click(function (e) {
+        var id = e.target.getAttribute('id');
+        var d = new Date();
+        var t = d.getTime().toString();
+        switch (id){
+            case 'first': window.location.href = 'mobileIndex.html?t='+t;break;
+            case 'exam': window.location.href = 'exam.html?t='+t;break;
+            case 'set': window.location.href = 'personSet.html?t='+t;break;
+        }
+    });
     var curst = 1,one = Math.PI/180,begin = -Math.PI/2,ls = 0 ;
     // 定时器绘制图案;
     var t = setInterval(function () {
@@ -72,5 +93,12 @@
             context.fillStyle = '#88bbd6';
             context.fillText(t, canvas.width / 2, canvas.width / 2 + size / 2);
         }
+    }
+    //获得url数据
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURIComponent(r[2]);
+        return null;
     }
 })($);

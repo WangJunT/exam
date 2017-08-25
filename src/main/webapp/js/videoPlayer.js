@@ -19,7 +19,8 @@
             c:0,
             p:1
         };
-        CKobject.embed('../ckplayer/ckplayer.swf','video','ckplayer_a1','700','500',false,flashvars);
+        var video=['/pic/'+data.reserveOne];
+        CKobject.embed('../ckplayer/ckplayer.swf','video','ckplayer_a1','700','500',false,flashvars,video);
     });
     // 登录或退出
     $('#log').click(function () {

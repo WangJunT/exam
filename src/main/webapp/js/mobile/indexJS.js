@@ -12,23 +12,34 @@
     }
     // 更多点击事件
     $('#moreVideo').click(function () {
-        window.location.href = 'allVideo.html';
+        if (!login) {
+            $('#log').click();
+        } else {
+            window.location.href = 'allVideo.html';
+        }
     });
     // 导航条
     $('#nav').click(function (e) {
+        e.stopPropagation();
         var id = e.target.getAttribute('id');
         var d = new Date();
         var t = d.getTime().toString();
-        switch (id){
-            case 'exam': window.location.href = 'exam.html?t='+t;break;
-            case 'video': window.location.href = 'allVideo.html?t='+t;break;
-            case 'set': window.location.href = 'personSet.html?t='+t;break;
+        if (!login) {
+            initLogin();
+        } else {
+            switch (id){
+                case 'exam': window.location.href = 'exam.html?t='+t;break;
+                case 'video': window.location.href = 'allVideo.html?t='+t;break;
+                case 'set': window.location.href = 'personSet.html?t='+t;break;
+            }
         }
     });
     //去练习
     $('#toTest').click(function (e) {
         e.stopPropagation();
         if (login) {
+            var d = new Date();
+            window.location.href = 'testAndExam.html?type=0&t='+d.getTime().toString();
         } else {
             initLogin();
         }
@@ -47,6 +58,7 @@
     $(document).click(function () {
         $('.wall').remove();
     });
+
     /*
     * *****自定义方法****
     * */
@@ -64,7 +76,7 @@
         var str = '<div class="wall"><div class="loginBox"><div class="loginHead"><a href="javascript:void(0)" id="mobileLogin">手机号登录</a> <a href="javascript:void(0)" id="otherLogin">账号登录</a></div>' +
             '<div class="loginCurst" id="curst"></div> <form class="loginForm"><div class="inputBox">' +
             '<div class="loginIcon1"></div><input type="text" id="account" placeholder="请输入账号或手机号"></div><div class="inputBox"><div class="loginIcon2"></div><input type="text" id="password" placeholder="请输入密码或账号"><a href="javascript:void(0)" class="getCode" id="getCode">获取验证码</a> </div> ' +
-            '<div class="lastLoadBox"><input type="radio" name="lastAuto">下次自动登录</div> <input type="button" class="loginSubmit" value="登录" id="submit"></form></div></div>';
+            '<div class="lastLoadBox"><input type="radio" name="lastAuto">下次自动登录</div></form> <input type="button" class="loginSubmit" value="登录" id="submit"></div></div>';
         $('body').append(str);
         $('.loginBox').children().click(function (e) {
             e.stopPropagation();
@@ -73,14 +85,14 @@
         $('#mobileLogin').click(function () {
             $('#curst').css('transform','translateX(0rem)');
             $('#getCode').css('display','block');
-            $('#password').attr('type','password');
+            $('#password').attr('type','password').val('');
             how = 0;
         });
         // 以账号登录
         $('#otherLogin').click(function(){
             $('#curst').css({'transform':'translateX(2.5rem)'});
             $('#getCode').css('display','none');
-            $('#password').attr('type','password');
+            $('#password').attr('type','password').val('');
             how = 1;
         });
         // 获取验证码
@@ -166,13 +178,19 @@
                 $('#submit').val('登录');
             }else{
                 if (data[0] != undefined) {
-                    $('.wall').remove();
-                    //保存一天登录状态
-                    login = true;
-                    //opCookie.add({loader:phone,isLoad: 'success'},24);
-                    sessionStorage.setItem('loader',phone);
-                    sessionStorage.setItem('isLoad','success');
-                    $('#msg').html(phone);
+                    if (data[0] == 'student') {
+                        $('.wall').remove();
+                        //保存一天登录状态
+                        login = true;
+                        //opCookie.add({loader:phone,isLoad: 'success'},24);
+                        sessionStorage.setItem('loader', phone);
+                        sessionStorage.setItem('isLoad', 'success');
+                        $('#msg').html(phone);
+                    } else {
+                        alert('当前用户非学生用户。');
+                        $('#submit').removeAttr("disabled");
+                        $('#submit').val('登录');
+                    }
                 }
             }
         });
@@ -183,13 +201,19 @@
         var url = '/SSMDemo/index/login.action?username=' +encodeURI(phone)+'&pass='+ yzm;
         $.get(url,function (data) {
             if (data[0] != undefined){
-                $('.wall').remove();
-                //保存一天登录状态
-                login = true;
-                //opCookie.add({loader:phone,isLoad: 'success'},24);
-                sessionStorage.setItem('loader',phone);
-                sessionStorage.setItem('isLoad','success');
-                $('#msg').html(phone);
+                if (data[0] == 'student') {
+                    $('.wall').remove();
+                    //保存一天登录状态
+                    login = true;
+                    //opCookie.add({loader:phone,isLoad: 'success'},24);
+                    sessionStorage.setItem('loader', phone);
+                    sessionStorage.setItem('isLoad', 'success');
+                    $('#msg').html(phone);
+                } else {
+                    alert('当前用户非学生用户。');
+                    $('#submit').removeAttr("disabled");
+                    $('#submit').val('登录');
+                }
             } else if (data[1] != undefined) {
                 alert('密码错误');
                 $('#submit').removeAttr("disabled");

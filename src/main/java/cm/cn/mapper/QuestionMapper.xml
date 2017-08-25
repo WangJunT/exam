@@ -44,8 +44,8 @@
         answer,
 	<!--         creater, -->
 	<!--         leibie_type, -->
-	    exam_type,
-	    difficult_type
+	     reserve_five,
+	    reserve_six
 	<!--         difficult_type, -->
 	<!--         know_type, -->
 	<!--         reserve_one, -->
@@ -64,10 +64,10 @@
         #{item.anC,jdbcType=VARCHAR},
         #{item.anD,jdbcType=VARCHAR},
         #{item.answer,jdbcType=VARCHAR},
+        #{item.reserveFive,jdbcType=VARCHAR},
+	    #{item.reserveSix,jdbcType=VARCHAR}
 	<!--         #{item.creater,jdbcType=VARCHAR}, -->
 	<!--         #{item.leibieType,jdbcType=VARCHAR}, -->
-	    #{item.examType,jdbcType=VARCHAR},
-        #{item.difficultType,jdbcType=INTEGER}
 	<!--         #{item.difficultType,jdbcType=INTEGER}, -->
 	<!--         #{item.knowType,jdbcType=VARCHAR}, -->
 	<!--         #{item.reserveOne,jdbcType=VARCHAR}, -->
@@ -88,50 +88,6 @@
 		js.answer 'answer'
 	FROM
 		js_quesion js
-  </select>
-  <!--   分类别查询所有题目 -->
-  <select id="selectTypeQuestion" parameterType="int" resultMap="BaseResultMap">
-  	SELECT
-  		js.id 'id',
-		js.title 'title',
-		js.an_A,
-		js.an_B,
-		js.an_C,
-		js.an_D,
-		js.answer 'answer'
-	FROM
-		js_quesion js
-	WHERE
-		js.type_id = #{type_id}
-  </select>
-  <!--   分类随机查询 ,不用这方法-->
-  <select id="selectRandomQuestion" resultMap="BaseResultMap">
-  	SELECT
-  		a.id 'id',
-		a.title,
-		a.answer,
-		a.an_A ,
-		a.an_B,
-		a.an_C,
-		a.an_D
-	FROM
-		(
-			SELECT
-				*
-			FROM
-				js_quesion ques
-			WHERE
-				ques.type_id = #{0}
-		) a limit #{1},#{2}
-  </select>
-   <!--   根据题目类别查询各种类别题目总数,不用这个 -->
-  <select id="selectCount" parameterType="int" resultType="int">
-  	SELECT
-		COUNT(*)
-	FROM
-		js_quesion ques
-	WHERE
-		ques.type_id = #{type_id}
   </select>
 	<!--   根据 id 查询答案 -->
   <select id="selectAnswer" resultType="string">

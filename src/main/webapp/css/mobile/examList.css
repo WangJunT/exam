@@ -65,7 +65,8 @@ html{
     line-height: 0.7rem;
     border-bottom: #A8A8A8 1px solid;
     text-indent: 0.2rem;
-    font-size: 0.26rem;
+    font-size: 0.3rem;
+    margin-top: 0.3rem;
 }
 .listBox input{
     outline: none;

@@ -1,0 +1,105 @@
+.title{
+    width: auto;
+    height: 30px;
+    font-size: 20px;
+    padding-left: 6px;
+    line-height: 30px;
+    border-left: 8px #88bbd6 solid;
+    font-weight: bold;
+}
+.allBox{
+    width: 600px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+}
+.allBox .titles{
+    height: 40px;
+    font-size: 18px;
+    line-height: 40px;
+    font-weight: bold;
+    color: #4d4d4d;
+}
+.firstSelect{
+    width: 100px;
+    display: block;
+    height: 30px;
+    outline:none;
+    line-height: 30px;
+    text-align: center;
+    color: #4d4d4d;
+    border: 1px solid #a9a9a9;
+}
+.listBox{
+    width: 500px;
+    height: auto;
+}
+.listBox ul{
+    width: 100%;
+    height: auto;
+    list-style: none;
+    border: 1px #a9a9a9 solid;
+}
+.listBox li{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #a9a9a9;
+}
+.listBox li:last-child{
+    border-bottom: 0;
+}
+.listBox li>span{
+    display: inline-block;
+    width: 400px;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+    text-indent: 20px;
+    color: #4d4d4d;
+}
+.addCate{
+    width: 100%;
+    height: 50px;
+    display: none;
+}
+.addCate input[type='text']{
+    display: inline-block;
+    float: left;
+    width: 200px;
+    height: 40px;
+    border: #a9a9a9 1px solid;
+    line-height: 40px;
+    color: #4d4d4d;
+}
+.addCate a{
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #fff;
+    background: #88bbd6;
+    border-radius: 3px;
+    float: left;
+    margin-left: 20px;
+    text-align: center;
+}
+.controlBox{
+    width: 100%;
+    height: 40px;
+}
+.controlBox a{
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-decoration: none;
+    color: #fff;
+    background: #88bbd6;
+    margin-left: 20px;
+    border-radius: 3px;
+    text-align: center;
+}

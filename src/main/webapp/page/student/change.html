@@ -2,9 +2,137 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>修改密码</title>
 </head>
+<style type="text/css">
+  .title{
+    width: auto;
+    height: 30px;
+    font-size: 20px;
+    padding-left: 6px;
+    line-height: 30px;
+    border-left: 8px #88bbd6 solid;
+    font-weight: bold;
+  }
+  .formBox{
+    width: 400px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+  }
+  .formBox input[type='text'],input[type='password']{
+    width: 100%;
+    height: 40px;
+    border: 1px #a9a9a9 solid;
+    line-height: 40px;
+    border-radius: 4px;
+    margin-top: 20px;
+    color: #4d4d4d;
+  }
+  .msg{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #d6646c;
+    font-size: 17px;
+    font-weight: 400;
+  }
+  .submit{
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    border-radius: 4px;
+    background: #88bbd6;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    border: 0;
+    outline: none;
+  }
+</style>
 <body>
-$END$
+<div class="title">修改密码</div>
+<form class="formBox">
+  <input type="text" placeholder="请输入手机号" id="phoneNumber">
+  <input type="password" placeholder="输入新密码" id="newPassword">
+  <input type="password" placeholder="再次确认新密码" id="passwordAgain">
+  <div class="msg" id="msg"></div>
+  <input type="button" class="submit" id="submit" value="提交">
+</form>
+<script src="../../js/jquery.min.js"></script>
+<script>
+  // 点击提交修改密码
+  $('#submit').click(function () {
+    var phone = $('#phoneNumber').val(),pwd = $('#newPassword').val(),
+        pwd1 = $('#passwordAgain').val();
+      phone = phone.replace(/\s/g,'');
+      pwd = pwd.replace(/\s/,'');
+      pwd1 = pwd1.replace(/\s/,'');
+    if (phone.length == 0) {
+        $('#msg').html('电话号码不能为空');
+    } else if( pwd.length == 0){
+        $('#msg').html('请输入密码');
+    } else if (pwd1.length == 0) {
+        $('#msg').html('请输入确认密码');
+    } else if (!/^1[34578]\d{9}$/.test(phone)) {
+        $('#msg').html('请输入正确手机号码');
+    }else if (pwd.length > 18){
+        $('#msg').html('请控制密码长度在18个字符内.');
+    }else if (!isLegal(pwd)) {
+        $('#msg').html('密码仅允许为数字和英文字符');
+    } else if (pwd1 != pwd) {
+        $('#msg').html('两次输入密码不一致');
+    } else { // 提交
+        $(this).attr('disabled','true');
+        $(this).val('提交中...');
+        var data = {phone: phone,password:pwd};
+        data = JSON.stringify(data);
+        $.ajax({
+            url:'/SSMDemo/stu/change.action',
+            type:'post',
+            contentType: "application/json;charset=utf-8",
+            data: data,
+            crossDomain: true,
+            dataType: 'JSON',
+            success: function (data) {
+                if (data[2] != undefined) {
+                    alert('非当前用户手机号。');
+                    $('#submit').removeAttr('disabled').val('提交');
+                } else {
+                    alert('修改成功，请重新登陆.');
+                    $.get('/SSMDemo/index/logout.action',function (data,status,xhr) {
+                        if (status == 'success'){
+                            sessionStorage.removeItem('isLoad');
+                            window.location.href ='/SSMDemo/index/first.action';
+                          } else {
+                            alert('发生错误.');
+                        }
+                    });
+                }
+            },
+            error: function(data) {
+                alert('发生错误，状态码:'+data.status);
+                $('#submit').removeAttr('disabled').val('提交');
+            }
+        });
+    }
+  });
+  /*
+  * *****自定义方法
+  * */
+  function isLegal(str) {
+      var p = /[a-z,A-Z,0-9]/;
+      for (var i = 0; i < str.length; i++) {
+          if (p.test(str[i])){
+
+          } else {
+              return false;
+          }
+      }
+      return true;
+  }
+</script>
 </body>
 </html>

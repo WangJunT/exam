@@ -41,7 +41,6 @@ public class DownFileController {
 					String fileName = "stu";
 				      byte[] content = os.toByteArray();
 				      InputStream is = new ByteArrayInputStream(content);
-				      // 设置response参数，可以打开下载页面
 //				      res.reset();
 				      res.setContentType("application/vnd.ms-excel;charset=utf-8");
 				      res.setHeader("Content-Disposition", "attachment;filename="+ new String((fileName+".xlsx").getBytes(), "utf-8"));

@@ -107,7 +107,7 @@
                 upLoadData(name,desc);
             },
             error: function (data) {
-                alert('上传失败,状态码:'+data.status+';请稍后重试');
+                alert('上传失败,请稍后重试');
                 $('#upload').val('上传').removeAttr('disabled').css('background','#88bbd6');
             }
         });
@@ -136,7 +136,7 @@
                 }
             },
             error: function (data) {
-                alert('上传失败,状态码:'+data.status+';请稍后重试');
+                alert('上传失败,请稍后重试');
                 $('#upload').val('上传').removeAttr('disabled').css('background','#88bbd6');
             }
         });

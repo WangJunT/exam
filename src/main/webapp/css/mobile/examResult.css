@@ -41,25 +41,22 @@ html{
     padding: 0;
     width: 0.4rem;
     height: 0.4rem;
-    line-height: 0.34rem;
-    text-align: center;
-    border-radius: 50%;
-    font-size: 0.4rem;
-    color: #4d4d4d;
+    border-left: 1px #4d4d4d solid;
+    border-bottom: 1px #4d4d4d solid;
+    transform: rotate(45deg);
     left: 0.4rem;
     top: 0.25rem;
-    border: 1px solid #4d4d4d;
     position: absolute;
 }
 /*中间区块*/
 .titleBox{
     width: auto;
-    height: 0.5rem;
+    height: 0.6rem;
     border-left: #88bbd6 0.1rem solid;
     padding-left: 0.1rem;
     box-sizing: border-box;
-    line-height: 0.5rem;
-    font-size: 0.27rem;
+    line-height: 0.6rem;
+    font-size: 0.36rem;
     color: #4d4d4d;
     font-weight: 500;
     margin: 0.25rem 0 0 0.25rem;
@@ -85,14 +82,14 @@ html{
 }
 .starBox{
     width: 100%;
-    height: 0.3rem;
+    height: 0.4rem;
     margin: 0.35rem 0.4rem;
     font-size: 0;
 }
 .starBox label{
     display: inline-block;
-    width: 0.26rem;
-    height: 0.26rem;
+    width: 0.36rem;
+    height: 0.36rem;
     margin-left: 0.36rem;
 }
 .starBox label:first-child{
@@ -108,10 +105,10 @@ html{
 }
 .summery{
     width: 100%;
-    height: 0.26rem;
+    height: 0.4rem;
     margin: 0.35rem 0.4rem;
-    font-size: 0.24rem;
-    line-height: 0.24rem;
+    font-size: 0.36rem;
+    line-height: 0.36rem;
     text-align: left;
     box-sizing: border-box;
     color: #808080;
