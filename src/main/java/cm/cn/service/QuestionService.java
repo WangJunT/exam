@@ -9,8 +9,8 @@ import cm.cn.po.RandomQuestion;
 public interface QuestionService {
 	//批量插入题目（除简答题）
 	public int insertList(List<JsQuesion> list);
-	//查看所有的题目（除简答题）
-	public List<JsQuesion> selectAllQuestion();
+	//老师查看所有的题目（老师可按层级来查看）、学生做顺序练习
+	public List<JsQuesion> selectAllQuestion(String reserveFive,String reserveSix);
 	//根据主键查询题目
 	public JsQuesion selectQuePrimary(int id);
 	//根据主键 id 数组查询答案
@@ -19,8 +19,8 @@ public interface QuestionService {
 	public List<JsQuesion> selectJsQuestion(String[] array);
 	//分页查询
 	public List<JsQuesion> selectJsQuestionlimit(PageQuestion pageQuestion);
-	//随机选题
+	//随机选题(教师在组卷时选择对应单位)
 	public List<JsQuesion> selectRan(RandomQuestion randomQuestion);
-	//查询各种类别试卷总数
-	public int selAllCount(JsQuesion jsQuesion);
+	//删除试题
+	public int delQues(int id);
 }

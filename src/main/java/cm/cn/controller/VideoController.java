@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import cm.cn.po.JsUser;
 import cm.cn.po.JsVideo;
 import cm.cn.po.Page;
 import cm.cn.service.VideoService;
@@ -25,10 +28,12 @@ import cm.cn.service.VideoService;
 public class VideoController {
 	@Autowired
 	VideoService videoService;
+	//学生查看当前分类视屏
 	@RequestMapping("/pageVideo")
 	@ResponseBody
-	public Page<JsVideo> addVideo(int current,int pageSize){
-		List<JsVideo> list = videoService.allVideo();;
+	public Page<JsVideo> addVideo(int current,int pageSize,HttpSession session){
+		JsUser user = (JsUser) session.getAttribute("user");
+		List<JsVideo> list = videoService.allVideo(user.getReserveFive(),user.getReserveSix());
 		Page<JsVideo> page= new Page<JsVideo>(current, pageSize,list);
 		return page;
 	}
@@ -36,11 +41,6 @@ public class VideoController {
 	@ResponseBody
 	public JsVideo watchVideo(int id){
 		return videoService.selById(id);
-	}
-	@RequestMapping("/allVideo")
-	@ResponseBody
-	public List<JsVideo> allVideo(){
-		return videoService.allVideo();
 	}
 	@RequestMapping("/addVideo")
 	@ResponseBody

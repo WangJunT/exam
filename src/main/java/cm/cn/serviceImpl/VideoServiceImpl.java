@@ -19,17 +19,28 @@ public class VideoServiceImpl implements VideoService {
 		// TODO Auto-generated method stub
 		return jsVideoMapper.insertSelective(video);
 	}
-
-	@Override
-	public List<JsVideo> allVideo() {
-		JsVideoExample example = new JsVideoExample();
-		return jsVideoMapper.selectByExample(example);
-	}
-
 	@Override
 	public JsVideo selById(int id) {
 		// TODO Auto-generated method stub
 		return jsVideoMapper.selectByPrimaryKey(id);
 	}
+
+	@Override
+	public List<JsVideo> allVideo(String reserveFive, String reserveSix) {
+		JsVideoExample example = new JsVideoExample();
+		JsVideoExample.Criteria criteria = example.createCriteria();
+		if (!(reserveFive == null ||"".equals(reserveFive))) {
+			criteria.andReserveFiveEqualTo(reserveFive);
+		}
+		if (!(reserveSix == null ||"".equals(reserveSix))) {
+			criteria.andReserveSixEqualTo(reserveSix);
+		}
+		return jsVideoMapper.selectByExample(example);
+	}
+//	@Override
+//	public int delById(int id) {
+		// TODO Auto-generated method stub
+//		return jsVideoMapper.deleteByPrimaryKey(id);
+//	}
 
 }

@@ -151,6 +151,12 @@
 	    <if test="know_type != null ">
 	        AND know_type = #{know_type}
 	    </if>
+	     <if test="reserveFive != null ">
+	        AND reserve_five = #{reserveFive}
+	    </if>
+	    <if test="reserveSix != null ">
+	        AND reserve_six = #{reserveSix}
+	    </if>
   </where>
 	limit #{start},#{size}
   </select>
@@ -181,6 +187,12 @@
 	    </if>
 	    <if test="know_type != null ">
 	        AND know_type = #{know_type}
+	    </if>
+	    <if test="reserveFive != null ">
+	        AND reserve_five = #{reserveFive}
+	    </if>
+	    <if test="reserveSix != null ">
+	        AND reserve_six = #{reserveSix}
 	    </if>
   </where>
 		ORDER BY RAND()  limit #{total}

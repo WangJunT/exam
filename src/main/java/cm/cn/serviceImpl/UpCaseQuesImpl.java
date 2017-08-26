@@ -26,7 +26,7 @@ public class UpCaseQuesImpl implements UpCaseQues {
 	 * 导入第三张表
 	 */
 	@Override
-	public void excelToJsCase(String path) {
+	public void excelToJsCase(String path,String reserveFive,String reserveSix) {
 		FileInputStream excelFileInputStream;
 		String filetype = path.substring(path.lastIndexOf(".") + 1);
 		if ("xls".equals(filetype.toLowerCase())) {
@@ -74,6 +74,9 @@ public class UpCaseQuesImpl implements UpCaseQues {
 					jsCase = new JsCase();
 					String content = row.getCell(1).getStringCellValue();
 					jsCase.setContent(content);
+					//-------------------------------------------------------------
+					jsCase.setReserveFive(reserveFive);
+					jsCase.setReserveSix(reserveSix);
 					caseQuestionService.insertCase(jsCase);
 					id = jsCase.getId();
 				}
@@ -124,6 +127,8 @@ public class UpCaseQuesImpl implements UpCaseQues {
 					jsCase = new JsCase();
 					String content = row.getCell(1).getStringCellValue();
 					jsCase.setContent(content);
+					jsCase.setReserveFive(reserveFive);
+					jsCase.setReserveSix(reserveSix);
 					caseQuestionService.insertCase(jsCase);
 					id = jsCase.getId();
 				}

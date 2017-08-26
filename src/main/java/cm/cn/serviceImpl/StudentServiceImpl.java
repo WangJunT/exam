@@ -60,8 +60,15 @@ public class StudentServiceImpl implements StudentService {
 		return jsUserMapper.selectByExample(example);
 	}
 	@Override
-	public List<JsUser> selectAll() {
+	public List<JsUser> selectAll(String reserveFive,String reserveSix) {
 		JsUserExample example = new JsUserExample();
+		JsUserExample.Criteria criteria = example.createCriteria();
+		if (!(reserveFive == null ||"".equals(reserveFive))) {
+			criteria.andReserveFiveEqualTo(reserveFive);
+		}
+		if (!(reserveSix == null ||"".equals(reserveSix))) {
+			criteria.andReserveSixEqualTo(reserveSix);
+		}
 		return jsUserMapper.selectByExample(example);
 	}
 }

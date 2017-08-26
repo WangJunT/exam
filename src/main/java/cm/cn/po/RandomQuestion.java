@@ -10,6 +10,20 @@ public class RandomQuestion {
 	private Integer difficult_type;//试卷难易程度（1-易，2-中，3-难）
 	private Integer know_type;//知识点
 	private Integer total;//需要查询总数
+	private String reserveFive;
+	private String reserveSix;
+	public String getReserveFive() {
+		return reserveFive;
+	}
+	public void setReserveFive(String reserveFive) {
+		this.reserveFive = reserveFive;
+	}
+	public String getReserveSix() {
+		return reserveSix;
+	}
+	public void setReserveSix(String reserveSix) {
+		this.reserveSix = reserveSix;
+	}
 	public Integer getTypeId() {
 		return typeId;
 	}

@@ -10,6 +10,20 @@ public class PageQuestion {
 	private Integer know_type;//知识点
 	private Integer start;//limit 前一个字段
 	private Integer size;//limit  后一个字段
+	private String reserveFive;
+	private String reserveSix;
+	public String getReserveFive() {
+		return reserveFive;
+	}
+	public void setReserveFive(String reserveFive) {
+		this.reserveFive = reserveFive;
+	}
+	public String getReserveSix() {
+		return reserveSix;
+	}
+	public void setReserveSix(String reserveSix) {
+		this.reserveSix = reserveSix;
+	}
 	public Integer getTypeId() {
 		return typeId;
 	}

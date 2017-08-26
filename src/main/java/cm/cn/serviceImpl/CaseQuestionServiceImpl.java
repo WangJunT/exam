@@ -50,7 +50,6 @@ public class CaseQuestionServiceImpl implements CaseQuestionService {
 	}
 	@Override
 	public List<CaseAndQuestion> selectCaseAndQues(String[] array) {
-		// TODO Auto-generated method stub
 		return caseQuesMapper.selectCaseAndQues(array);
 	}
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cm.cn.po.CaseAndQuestion;
 import cm.cn.po.JsExampaper;
 import cm.cn.po.JsQuesion;
+import cm.cn.po.JsUser;
 import cm.cn.po.RandomQuestion;
 import cm.cn.service.CaseQuestionService;
 import cm.cn.service.ExamPaperService;
@@ -36,6 +39,8 @@ public class ExamPaperController {
 	public Map<Integer, String> addQuestion(@RequestBody JsExampaper jsExampaper){
 		Map<Integer, String> map = new HashMap<>();
 		RandomQuestion randomQuestion = new RandomQuestion();
+		randomQuestion.setReserveFive(jsExampaper.getReserveFive());
+		randomQuestion.setReserveSix(jsExampaper.getReserveSix());
 		int selectOneNum=jsExampaper.getSelectOneNum();
 		if (selectOneNum>0) {
 			randomQuestion.setTypeId(1);
@@ -68,7 +73,6 @@ public class ExamPaperController {
 		}
 //		int caseNum=jsExampaper.getCasequesNum();
 //		if (caseNum>0) {
-//			
 //		}
 		if(examPaperService.addExamPaper(jsExampaper)>0){
 			map.put(0,"success");
@@ -85,10 +89,12 @@ public class ExamPaperController {
 		Map<Integer, String> map = new HashMap<>();
 		return map;
 	}
+	//学生查询对应工种所有试卷
 	@RequestMapping(value="/selectAll")
 	@ResponseBody
-	public List<JsExampaper> selectAll(){
-		List<JsExampaper> list = examPaperService.selectAll();
+	public List<JsExampaper> selectAll(HttpSession session){
+		JsUser user = (JsUser) session.getAttribute("user");
+		List<JsExampaper> list = examPaperService.selectAll(user.getReserveFive(),user.getReserveSix());
 		return list;
 	}
 	@RequestMapping(value="/beginExam")

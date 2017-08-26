@@ -25,8 +25,15 @@ public class ExamPaperServiceImpl implements cm.cn.service.ExamPaperService {
 		return jsExampaperMapper.insertSelective(jsExampaper);
 	}
 	@Override
-	public List<JsExampaper> selectAll() {
+	public List<JsExampaper> selectAll(String reserveFive,String reserveSix) {
 		JsExampaperExample example = new JsExampaperExample();
+		JsExampaperExample.Criteria criteria = example.createCriteria();
+		if (!(reserveFive == null ||"".equals(reserveFive))) {
+			criteria.andReserveFiveEqualTo(reserveFive);
+		}
+		if (!(reserveSix == null ||"".equals(reserveSix))) {
+			criteria.andReserveSixEqualTo(reserveSix);
+		}
 		return jsExampaperMapper.selectByExample(example);
 	}
 	@Override

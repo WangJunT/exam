@@ -26,8 +26,16 @@ public class QuestingServiceImpl implements QuestionService {
 		return questionMapper.insertList(list);
 	}
 	@Override
-	public List<JsQuesion> selectAllQuestion() {
-		return questionMapper.selectAllQuestion();
+	public List<JsQuesion> selectAllQuestion(String reserveFive,String reserveSix) {
+		JsQuesionExample example = new JsQuesionExample();
+		JsQuesionExample.Criteria criteria = example.createCriteria();
+		if (!(reserveFive == null ||"".equals(reserveFive))) {
+			criteria.andReserveFiveEqualTo(reserveFive);
+		}
+		if (!(reserveSix == null ||"".equals(reserveSix))) {
+			criteria.andReserveSixEqualTo(reserveSix);
+		}
+		return jsquestionMapper.selectByExample(example);
 	}
 	@Override
 	public JsQuesion selectQuePrimary(int id) {
@@ -50,25 +58,8 @@ public class QuestingServiceImpl implements QuestionService {
 		return questionMapper.selectRan(randomQuestion);
 	}
 	@Override
-	public int selAllCount(JsQuesion jsQuesion) {
-		JsQuesionExample jsQuesionExample = new JsQuesionExample();
-		JsQuesionExample.Criteria criteria = jsQuesionExample.createCriteria();
-		if (jsQuesion.getTypeId()!=0) {
-			criteria.andTypeIdEqualTo(jsQuesion.getTypeId());
-		}
-		if (jsQuesion.getDifficultType()!=0) {
-			criteria.andDifficultTypeEqualTo(jsQuesion.getDifficultType());
-		}
-		if (jsQuesion.getKnowType()!=null) {
-			criteria.andKnowTypeEqualTo(jsQuesion.getKnowType());
-		}
-		if (jsQuesion.getExamType()!=null) {
-			criteria.andExamTypeEqualTo(jsQuesion.getExamType());
-		}
-		if (jsQuesion.getLeibieType()!=null) {
-			criteria.andLeibieTypeEqualTo(jsQuesion.getLeibieType());
-		}
-		return jsquestionMapper.countByExample(jsQuesionExample);
+	public int delQues(int id) {
+		return jsquestionMapper.deleteByPrimaryKey(id);
 	}
 
 }

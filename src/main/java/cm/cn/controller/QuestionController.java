@@ -30,18 +30,12 @@ public class QuestionController {
 	QuestionService questionService;
 	@Autowired
 	UpCaseQues upCaseQues;
-	@RequestMapping("/selAll")
+	//学生查询对应工种题目，即顺序练习
+	@RequestMapping("/selStuQues")
 	@ResponseBody
-	public List<JsQuesion> selAll(){
-		return questionService.selectAllQuestion();
-	}
-	@RequestMapping("/addCase")
-	@ResponseBody
-	public Map<Integer, String> addCase(){
-		Map<Integer, String> map = new HashMap<>();
-		String filePath = "C:\\Users\\dnd\\Documents\\WeChat Files\\wxid_5xxl7t4xw9ws22\\Files\\材料员实务.xls";
-		upCaseQues.excelToJsCase(filePath);
-		return map ;
+	public List<JsQuesion> selStuQues(HttpSession session){
+		JsUser user = (JsUser) session.getAttribute("user");
+		return questionService.selectAllQuestion(user.getReserveFive(),user.getReserveSix());
 	}
 //	@RequestMapping("/orderPractice")
 //	@ResponseBody

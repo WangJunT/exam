@@ -1,7 +1,6 @@
 package cm.cn.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cm.cn.po.JsUser;
 import cm.cn.service.StudentService;
-import cm.cn.util.ListStuToExcel;
 
 @Controller
 @RequestMapping("/stu")
@@ -45,20 +43,6 @@ public class StudentController {
 		}
 		else{
 			map.put(2,"电话号码有误");
-		}
-		return map ;
-	}
-	@RequestMapping("/exportStu")
-	@ResponseBody
-	public Map<Integer, String> exportStu(JsUser jsUser){
-		Map<Integer, String> map = new HashMap<>();
-		List<JsUser> list = studentService.selectAll();
-		if (list.size()>0) {
-			ListStuToExcel.questionToExcel(list);
-			map.put(0, "导出成功");
-		}
-		else{
-			map.put(1,"未导出");
 		}
 		return map ;
 	}

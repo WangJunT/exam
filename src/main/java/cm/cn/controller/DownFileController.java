@@ -29,9 +29,9 @@ public class DownFileController {
 	QuestionService questionService;
 	@RequestMapping("/downStu")
 	@ResponseBody
-	public Map<Integer, String> stuDown(HttpServletResponse res){
+	public Map<Integer, String> stuDown(HttpServletResponse res,String reserveFive,String reserveSix){
 		Map<Integer, String> map = new HashMap<>();
-		 List<JsUser> list = studentService.selectAll();
+		 List<JsUser> list = studentService.selectAll(reserveFive,reserveSix);
 			if (list.size()>0) {
 				ByteArrayOutputStream os = new ByteArrayOutputStream();
 				BufferedInputStream bis = null;
@@ -82,9 +82,9 @@ public class DownFileController {
 	}
 	@RequestMapping("/downQues")
 	@ResponseBody
-	public Map<Integer, String> quesDown(HttpServletResponse res){
+	public Map<Integer, String> quesDown(HttpServletResponse res,String reserveFive,String reserveSix){
 		Map<Integer, String> map = new HashMap<>();
-		 List<JsQuesion> list = questionService.selectAllQuestion();
+		 List<JsQuesion> list = questionService.selectAllQuestion(reserveFive,reserveSix);
 			if (list.size()>0) {
 				ByteArrayOutputStream os = new ByteArrayOutputStream();
 				BufferedInputStream bis = null;

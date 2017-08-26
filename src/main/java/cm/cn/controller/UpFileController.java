@@ -54,7 +54,7 @@ public class UpFileController {
 			}
 			return filePath;
 		}
-		@RequestMapping("/addQuesBatch")
+		@RequestMapping(value="/addQuesBatch",method=RequestMethod.POST)
 		@ResponseBody
 		public Map<Integer, String> addQuesBatch(@RequestBody UpCondition asd){
 			Map<Integer, String> map = new HashMap<>();
@@ -73,10 +73,9 @@ public class UpFileController {
 			return map;
 		}
 		//添加简答题
-		@RequestMapping("/addCase")
+		@RequestMapping("/addCaseFile")
 		@ResponseBody
-		public Map<Integer, String> addCase(MultipartFile file){
-			Map<Integer, String> map = new HashMap<>();
+		public String addCase(MultipartFile file){
 			 //获取文件名  
 		    String fileName = file.getOriginalFilename();  
 		    //文件扩展名  
@@ -85,15 +84,33 @@ public class UpFileController {
 		 	String video_path = "D:\\";
 		 	String filePath = video_path + newFileName;
 		 	// 新文件,存到磁盘
-			File newFile = new File(filePath);
+		 	File newFile = new File(filePath);
 			try {
 				file.transferTo(newFile);
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			upCaseQues.excelToJsCase(filePath);
-			return map ;
+			return filePath;
+			
+		}
+		@RequestMapping(value="/addCaseBatch",method=RequestMethod.POST)
+		@ResponseBody
+		public Map<Integer, String> addCaseBatch(@RequestBody UpCondition asd){
+			Map<Integer, String> map = new HashMap<>();
+			upCaseQues.excelToJsCase(asd.getFilePath(),asd.getReserveFive(),asd.getReserveSix());
+//			if (list.size()>0) {
+//				if (questionService.insertList(list)>0){
+//					map.put(0, "上传成功");
+//				}
+//				else{
+//					map.put(1, "添加失败");
+//				}
+//			}
+//			else{
+//				map.put(2, "文件格式错误或数据有误");
+//			}
+			return map;
 		}
 		//添加学生
 		@RequestMapping("/addStuBatch")
