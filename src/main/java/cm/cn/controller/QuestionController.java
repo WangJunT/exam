@@ -78,6 +78,8 @@ public class QuestionController {
 		if (list1.size()>0) {
 			jsQuestionStu = list1.get(0);
 			start = start + jsQuestionStu.getTotal();
+			jsQuestionStu.setTotal(start);
+			questionStuService.updateRecord(jsQuestionStu);
 		}else{
 			jsQuestionStu.setStuId(jsUser.getId());
 			jsQuestionStu.setTotal(start);

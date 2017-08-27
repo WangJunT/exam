@@ -5,6 +5,7 @@ import java.util.List;
 import cm.cn.po.JsQuesion;
 import cm.cn.po.PageQuestion;
 import cm.cn.po.RandomQuestion;
+import cm.cn.po.StuDoneQues;
 
 public interface QuestionService {
 	//批量插入题目（除简答题）
@@ -23,4 +24,6 @@ public interface QuestionService {
 	public List<JsQuesion> selectRan(RandomQuestion randomQuestion);
 	//删除试题
 	public int delQues(int id);
+	//学生做题总数信息
+	public List<StuDoneQues> selStuDeonQues();
 }

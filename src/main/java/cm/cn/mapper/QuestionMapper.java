@@ -5,6 +5,7 @@ import java.util.List;
 import cm.cn.po.JsQuesion;
 import cm.cn.po.PageQuestion;
 import cm.cn.po.RandomQuestion;
+import cm.cn.po.StuDoneQues;
 
 public interface QuestionMapper {
 	//批量插入题
@@ -19,4 +20,6 @@ public interface QuestionMapper {
 	public List<JsQuesion> selectJsQuestionlimit(PageQuestion pageQuestion);
 	//随机查询题目
 	public List<JsQuesion> selectRan(RandomQuestion randomQuestion);
+	//学生做题总数信息
+	public List<StuDoneQues> selStuDeonQues();
 }

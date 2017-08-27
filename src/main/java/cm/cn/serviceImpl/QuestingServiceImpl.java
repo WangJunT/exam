@@ -11,6 +11,7 @@ import cm.cn.po.JsQuesion;
 import cm.cn.po.JsQuesionExample;
 import cm.cn.po.PageQuestion;
 import cm.cn.po.RandomQuestion;
+import cm.cn.po.StuDoneQues;
 import cm.cn.service.QuestionService;
 
 @Service
@@ -60,6 +61,11 @@ public class QuestingServiceImpl implements QuestionService {
 	@Override
 	public int delQues(int id) {
 		return jsquestionMapper.deleteByPrimaryKey(id);
+	}
+	@Override
+	public List<StuDoneQues> selStuDeonQues() {
+		// TODO Auto-generated method stub
+		return questionMapper.selStuDeonQues();
 	}
 
 }

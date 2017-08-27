@@ -13,6 +13,7 @@ import cm.cn.po.JsUser;
 import cm.cn.po.JsVideo;
 import cm.cn.po.Page;
 import cm.cn.po.StuDoneExam;
+import cm.cn.po.StuDoneQues;
 import cm.cn.service.ExamPaperService;
 import cm.cn.service.ExampaperStuService;
 import cm.cn.service.QuestionService;
@@ -104,4 +105,17 @@ public class TeacherController {
 		}
 	}
 	//查看学生做题信息
+	@RequestMapping("/selStuQues")
+	@ResponseBody
+	public Page<StuDoneQues> selStuQues(int current,int pageSize){
+		List<StuDoneQues> list = questionService.selStuDeonQues();
+		Page<StuDoneQues> page= null;
+		if (list.size()>0) {
+			page= new Page<StuDoneQues>(current, pageSize,list);
+			return page;
+		}
+		else{
+			return null;
+		}
+	}
 }
