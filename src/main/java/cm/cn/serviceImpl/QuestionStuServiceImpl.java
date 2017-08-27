@@ -32,4 +32,12 @@ public class QuestionStuServiceImpl implements QuestionStuService {
 		return jsQuestionStuMapper.updateByPrimaryKeySelective(jsQuestionStu);
 	}
 
+	@Override
+	public int delQuesStu(int id) {
+		JsQuestionStuExample example = new JsQuestionStuExample();
+		JsQuestionStuExample.Criteria criteria = example.createCriteria();
+		criteria.andStuIdEqualTo(id);
+		return jsQuestionStuMapper.deleteByExample(example);
+	}
+
 }

@@ -19,4 +19,6 @@ public interface StudentService {
 	public List<JsUser> selectBypass(String username);
 	//查询所有的学生（用于导出）
 	public List<JsUser> selectAll(String reserveFive,String reserveSix);
+	//删除学生
+	public int delStu(int id);
 }

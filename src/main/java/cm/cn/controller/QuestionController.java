@@ -37,25 +37,6 @@ public class QuestionController {
 		JsUser user = (JsUser) session.getAttribute("user");
 		return questionService.selectAllQuestion(user.getReserveFive(),user.getReserveSix());
 	}
-//	@RequestMapping("/orderPractice")
-//	@ResponseBody
-//	public Map<Integer, Object> orderPractice(PageQuestion pageQuestion,HttpSession session){
-//		Map<Integer, Object> map = new HashMap<>();
-//		JsUser jsUser = (JsUser) session.getAttribute("user");
-//		List<JsQuestionStu> list1 = null;
-//		JsQuestionStu jsQuestionStu = null;
-//		int start = pageQuestion.getStart();
-//		list1 = questionStuService.selectIfExit(jsUser.getId());
-//		if (list1.size()>0) {
-//			jsQuestionStu = list1.get(0);
-//			start = jsQuestionStu.getTotal();
-//			pageQuestion.setStart(start);
-//		}
-//		List<JsQuesion> list= questionService.selectJsQuestionlimit(pageQuestion);
-//		map.put(0, start);
-//		map.put(1, list);
-//		return map;
-//	}
 	//进入顺序练习
 	@RequestMapping("/orderPractice")
 	@ResponseBody
@@ -96,12 +77,7 @@ public class QuestionController {
 		list1 = questionStuService.selectIfExit(jsUser.getId());
 		if (list1.size()>0) {
 			jsQuestionStu = list1.get(0);
-			if (start>jsQuestionStu.getTotal()) {
-				jsQuestionStu.setTotal(start);
-				questionStuService.updateRecord(jsQuestionStu);
-			}
-			else
-				start = jsQuestionStu.getTotal();
+			start = start + jsQuestionStu.getTotal();
 		}else{
 			jsQuestionStu.setStuId(jsUser.getId());
 			jsQuestionStu.setTotal(start);

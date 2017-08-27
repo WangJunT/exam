@@ -5,8 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cm.cn.mapper.JsExampaperStuMapper;
+import cm.cn.mapper.JsQuestionStuMapper;
 import cm.cn.mapper.JsUserMapper;
 import cm.cn.mapper.StudentMapper;
+import cm.cn.po.JsExampaperStuExample;
+import cm.cn.po.JsQuestionStuExample;
 import cm.cn.po.JsUser;
 import cm.cn.po.JsUserExample;
 import cm.cn.po.JsUserExample.Criteria;
@@ -20,6 +24,10 @@ public class StudentServiceImpl implements StudentService {
 	StudentMapper studentMapper;
 	@Autowired
 	JsUserMapper jsUserMapper;
+	@Autowired
+	JsExampaperStuMapper jsExampaperStuMapper;
+	@Autowired
+	JsQuestionStuMapper jsQuestionStuMapper;
 	@Override
 	public int insertStuList(List<JsUser> stu) {
 		return studentMapper.insertStuList(stu);
@@ -70,5 +78,19 @@ public class StudentServiceImpl implements StudentService {
 			criteria.andReserveSixEqualTo(reserveSix);
 		}
 		return jsUserMapper.selectByExample(example);
+	}
+	@Override
+	public int delStu(int id) {
+		//先删除做试卷信息
+		JsExampaperStuExample example = new JsExampaperStuExample();
+		JsExampaperStuExample.Criteria criteria = example.createCriteria();
+		criteria.andStuIdEqualTo(id);
+		jsExampaperStuMapper.deleteByExample(example);
+		//删除做题信息
+		JsQuestionStuExample example1 = new JsQuestionStuExample();
+		JsQuestionStuExample.Criteria criteria1 = example1.createCriteria();
+		criteria1.andStuIdEqualTo(id);
+		jsQuestionStuMapper.deleteByExample(example1);
+		return jsUserMapper.deleteByPrimaryKey(id);
 	}
 }

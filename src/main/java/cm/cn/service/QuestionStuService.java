@@ -12,4 +12,6 @@ public interface QuestionStuService {
 	public int insertRecord(JsQuestionStu jsQuestionStu);
 	//退出时与学生上次做题记录相比较，大于则更改，小于则不管。
 	public int updateRecord(JsQuestionStu jsQuestionStu);
+	//删除学生时删除对应的做题信息
+	public int delQuesStu(int id);
 }

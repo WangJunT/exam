@@ -42,5 +42,10 @@ public class VideoServiceImpl implements VideoService {
 		// TODO Auto-generated method stub
 //		return jsVideoMapper.deleteByPrimaryKey(id);
 //	}
+	@Override
+	public int delById(int id) {
+		// TODO Auto-generated method stub
+		return jsVideoMapper.deleteByPrimaryKey(id);
+	}
 
 }

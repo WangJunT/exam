@@ -15,7 +15,7 @@ import cm.cn.service.VideoService;
 @Controller
 @RequestMapping("/tea")
 public class TeacherDelController {
-	//删除学生信息
+	
 	//删除视屏
 	@Autowired
 	QuestionService questionService;
@@ -25,6 +25,20 @@ public class TeacherDelController {
 	ExamPaperService examPaperService;
 	@Autowired
 	VideoService videoService;
+	//删除学生信息
+	@RequestMapping("/delStu")
+	@ResponseBody
+	public Map<Integer, Object> delStu(int id){
+		Map<Integer,Object> map = new HashMap<>();
+		int num = studentService.delStu(id);
+		if (num>0) {
+			map.put(0, "删除成功");
+		}
+		else{
+			map.put(1, "删除失败");
+		}
+		return map;
+	}
 	//删除题目
 	@RequestMapping("/delQues")
 	@ResponseBody
