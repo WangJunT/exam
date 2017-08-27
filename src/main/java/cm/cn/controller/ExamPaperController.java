@@ -17,6 +17,7 @@ import cm.cn.po.CaseAndQuestion;
 import cm.cn.po.JsExampaper;
 import cm.cn.po.JsQuesion;
 import cm.cn.po.JsUser;
+import cm.cn.po.Page;
 import cm.cn.po.RandomQuestion;
 import cm.cn.service.CaseQuestionService;
 import cm.cn.service.ExamPaperService;
@@ -92,10 +93,17 @@ public class ExamPaperController {
 	//学生查询对应工种所有试卷
 	@RequestMapping(value="/selectAll")
 	@ResponseBody
-	public List<JsExampaper> selectAll(HttpSession session){
+	public Page<JsExampaper> selectAll(HttpSession session,int current,int pageSize){
 		JsUser user = (JsUser) session.getAttribute("user");
 		List<JsExampaper> list = examPaperService.selectAll(user.getReserveFive(),user.getReserveSix());
-		return list;
+		Page<JsExampaper> page= null;
+		if (list.size()>0){
+			page= new Page<JsExampaper>(current, pageSize,list);
+			return page;
+		}
+		else{
+			return null ;
+		}
 	}
 	@RequestMapping(value="/beginExam")
 	@ResponseBody
@@ -129,20 +137,6 @@ public class ExamPaperController {
 			List<CaseAndQuestion> caseQues = caseQuestionService.selectCaseAndQues(caseArray);
 			map.put(3, caseQues);
 			map.put(7, jsExampaper.getCasequesNum());
-		}
-		return map;
-	}
-	@RequestMapping(value="/delExam")
-	@ResponseBody
-	public Map<Integer, Object> delExam(int[] intarray){
-		Map<Integer,Object> map = new HashMap<>();
-		//先删除与之关联的试卷学生关系
-		int num = examPaperService.delExam(intarray);
-		if (num>0) {
-			map.put(0, "删除"+num+"条数据");
-		}
-		else{
-			map.put(1, "删除失败");
 		}
 		return map;
 	}

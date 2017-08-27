@@ -82,14 +82,6 @@ public class QuestionController {
 	@RequestMapping("/selectLimit")
 	@ResponseBody
 	public List<JsQuesion> selectLimit(PageQuestion pageQuestion,HttpSession session){
-//		JsUser jsUser = (JsUser) session.getAttribute("user");
-//		List<JsQuestionStu> list1 = null;
-//		JsQuestionStu jsQuestionStu = null;
-//		list1 = questionStuService.selectIfExit(jsUser.getId());
-//		if (list1.size()>0) {
-//			jsQuestionStu = list1.get(0);
-//			pageQuestion.setStart(jsQuestionStu.getTotal());
-//		}
 		List<JsQuesion> list= questionService.selectJsQuestionlimit(pageQuestion);
 		return list;
 	}

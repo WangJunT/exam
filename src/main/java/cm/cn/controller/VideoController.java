@@ -29,13 +29,19 @@ public class VideoController {
 	@Autowired
 	VideoService videoService;
 	//学生查看当前分类视屏
-	@RequestMapping("/pageVideo")
+	@RequestMapping("/allVideo")
 	@ResponseBody
-	public Page<JsVideo> addVideo(int current,int pageSize,HttpSession session){
+	public Page<JsVideo> allVideo(int current,int pageSize,HttpSession session){
 		JsUser user = (JsUser) session.getAttribute("user");
 		List<JsVideo> list = videoService.allVideo(user.getReserveFive(),user.getReserveSix());
-		Page<JsVideo> page= new Page<JsVideo>(current, pageSize,list);
-		return page;
+		Page<JsVideo> page= null;
+		if (list.size()>0){
+			page= new Page<JsVideo>(current, pageSize,list);
+			return page;
+		}
+		else{
+			return null ;
+		}
 	}
 	@RequestMapping("/watchVideo")
 	@ResponseBody

@@ -125,7 +125,7 @@ public class DownFileController {
 				      }
 		}
 		else{
-			map.put(1,"导出失败");
+			map.put(1,"导出失败，没有数据");
 		}
 	     
 		return map;

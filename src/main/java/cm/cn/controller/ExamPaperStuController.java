@@ -31,6 +31,8 @@ public class ExamPaperStuController {
 		if (list.size()>0) {
 			Double score = jsExampaperStu.getScore();
 			jsExampaperStu = list.get(0);
+			jsExampaperStu.setReserveFive(jsUser.getReserveFive());
+			jsExampaperStu.setReserveSix(jsUser.getReserveSix());
 			jsExampaperStu.setScore(score);
 			exampaperStuService.updateStuExam(jsExampaperStu);
 			map.put(0, "试卷提交成功");

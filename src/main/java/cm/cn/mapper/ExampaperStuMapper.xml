@@ -5,6 +5,7 @@
 <!-- 		<id column="id" property="id" jdbcType="INTEGER" /> -->
 	    <result column="name" property="name"  />
 	    <result column="score" property="score"  />
+	    <result column="stuName" property="stuName"  />
 	</resultMap>
 	<delete id="delByExamIdArray">
 		DELETE
@@ -17,6 +18,7 @@
            #{id}
      	</foreach>
 	</delete>
+	<!-- 	学生查询自己已做 -->
 	<select id="selDone" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
 			s.`name`,
@@ -34,5 +36,25 @@
 			WHERE
 				sd.stu_id = #{stuid,jdbcType=INTEGER}
 		)
+	</select>
+	<!-- 	老师查询学生已做 -->
+	<select id="selStuDone" resultMap="BaseResultMap" >
+		SELECT
+			s.`name` '考试名称',
+			le1.`name` '第一层',
+			le2.`name` '第er层',
+			sd.score '最后一次考试分数',
+			stu.username '学生姓名'
+		FROM
+			js_exampaper s,
+			js_exampaper_stu sd,
+			js_user stu,
+			js_level le1,
+			js_level le2
+		WHERE
+			s.id = sd.exampaper_id
+		AND stu.id = sd.stu_id
+		AND stu.reserve_five = le1.id
+		AND stu.reserve_six = le2.id
 	</select>
 </mapper>

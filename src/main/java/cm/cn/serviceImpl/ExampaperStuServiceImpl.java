@@ -38,14 +38,28 @@ public class ExampaperStuServiceImpl implements ExampaperStuService {
 		return jsExampaperStuMapper.updateByPrimaryKeySelective(examStu);
 	}
 
-	@Override
-	public int delStuExam(int[] arrays) {
-		return exampaperStuMapper.delByExamIdArray(arrays);
-	}
+//	@Override
+//	public int delStuExam(int[] arrays) {
+//		return exampaperStuMapper.delByExamIdArray(arrays);
+//	}
 
 	@Override
 	public List<StuDoneExam> seleDone(int stuid) {
 		return exampaperStuMapper.selDone(stuid);
+	}
+
+	@Override
+	public List<StuDoneExam> selExamStu() {
+		// TODO Auto-generated method stub
+		return exampaperStuMapper.selStuDone();
+	}
+
+	@Override
+	public int delStuDoneExam(int id) {
+		JsExampaperStuExample example = new JsExampaperStuExample();
+		JsExampaperStuExample.Criteria criteria = example.createCriteria();
+		criteria.andExampaperIdEqualTo(id);
+		return jsExampaperStuMapper.deleteByExample(example);
 	}
 
 }

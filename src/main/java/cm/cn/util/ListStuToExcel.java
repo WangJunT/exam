@@ -28,25 +28,25 @@ public class ListStuToExcel {
 	    headCell.setCellValue("姓名");
 	    headCell.setCellStyle(cellStyle);
 	 
-	    headCell = hssfRow.createCell(1);
-	    headCell.setCellValue("密码");
-	    headCell.setCellStyle(cellStyle);
+//	    headCell = hssfRow.createCell(1);
+//	    headCell.setCellValue("密码");
+//	    headCell.setCellStyle(cellStyle);
 	 
-	    headCell = hssfRow.createCell(2);
+	    headCell = hssfRow.createCell(1);
 	    headCell.setCellValue("年级");
 	    headCell.setCellStyle(cellStyle);
 	    
-	    headCell = hssfRow.createCell(3);
+	    headCell = hssfRow.createCell(2);
 	    headCell.setCellValue("电话");
 	    headCell.setCellStyle(cellStyle);
 	    
-	    headCell = hssfRow.createCell(4);
+	    headCell = hssfRow.createCell(3);
 	    headCell.setCellValue("身份证");
 	    headCell.setCellStyle(cellStyle);
 	    
-	    headCell = hssfRow.createCell(5);
-	    headCell.setCellValue("学生类别");
-	    headCell.setCellStyle(cellStyle);
+//	    headCell = hssfRow.createCell(5);
+//	    headCell.setCellValue("学生类别");
+//	    headCell.setCellStyle(cellStyle);
 	    for (int i = 0; i < list.size(); i++){
 	    	hssfRow = sheet.createRow((int) i + 1);
 	    	JsUser jsUser = list.get(i);
@@ -55,25 +55,25 @@ public class ListStuToExcel {
 		    cell.setCellValue(jsUser.getUsername());
 		    cell.setCellStyle(cellStyle);
 		    
-		    cell = hssfRow.createCell(1);
-		    cell.setCellValue(jsUser.getPassword());
-		    cell.setCellStyle(cellStyle);
+//		    cell = hssfRow.createCell(1);
+//		    cell.setCellValue(jsUser.getPassword());
+//		    cell.setCellStyle(cellStyle);
 		    
-		    cell = hssfRow.createCell(2);
+		    cell = hssfRow.createCell(1);
 		    cell.setCellValue(jsUser.getRealname());
 		    cell.setCellStyle(cellStyle);
 		    
-		    cell = hssfRow.createCell(3);
+		    cell = hssfRow.createCell(2);
 		    cell.setCellValue(jsUser.getPhone());
 		    cell.setCellStyle(cellStyle);
 		    
-		    cell = hssfRow.createCell(4);
+		    cell = hssfRow.createCell(3);
 		    cell.setCellValue(jsUser.getIdcard());
 		    cell.setCellStyle(cellStyle);
 		    
-		    cell = hssfRow.createCell(5);
-		    cell.setCellValue(jsUser.getStuType());
-		    headCell.setCellStyle(cellStyle);
+//		    cell = hssfRow.createCell(5);
+//		    cell.setCellValue(jsUser.getStuType());
+//		    headCell.setCellStyle(cellStyle);
 	    }
 	    // 保存Excel文件
 //	    try {

@@ -1,4 +1,4 @@
-package cm.cn.util;
+/*package cm.cn.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,8 +15,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cm.cn.po.JsCase;
-import cm.cn.po.JsCasequestion;
 import cm.cn.po.JsQuesion;
 import cm.cn.po.JsUser;
 import cm.cn.service.QuestionService;
@@ -24,10 +22,10 @@ import cm.cn.service.QuestionService;
 public class ExcelUtil {
 	@Autowired
 	QuestionService questionService;
-	/**
+	*//**
 	 * @param filePath 文件路径 返回问题的 list集合
 	 * @return
-	 */
+	 *//*
 	public static List<JsQuesion> excelToQues(String filePath) {
 		List<JsQuesion> list = new ArrayList<JsQuesion>();
 		FileInputStream excelFileInputStream;
@@ -87,11 +85,11 @@ public class ExcelUtil {
 				}
 		return list;
 	}
-	/**
+	*//**
 	 * 批量导入学生
 	 * @param filePath
 	 * @return
-	 */
+	 *//*
 	public static List<JsUser> excelToStu(String filePath) {
 		List<JsUser> list = new ArrayList<JsUser>();
 		FileInputStream excelFileInputStream;
@@ -134,3 +132,4 @@ public class ExcelUtil {
 		return list;
 	} 
 }
+*/

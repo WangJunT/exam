@@ -12,13 +12,16 @@ import cm.cn.po.JsQuesion;
 import cm.cn.po.JsUser;
 import cm.cn.po.JsVideo;
 import cm.cn.po.Page;
+import cm.cn.po.StuDoneExam;
 import cm.cn.service.ExamPaperService;
+import cm.cn.service.ExampaperStuService;
 import cm.cn.service.QuestionService;
 import cm.cn.service.StudentService;
 import cm.cn.service.VideoService;
 
 @Controller
 @RequestMapping("/tea")
+//老师查看各种信息
 public class TeacherController {
 	@Autowired
 	QuestionService questionService;
@@ -28,13 +31,21 @@ public class TeacherController {
 	ExamPaperService examPaperService;
 	@Autowired
 	VideoService videoService;
+	@Autowired
+	ExampaperStuService exampaperStuService;
 	//按层级查询视屏信息
 	@RequestMapping("/selVideo")
 	@ResponseBody
 	public Page<JsVideo> selVideo(int current,int pageSize,String reserveFive,String reserveSix){
 		List<JsVideo> list = videoService.allVideo(reserveFive,reserveSix);
-		Page<JsVideo> page= new Page<JsVideo>(current, pageSize,list);
-		return page;
+		Page<JsVideo> page= null;
+		if (list.size()>0){
+			page= new Page<JsVideo>(current, pageSize,list);
+			return page;
+		}
+		else{
+			return null ;
+		}
 	}
 	//按层级查看学生信息
 	@RequestMapping("/selStu")
@@ -55,22 +66,42 @@ public class TeacherController {
 	@ResponseBody
 	public Page<JsQuesion> selQues(int current,int pageSize,String reserveFive,String reserveSix){
 		List<JsQuesion> list = questionService.selectAllQuestion(reserveFive,reserveSix);;
-		Page<JsQuesion> page= new Page<JsQuesion>(current, pageSize,list);
-		return page;
+		Page<JsQuesion> page= null;
+		if (list.size()>0) {
+			page= new Page<JsQuesion>(current, pageSize,list);
+			return page;
+		}
+		else{
+			return null;
+		}
 	}
 	//按层级查看试卷信息
 	@RequestMapping("/selExam")
 	@ResponseBody
 	public Page<JsExampaper> selExam(int current,int pageSize,String reserveFive,String reserveSix){
 		List<JsExampaper> list = examPaperService.selectAll(reserveFive, reserveSix);
-		Page<JsExampaper> page= new Page<JsExampaper>(current, pageSize,list);
-		return page;
+		Page<JsExampaper> page= null;
+		if (list.size()>0) {
+			page= new Page<JsExampaper>(current, pageSize,list);
+			return page;
+		}
+		else{
+			return null;
+		}
 	}
 	//按层级查看学生考试信息
-//	@RequestMapping
-//	@ResponseBody
-//	public List<JsExampaper> selStuExam(String reserveFive,String reserveSix){
-//		return examPaperService.selectAll(reserveFive, reserveSix);
-//	}
+	@RequestMapping
+	@ResponseBody
+	public Page<StuDoneExam> selStuExam(int current,int pageSize,String reserveFive,String reserveSix){
+		List<StuDoneExam> list = exampaperStuService.selExamStu();
+		Page<StuDoneExam> page= null;
+		if (list.size()>0) {
+			page= new Page<StuDoneExam>(current, pageSize,list);
+			return page;
+		}
+		else{
+			return null;
+		}
+	}
 	//查看学生做题信息
 }
