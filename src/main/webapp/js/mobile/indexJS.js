@@ -10,14 +10,6 @@
     } else {
         login = true;
     }
-    // 更多点击事件
-    $('#moreVideo').click(function () {
-        if (!login) {
-            $('#log').click();
-        } else {
-            window.location.href = 'allVideo.html';
-        }
-    });
     // 导航条
     $('#nav').click(function (e) {
         e.stopPropagation();
@@ -50,6 +42,17 @@
         if (login) {
             var d = new Date();
             window.location.href = 'examList.html?t='+d.getTime().toString();
+        } else {
+            initLogin();
+        }
+    });
+    // 视频
+    // 去考试
+    $('#toVideo').click(function(e){
+        e.stopPropagation();
+        if (login) {
+            var d = new Date();
+            window.location.href = 'allVideo.html?t='+d.getTime().toString();
         } else {
             initLogin();
         }

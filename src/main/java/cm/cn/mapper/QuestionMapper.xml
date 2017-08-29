@@ -210,4 +210,15 @@
 	AND stu.reserve_five = le1.id
 	AND stu.reserve_six = le2.id
   </select>
+  <delete id="delQuesBatch">
+  		DELETE
+		FROM
+			js_quesion
+		WHERE
+			id IN 
+		<foreach collection="array" item="id" index="index"
+           open="(" close=")" separator=",">
+           #{id}
+     	</foreach>
+  </delete>
 </mapper>

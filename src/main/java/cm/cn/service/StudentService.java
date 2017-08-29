@@ -21,4 +21,8 @@ public interface StudentService {
 	public List<JsUser> selectAll(String reserveFive,String reserveSix);
 	//删除学生
 	public int delStu(int id);
+	//更改学生信息(只可更改电话号码，姓名，身份证号)
+	public int updateStuInfo(JsUser jsUser);
+	//批量删除学生
+	public int delStuBatch(int[] array);
 }

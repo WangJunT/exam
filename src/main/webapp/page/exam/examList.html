@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>考试试卷列表</title>
   <link href="../../css/examList.css" rel="stylesheet">
+  <link href="../../css/plugin/jquery.pagination.css" rel="stylesheet">
 </head>
 <body>
 <!--头部-->
@@ -18,10 +19,13 @@
     <a href="javascript:void(0)" id="user">用户</a>
   </div>
 </header>
-<div class="examListBox" id="listBox">
-
+<div class="examListBox" >
+  <ul id="listBox">
+  </ul>
+  <div class="paging"></div>
 </div>
 <script src="../../js/jquery-3.2.1.min.js"></script>
+<script src="../../js/plugin/jquery.pagination.min.js"></script>
 <script src="../../js/examList.js"></script>
 </body>
 </html>

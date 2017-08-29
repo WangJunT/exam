@@ -12,6 +12,12 @@
 <!--头部标识-->
 <div class="title">上传视频课程</div>
 <div class="videoMessageBox">
+  <!--选择区块-->
+  <div class="selectBox">
+    <select id="firstSelect" class="oneSelect" data-Id="0"></select>
+    <select id="secondSelect" class="oneSelect"></select>
+  </div>
+  <!--具体区块-->
   <div class="oneItemBox"><div id="videoMsg">选择视频文件(支持mp4,webm,ogg文件，小于240)</div><a href="javascript:void(0)" id="chooseVideo">选择</a> </div>
   <div class="oneItemBox"><div id="imgMsg">选择封面图片(支持jpg,jpeg,png文件)</div><a href="javascript:void(0)" id="chooseImg">选择</a> </div>
   <input type="text" class="nameBox" placeholder="输入课程名称" id="name">

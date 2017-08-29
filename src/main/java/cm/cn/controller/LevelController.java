@@ -28,6 +28,7 @@ public class LevelController {
 	public List<JsLevel> selTwo(int id){
 		return levelService.selTwo(id);
 	}
+	//删除管理类别的第二级
 	@RequestMapping("/delTwo")
 	@ResponseBody
 	public Map<Integer, String> delTwo(int id){

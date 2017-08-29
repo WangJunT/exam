@@ -7,6 +7,7 @@
 	    <result column="score" property="score"  />
 	    <result column="stuName" property="stuName"  />
 	</resultMap>
+<!-- 	根据试卷 ID 删除试卷学生关系 -->
 	<delete id="delByExamIdArray">
 		DELETE
 		FROM
@@ -17,6 +18,18 @@
            open="(" close=")" separator=",">
            #{id}
      	</foreach>
+	</delete>
+<!-- 	根据学生 ID 删除试卷学生关系 -->
+	<delete id="delByStuIdArray">
+		DELETE
+		FROM
+			js_exampaper_stu
+		WHERE
+			stu_id IN 
+		<foreach collection="array" item="id" index="index"
+	          open="(" close=")" separator=",">
+	          #{id}
+	    </foreach>
 	</delete>
 	<!-- 	学生查询自己已做 -->
 	<select id="selDone" resultMap="BaseResultMap" parameterType="java.lang.Integer">

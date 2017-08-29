@@ -44,14 +44,16 @@ var caseques = '';
                     name: name, total: total, passScore: passScore,
                     selectOneNum: selectOneNum, selectMoreNum: selectMoreNum,
                     selectJudgeNum: selectJudgeNum, selectOneScore: selectOneScore, selectMoreScore: selectMoreScore,
-                    selectJudgeScore: selectJudgeScore,caseques:caseques,casequesNum:casequesNum
+                    selectJudgeScore: selectJudgeScore,caseques:caseques,casequesNum:casequesNum,
+                    reserveFive: $('#firstSelect').val(),reserveSix: $('#secondSelect').val()
                 };
             } else {
                 data = {
                     name: name, total: total, passScore: passScore,
                     selectOneNum: selectOneNum, selectMoreNum: selectMoreNum,
                     selectJudgeNum: selectJudgeNum, selectOneScore: selectOneScore, selectMoreScore: selectMoreScore,
-                    selectJudgeScore: selectJudgeScore
+                    selectJudgeScore: selectJudgeScore,
+                    reserveFive: $('#firstSelect').val(),reserveSix: $('#secondSelect').val()
                 };
             }
             data = JSON.stringify(data);
@@ -67,7 +69,7 @@ var caseques = '';
                     window.location.reload(true);
                 },
                 error: function (msg) {
-                    alert('请求错误: ' + msg.status);
+                    alert('请求错误:，请稍后重试');
                 }
             });
         }
@@ -76,7 +78,26 @@ var caseques = '';
     $('#chooseCase').click(function () {
         window.parent.chooseCase();
     });
+    // 获得数据
+    $.get('/SSMDemo/level/selOne.action', function (data, status) {
+        if (status == 'success') {
+            var op = '';
+            for (var i = 0; i < data.length; i++) {
+                id = data[0].id;
+                op += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+            }
+            $('#firstSelect').html(op);
+            addSecond(id);
+        } else {
+            alert('发生错误，请稍后重试.');
+        }
 
+    });
+    // 监听变化
+    $(document).on('change','#firstSelect',function () {
+        id = Number($('#firstSelect').val());
+        addSecond(id);
+    })
     /*
     * *****function
     * */
@@ -116,9 +137,23 @@ var caseques = '';
             return Number(l*caseScore);
         }
     }
-    // 多选题个数
+    /////
+    function addSecond(id) {
+        $.get('/SSMDemo/level/selTwo.action?id=' + id, function (data, status) {
+            if (status == 'success') { // 成功了
+                op = '';
+                console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    op += '<option value="' + data[i].id + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
+                }
+                $('#secondSelect').html(op);
+            } else {
+                alert('发生错误');
+            }
+        });
+    }
 })($);
-function getCase(str) {
+function getCase(str,st1) {
     caseques = str;
-    $('#theChoose').text('已选择：'+caseques);
+    $('#theChoose').text('已选择：'+st1);
 }

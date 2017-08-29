@@ -30,9 +30,9 @@
     // 载入视频列表
     var d = new Date();
     var current = 1,size = 20,allRecord = 0,allpage = 0;//页码
-    $.get('/SSMDemo/video/pageVideo.action?current='+current+'&pageSize=20',function(data){
+    $.get('/SSMDemo/video/allVideo.action?current='+current+'&pageSize=20',function(data){
         var str = '';
-        console.log(data);
+        // console.log(data);
         //data = JSON.parse(data);
         allRecord = data.totalRecord;
         allpage = data.totalPage;
@@ -54,7 +54,7 @@
             nextPageText: "下一页",// 下一页文本
             callback: function(current) {
                 // 回调,current(当前页数)
-                $.get('/SSMDemo/video/pageVideo.action?current='+current+'&pageSize=20',function(data){
+                $.get('/SSMDemo/video/allVideo.action?current='+current+'&pageSize=20',function(data){
                     //data = JSON.parse(data);
                     var str = '';
                     for(var i = 0;i < data.dataList.length; i++) {

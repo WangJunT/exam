@@ -12,7 +12,7 @@ public interface ExampaperStuService {
 	public int insertStuExam(JsExampaperStu examStu);
 	//如果存在则更改学生考试信息
 	public int updateStuExam(JsExampaperStu examStu);
-	//当删除试卷时，删除与之有关的考试信息
+	//当删除试卷(或学生)时，删除与之有关的考试信息
 //	public int delStuExam(int[] arrays);
 	//查看当前学生做试卷情况
 	public List<StuDoneExam> seleDone(int stuid); 

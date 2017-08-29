@@ -17,7 +17,7 @@
     examId= getQueryString('id');
     if (from == 0) {// 练习
         var d =  new Date();
-        url = '/SSMDemo/question/selAll.action?t='+d.getTime().toString();
+        url = '/SSMDemo/question/selStuQues.action?t='+d.getTime().toString();
     } else {
         var d =  new Date();
         $('#handIn').text('结束考试');
@@ -70,7 +70,20 @@
     // 点击交卷
     $('#handIn').click(function () {
         if (from == 0){
-            window.location.href = 'exam.html';
+            var n = 0;
+            for (var i = 0 ; i < TheChoose.length; i++){
+                if (TheChoose[i] != undefined) {
+                    n++;
+                }
+            }
+            $.get('/SSMDemo/question/quitPractice.action?start=' + n,function (data, status) {
+                if (status == 'success') {
+                    alert('本次做题数为:' + n);
+                    window.location.href = 'exam.html';
+                } else {
+                    alert('发生错误，请稍后重试');
+                }
+            });
         } else { // 考试提交
             var num = 0;
             var finish = 0 ;

@@ -11,17 +11,44 @@
     //window.history.forward(1);
     $('#user').html(sessionStorage.getItem('loader'));
     // 获取试卷
-    $.get('/SSMDemo/exam/selectAll.action',function (data) {
+    var current = 1,size = 20,allRecord = 0,allpage = 0;//页码
+    $.get('/SSMDemo/exam/selectAll.action?current='+current+'&pageSize=20',function (data) {
         if (data[1] == '!'){
             alert('登录已失效');
-            $('#log').click();
+            window.location.href = 'mobileIndex.html';
+        } else {
+            var str = '';
+            //console.log(data);
+            for (var i = 0; i < data.dataList.length; i++) {
+                str += '<li>'+data.dataList[i].name+'<a href="javascript:void(0)" id="goTo" data-ExamId="'+data.dataList[i].id+'">去考试</a></li>';
+            }
+
+            $('#listBox').html(str);
+            // 总页数大于1才显示
+            if (allpage > 1) {
+                $('#paging').pagination({
+                    currentPage: 1,// 当前页数
+                    totalPage: 16,// 总页数
+                    isShow: true,// 是否显示首尾页
+                    count: 7,// 显示个数
+                    homePageText: "首页",// 首页文本
+                    endPageText: "尾页",// 尾页文本
+                    prevPageText: "上一页",// 上一页文本
+                    nextPageText: "下一页",// 下一页文本
+                    callback: function(current) {
+                        // 回调,current(当前页数)
+                        $.get('/SSMDemo/exam/selectAll.action?current='+current+'&pageSize=20',function(data){
+                            ///////////////////////////////////////////////////////////
+                            for (var i = 0; i < data.length; i++) {
+                                str += '<li>'+data[i].name+'<a href="javascript:void(0)" id="goTo" data-ExamId="'+data.dataList[i].id+'">去考试</a></li>';
+                            }
+                            $('#listBox').html(str);
+                        });
+                        ///////////////////the end//////////////////
+                    }
+                });
+            }
         }
-        var con='';
-        for (var i = 0; i < data.length; i++) {
-            con += '<li>'+data[i].name+'<a href="javascript:void(0)" id="goTo" data-ExamId="'+data[i].id+'">去考试</a></li>';
-        }
-        str += con+'</ul>';
-        $('#listBox').html(str);
     });
     $(document).on('click','#goTo',function (e) {
         var theId = e.target.getAttribute('data-ExamId');

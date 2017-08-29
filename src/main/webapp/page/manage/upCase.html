@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="../../css/manage/upStu.css" rel="stylesheet">
+  <title>上传简答题</title>
+</head>
+<body>
+<div class="title">上传简答题</div>
+<!--具体区块-->
+<!--文件上传内容-->
+<input type="file" id="uploadFile" accept=".xlsx,.xls">
+<div class="allBox">
+  <!--选择区块-->
+  <div class="selectBox">
+    <select id="firstSelect" class="oneSelect" data-Id="0"></select>
+    <select id="secondSelect" class="oneSelect"></select>
+  </div>
+  <!--文件上传具体模块-->
+  <div class="uploadBox">
+    <div class="fileName" id="fileName">选择文件</div>
+    <input type="button" id="upLoad" class="uploadButton" value="上传文件" disabled>
+    <input type="button" id="choose" class="uploadButton" value="选择文件">
+  </div>
+</div>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/manage/upCase.js"></script>
+</body>
+</html>

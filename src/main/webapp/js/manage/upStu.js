@@ -102,6 +102,8 @@
             },
             error: function (data) {
                 alert('发生错误');
+                $('#fileName').html('选择文件');
+                $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
             }
         });
         // $.get('/SSMDemo/admin/addStuFile.action?filePath='+filePath+'&reserveFive='+reserveFive+'&reserveSix='+reserveSix,function (data) {
@@ -119,7 +121,7 @@
                 op = '';
                 console.log(data);
                 for (var i = 0; i < data.length; i++) {
-                    op += '<option value="' + i + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
+                    op += '<option value="' + data[i].id + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
                 }
                 $('#secondSelect').html(op);
             } else {
@@ -130,7 +132,7 @@
     // 判断文间类型
     function isExcel(name) {
         var n = name.split('.');
-        if (n[n.length - 1] == 'xlsx') {
+        if (n[n.length - 1] == 'xlsx'|| n[n.length - 1] == 'xls') {
             return true;
         } else {
             return false;

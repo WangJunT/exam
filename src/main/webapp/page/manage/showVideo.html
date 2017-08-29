@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="../../css/manage/showVideo.css" rel="stylesheet">
+  <link href="../../css/plugin/jquery.pagination.css" rel="stylesheet">
+  <title>显示视频</title>
+</head>
+<body>
+<!--标题-->
+<div class="title">所以视频</div>
+<!--所有学生信息-->
+<div class="allBox">
+  <!--选择区块-->
+  <div class="selectBox">
+    <select id="firstSelect" class="oneSelect" data-Id="0"></select>
+    <select id="secondSelect" class="oneSelect"></select>
+  </div>
+  <!--显示学生区块-->
+  <ul>
+    <li><span>名称</span><span>描述</span><span>操作</span></li>
+  </ul>
+  <ul id="student">
+  </ul>
+  <!--分页-->
+  <div id="page"></div>
+</div>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/plugin/jquery.pagination.min.js"></script>
+<script src="../../js/manage/showVideo.js"></script>
+</body>
+</html>

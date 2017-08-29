@@ -11,7 +11,7 @@ public interface ExamPaperService {
 	public List<JsExampaper> selectAll(String reserveFive,String reserveSix);
 	//考试(传给前段所有题目,答案)
 	public JsExampaper selectById(int id);
-	//删除试卷
+	//	删除试卷
 //	public int delExam(int[] intarray);
 	//单个删除试卷
 	public int delExam(int id);

@@ -64,8 +64,11 @@ public class QuestingServiceImpl implements QuestionService {
 	}
 	@Override
 	public List<StuDoneQues> selStuDeonQues() {
-		// TODO Auto-generated method stub
 		return questionMapper.selStuDeonQues();
+	}
+	@Override
+	public int delQuesBatch(String[] array) {
+		return questionMapper.delQuesBatch(array);
 	}
 
 }

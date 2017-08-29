@@ -22,4 +22,6 @@ public interface QuestionMapper {
 	public List<JsQuesion> selectRan(RandomQuestion randomQuestion);
 	//学生做题总数信息
 	public List<StuDoneQues> selStuDeonQues();
+	//根据 ID 批量删除题目
+	public int delQuesBatch(String[] array);
 }

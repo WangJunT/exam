@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -12,7 +13,7 @@ import cm.cn.po.JsQuesion;
 import cm.cn.po.JsUser;
 import cm.cn.po.JsVideo;
 import cm.cn.po.Page;
-import cm.cn.po.StuDoneExam;
+//import cm.cn.po.StuDoneExam;
 import cm.cn.po.StuDoneQues;
 import cm.cn.service.ExamPaperService;
 import cm.cn.service.ExampaperStuService;
@@ -91,19 +92,19 @@ public class TeacherController {
 		}
 	}
 	//按层级查看学生考试信息
-	@RequestMapping
-	@ResponseBody
-	public Page<StuDoneExam> selStuExam(int current,int pageSize,String reserveFive,String reserveSix){
-		List<StuDoneExam> list = exampaperStuService.selExamStu();
-		Page<StuDoneExam> page= null;
-		if (list.size()>0) {
-			page= new Page<StuDoneExam>(current, pageSize,list);
-			return page;
-		}
-		else{
-			return null;
-		}
-	}
+//	@RequestMapping
+//	@ResponseBody
+//	public Page<StuDoneExam> selStuExam(int current,int pageSize,String reserveFive,String reserveSix){
+//		List<StuDoneExam> list = exampaperStuService.selExamStu();
+//		Page<StuDoneExam> page= null;
+//		if (list.size()>0) {
+//			page= new Page<StuDoneExam>(current, pageSize,list);
+//			return page;
+//		}
+//		else{
+//			return null;
+//		}
+//	}
 	//查看学生做题信息
 	@RequestMapping("/selStuQues")
 	@ResponseBody
@@ -117,5 +118,11 @@ public class TeacherController {
 		else{
 			return null;
 		}
+	}
+	//更改学生做题信息
+	@RequestMapping("/upStuInfo")
+	@ResponseBody
+	public int upStuInfo(@RequestBody JsUser record){
+        return studentService.updateStuInfo(record);
 	}
 }

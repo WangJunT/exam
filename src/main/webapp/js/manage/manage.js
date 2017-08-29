@@ -64,6 +64,41 @@
             $('#frameBox').attr('src','category.html');
         }
     });
+    // 上传简答题
+    $('#uploadCase').click(function () {
+        if(nowPage != 8) {
+            nowPage = 8;
+            $('#frameBox').attr('src','upCase.html');
+        }
+    });
+    // 学生信息查看
+    $('#showStu').click(function () {
+        if (nowPage != 9) {
+            nowPage = 9;
+            $('#frameBox').attr('src','showStu.html');
+        }
+    });
+    // 查看试题
+    $('#showTopic').click(function () {
+        if (nowPage != 10) {
+            nowPage = 10;
+            $('#frameBox').attr('src','showTopic.html');
+        }
+    });
+    // 查看视频课程
+    $('#showVideo').click(function () {
+        if (nowPage != 11) {
+            nowPage = 11;
+            $('#frameBox').attr('src','showVideo.html');
+        }
+    });
+    // 做题历史信息
+    $('#showHistory').click(function () {
+        if (nowPage != 12) {
+            nowPage = 12;
+            $('#frameBox').attr('src','showHistory.html');
+        }
+    });
     // 退出后台管理
     $('#outManage').click(function () {
         $.get('/SSMDemo/index/logout.action',function () {
@@ -73,13 +108,16 @@
     });
     // 确认多选题
     $(document).on('click','#sureCase',function () {
-        var str = '';
+        var str = '',st1= '';
         $('input[name = case]:checked').each(function () {
             var id = $(this).attr('case-id');
+            var choose = $(this).attr('data-chooseId');
             str += id + ',';
+            st1 += choose + ',';
         });
         str = str.substr(0,str.length -1);
-        $("#frameBox")[0].contentWindow.getCase(str);
+        st1 = st1.substr(0,st1.length - 1);
+        $("#frameBox")[0].contentWindow.getCase(str, st1);
         $('.wall').remove();
     })
     //退出选择多选题
@@ -99,7 +137,7 @@ function chooseCase() {
     $.get('/SSMDemo/caseQues/allCase.action',function (data) {
         var str = '';
         for (var i = 0; i < data.length; i++) {
-            var ls = '<div class="caseItem"><input type="checkbox" case-id="'+data[i].id+'" name="case"><div class="textBox">'+data[i].content+'</div></div>';
+            var ls = '<div class="caseItem"><input type="checkbox" case-id="'+data[i].id+'" name="case" data-chooseId="'+(i+1)+'"><div class="textBox">'+(i + 1)+','+data[i].content+'</div></div>';
             str += ls;
         }
         str += '<input type="button" class="sureCase" value="确定" id="sureCase">';

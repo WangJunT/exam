@@ -4,56 +4,29 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="../css/examManage.css" rel="stylesheet">
+    <link href="../css/plugin/jquery.pagination.css" rel="stylesheet">
 </head>
 <body>
-    <!--标题-->
-    <div class="title">试卷管理</div>
-<!--选择-->
-    <!--<div class="selectBox">-->
-        <!--<label>-->
-            <!--考试科目 :-->
-        <!--</label>-->
-        <!--<select class="select">-->
-            <!--<option>不限</option>-->
-            <!--<option>低压电工</option>-->
-            <!--<option>熔化焊与热切割</option>-->
-            <!--<option>高处作业维护与安装拆除</option>-->
-            <!--<option>登高架设</option>-->
-        <!--</select>-->
-        <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-        <!--<label>-->
-            <!--选择类型 :-->
-        <!--</label>-->
-        <!--<select class="select">-->
-            <!--<option>不限</option>-->
-            <!--<option>随机抽题</option>-->
-            <!--<option>手动抽题</option>-->
-        <!--</select>-->
-        <!--<button class="seach">搜索</button>-->
-    <!--</div>-->
-<!--具体内容-->
-    <div class="messageBox" id="messageBox">
-        <div class="item itemTitle">
-            <ul>
-                <li></li>
-                <li>试题名称</li>
-                <li>组卷人</li>
-                <li>组卷类型</li>
-                <li>知识分类</li>
-                <li>组卷时间</li>
-                <li>考试科目</li>
-                <li></li>
-            </ul>
-        </div>
-        <!--具体信息-->
-        <div id="content">
-            <div id="examList"></div>
-            <div class="optionBox">
-                <a href="javascript:void(0)" id="delete">批量删除</a>
-            </div>
-        </div>
+<!--标题-->
+<div class="title">试卷管理</div>
+<!--所有学生信息-->
+<div class="allBox">
+    <!--选择区块-->
+    <div class="selectBox">
+        <select id="firstSelect" class="oneSelect" data-Id="0"></select>
+        <select id="secondSelect" class="oneSelect"></select>
     </div>
+    <!--显示学生区块-->
+    <ul>
+        <li><span>试卷名称</span><span>操作</span></li>
+    </ul>
+    <ul id="student">
+    </ul>
+    <!--分页-->
+    <div id="page"></div>
+</div>
 </body>
 <script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/plugin/jquery.pagination.min.js"></script>
 <script src="../js/examManage.js"></script>
 </html>

@@ -16,7 +16,7 @@ import cm.cn.service.VideoService;
 @RequestMapping("/tea")
 public class TeacherDelController {
 	
-	//删除视屏
+	
 	@Autowired
 	QuestionService questionService;
 	@Autowired
@@ -25,6 +25,20 @@ public class TeacherDelController {
 	ExamPaperService examPaperService;
 	@Autowired
 	VideoService videoService;
+	//删除视屏
+	@RequestMapping("/delVideo")
+	@ResponseBody
+	public Map<Integer, Object> delVideo(int id){
+		Map<Integer,Object> map = new HashMap<>();
+		int num = videoService.delById(id);
+		if (num>0) {
+			map.put(0, "删除成功");
+		}
+		else{
+			map.put(1, "删除失败");
+		}
+		return map;
+	}
 	//删除学生信息
 	@RequestMapping("/delStu")
 	@ResponseBody
@@ -59,6 +73,34 @@ public class TeacherDelController {
 	public Map<Integer, Object> delExam(int id){
 		Map<Integer,Object> map = new HashMap<>();
 		int num = examPaperService.delExam(id);
+		if (num>0) {
+			map.put(0, "删除成功");
+		}
+		else{
+			map.put(1, "删除失败");
+		}
+		return map;
+	}
+	//批量删除学生
+	@RequestMapping("/delStuBatch")
+	@ResponseBody
+	public Map<Integer, Object> delStuBatch(int[] array){
+		Map<Integer,Object> map = new HashMap<>();
+		int num = studentService.delStuBatch(array);
+		if (num>0) {
+			map.put(0, "删除成功");
+		}
+		else{
+			map.put(1, "删除失败");
+		}
+		return map;
+	}
+	//批量删除题目
+	@RequestMapping("/delQuesBatch")
+	@ResponseBody
+	public Map<Integer, Object> delQuesBatch(String[] array){
+		Map<Integer,Object> map = new HashMap<>();
+		int num = questionService.delQuesBatch(array);
 		if (num>0) {
 			map.put(0, "删除成功");
 		}

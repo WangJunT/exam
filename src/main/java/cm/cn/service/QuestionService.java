@@ -26,4 +26,6 @@ public interface QuestionService {
 	public int delQues(int id);
 	//学生做题总数信息
 	public List<StuDoneQues> selStuDeonQues();
+	//添加批量删除
+	public int delQuesBatch(String[] array);
 }

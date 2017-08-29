@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cm.cn.mapper.ExampaperStuMapper;
 import cm.cn.mapper.JsExampaperStuMapper;
 import cm.cn.mapper.JsQuestionStuMapper;
 import cm.cn.mapper.JsUserMapper;
+import cm.cn.mapper.QuestionStuMapper;
 import cm.cn.mapper.StudentMapper;
 import cm.cn.po.JsExampaperStuExample;
 import cm.cn.po.JsQuestionStuExample;
@@ -24,6 +26,10 @@ public class StudentServiceImpl implements StudentService {
 	StudentMapper studentMapper;
 	@Autowired
 	JsUserMapper jsUserMapper;
+	@Autowired
+	ExampaperStuMapper exampaperStuMapper;
+	@Autowired
+	QuestionStuMapper questionStuMapper;
 	@Autowired
 	JsExampaperStuMapper jsExampaperStuMapper;
 	@Autowired
@@ -92,5 +98,18 @@ public class StudentServiceImpl implements StudentService {
 		criteria1.andStuIdEqualTo(id);
 		jsQuestionStuMapper.deleteByExample(example1);
 		return jsUserMapper.deleteByPrimaryKey(id);
+	}
+	@Override
+	public int updateStuInfo(JsUser jsUser) {
+		// TODO Auto-generated method stub
+		return jsUserMapper.updateByPrimaryKey(jsUser);
+	}
+	@Override
+	public int delStuBatch(int[] array) {
+		//先删除其做题信息
+		questionStuMapper.delStuQues(array);
+		//再删除其做试卷信息
+		exampaperStuMapper.delByStuIdArray(array);
+		return studentMapper.delStuBatch(array);
 	}
 }

@@ -85,3 +85,18 @@ html,body{
     text-align: center;
     background: #88bbd6;
 }
+.selectBox{
+    width: 500px;
+    height: auto;
+    margin: 20px auto;
+}
+.selectBox .oneSelect{
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 20px;
+    border: #a9a9a9 1px solid;
+    outline: none;
+    color: #4d4d4d;
+}

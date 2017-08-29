@@ -7,4 +7,6 @@ import cm.cn.po.JsUser;
 public interface StudentMapper {
 	//批量添加学生
 	public int insertStuList(List<JsUser> stu);
+	//批量删除学生
+	public int delStuBatch(int[] array);
 }

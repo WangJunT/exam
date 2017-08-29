@@ -13,4 +13,6 @@ public interface VideoService {
 	public JsVideo selById(int id);
 	//根据 id 删除相应的视屏
 	public int delById(int id);
+	//删除二级单位删除对应视屏
+	public int delVideo(String reserveFive,String reserveSix);
 }

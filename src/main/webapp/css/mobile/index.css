@@ -39,13 +39,33 @@ html{
     width: 100%;
     height: 4.2rem;
     position: relative;
-    background: #000000;
+    background: url(../../image/mobile/mobileImg.jpg) 100% no-repeat;
+    background-size: 100%;
 }
-.slideBox ul{
-    width: 100%;
-    height: 100%;
-    position: relative;
-
+.slideVideoBox{
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+.slideVideoBox a{
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-decoration: none;
+    background: url(../../image/index/play.png) 100% no-repeat;
+    background-size: 100%;
+    margin: 0 auto;
+}
+.slideVideoBox .slideTitle{
+    width: auto;
+    height: 1rem;
+    line-height: 1rem;
+    color: #fff;
+    font-size: 0.5rem;
+    font-weight: 500;
 }
 /*选择*/
 .chooseBox{

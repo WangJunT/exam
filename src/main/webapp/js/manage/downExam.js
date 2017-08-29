@@ -31,9 +31,10 @@
                 op = '';
                 console.log(data);
                 for (var i = 0; i < data.length; i++) {
-                    op += '<option value="' + i + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
+                    op += '<option value="' + data[i].id + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
                 }
                 $('#secondSelect').html(op);
+                $('#down').attr('href','/SSMDemo/admin/downQues.action?reserveFive='+$('#firstSelect').val()+'&reserveSix='+$('#secondSelect').val());
             } else {
                 alert('发生错误');
             }

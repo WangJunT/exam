@@ -8,4 +8,5 @@ public interface ExampaperStuMapper {
 	public int delByExamIdArray(int[] arrays);
 	public List<StuDoneExam> selDone(int stuid);
 	public List<StuDoneExam> selStuDone();
+	public int delByStuIdArray(int[] arrays);
 }

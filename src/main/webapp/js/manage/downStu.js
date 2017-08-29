@@ -2,26 +2,56 @@
  * Created by Admin on 2017/8/25.
  */
 (function () {
-    var data = [{ name: '建筑特种工',second:['a','b','c']},
-        {name: '三类',second:['f','b','c']}
-        ,{name: '安监',second:['b','b','c']}
-        ,{name: '七大员',second:['g','j','h']}];
-    var op = '';
-    for (var i = 0; i < data.length; i++) {
-        op += '<option value="'+i+'">'+data[i].name+'</option>';
-    }
-    $('#firstSelect').html(op);
-    op ='';
-    for (var i = 0; i < data[0].second.length; i++) {
-        op += '<option value="'+i+'">'+data[0].second[i]+'</option>';
-    }
-    $('#secondSelect').html(op);
-    $(document).on('change','#firstSelect',function () {
-        var id = $('#firstSelect').val();
-        op ='';
-        for (var i = 0; i < data[id].second.length; i++) {
-            op += '<option value="'+i+'">'+data[id].second[i]+'</option>';
+    // 获得数据
+    $.get('/SSMDemo/level/selOne.action', function (data, status) {
+        if (status == 'success') {
+            var op = '';
+            for (var i = 0; i < data.length; i++) {
+                id = data[0].id;
+                op += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+            }
+            $('#firstSelect').html(op);
+            addSecond(id);
+        } else {
+            alert('发生错误，请稍后重试.');
         }
-        $('#secondSelect').html(op);
+
+    });
+    // 监听变化
+    $(document).on('change','#firstSelect',function () {
+        id = Number($('#firstSelect').val());
+        addSecond(id);
     })
+    // 下载
+    // $('#down').click(function () {
+    //     $('#hid').attr('href','/SSMDemo/admin/downStu.action?reserveFive='+$('#firstSelect').val()+'&reserveSix='+$('#secondSelect').val());
+    //     $('#hid').click();
+    //     // $.get('/SSMDemo/admin/downStu.action?reserveFive='+$('#firstSelect').val()+'&reserveSix='+$('#secondSelect').val(),function (data,status) {
+    //     //     if (status == 'success') {
+    //     //         console.log(data);
+    //     //     } else {
+    //     //         alert('发生错误，稍后重试');
+    //     //     }
+    //     // });
+    // });
+    /**
+     * ***********************方法
+     * ************
+     * */
+    /////
+    function addSecond(id) {
+        $.get('/SSMDemo/level/selTwo.action?id=' + id, function (data, status) {
+            if (status == 'success') { // 成功了
+                op = '';
+                // console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    op += '<option value="' + data[i].id + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
+                }
+                $('#secondSelect').html(op);
+                $('#down').attr('href','/SSMDemo/admin/downStu.action?reserveFive='+$('#firstSelect').val()+'&reserveSix='+$('#secondSelect').val());
+            } else {
+                alert('发生错误');
+            }
+        });
+    }
 })($);

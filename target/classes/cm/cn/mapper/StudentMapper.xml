@@ -63,4 +63,15 @@
 	  )
 	  </foreach>
   </insert>
+  <delete id="delStuBatch">
+  	DELETE
+	FROM
+		js_user
+	WHERE
+		id IN 
+	<foreach collection="array" item="id" index="index"
+          open="(" close=")" separator=",">
+          #{id}
+    </foreach>
+  </delete>
   </mapper>

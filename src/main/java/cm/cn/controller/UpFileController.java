@@ -42,7 +42,7 @@ public class UpFileController {
 		    //文件扩展名  
 		    String newFileName = "ques"+UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));  
 		    // 存储文件的物理路径
-		 	String video_path = "D:\\";
+		 	String video_path = "/tmp/";
 		 	String filePath = video_path + newFileName;
 		 	// 新文件,存到磁盘
 			File newFile = new File(filePath);
@@ -81,7 +81,7 @@ public class UpFileController {
 		    //文件扩展名  
 		    String newFileName = "case"+UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));  
 		    // 存储文件的物理路径
-		 	String video_path = "D:\\";
+		 	String video_path = "/tmp/";
 		 	String filePath = video_path + newFileName;
 		 	// 新文件,存到磁盘
 		 	File newFile = new File(filePath);
@@ -122,7 +122,7 @@ public class UpFileController {
 		    //文件扩展名  
 		    String newFileName = "stu"+UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));  
 		    // 存储文件的物理路径
-	 	 	String video_path = "D:\\";
+	 	 	String video_path = "/tmp/";
 	 	 	String filePath = video_path + newFileName;
 	 	 	// 新文件
 	 		File newFile = new File(filePath);

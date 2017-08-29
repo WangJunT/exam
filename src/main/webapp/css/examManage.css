@@ -5,9 +5,58 @@
 a{
     text-decoration: none;
 }
-html,body{
+.allBox{
+    width: 98%;
+    min-width: 500px;
+    height: auto;
+    margin: 30px auto;
+}
+.allBox ul{
     width: 100%;
-    height: 100%;
+    height: auto;
+    list-style: none;
+}
+.allBox li{
+    width: 100%;
+    height: auto;
+}
+.allBox li>span{
+    width: 50%;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    color: #4d4d4d;
+    border-bottom: 1px #a9a9a9 solid;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.allBox span > a{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #4d4d4d;
+}
+.selectBox{
+    width: 500px;
+    height: auto;
+    margin: 20px auto;
+}
+.selectBox .oneSelect{
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 20px;
+    border: #a9a9a9 1px solid;
+    outline: none;
+    color: #4d4d4d;
 }
 .title{
     width: auto;
@@ -17,110 +66,4 @@ html,body{
     line-height: 30px;
     border-left: 8px #88bbd6 solid;
     font-weight: bold;
-}
-.selectBox {
-    width: 90%;
-    height: 50px;
-    margin-top: 10px;
-    position: relative;
-}
-.select{
-    width: 200px;
-    outline: none;
-    height: 30px;
-    border-radius: 3px;
-    border: #ccc 1px solid;
-    color: #A8A8A8;
-}
-.selectBox label{
-    font-size: 17px;
-}
-.select option{
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-}
-.selectBox .seach{
-    color: #000;
-    width: 50px;
-    height: 30px;
-    border: 1px #ccc solid;
-    float: right;
-    outline: none;
-    background: #fff;
-    border-radius: 3px;
-    margin-right: 20px;
-}
-.messageBox{
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-}
-.item {
-    width: 100%;
-    height: 50px;
-    border-bottom: 1px #ccc solid;
-}
-.item:last-child {
-    border-bottom: 0px;
-}
-.item ul{
-    width: 90%;
-    font-size: 0px;
-    height: 50px;
-    line-height: 50px;
-    display: block;
-}
-.item li{
-    width: 12.5%;
-    display: inline-block;
-    color: #000;
-    height: 50px;
-    text-align: center;
-    vertical-align: top;
-    font-size: 15px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-wrap: none;
-}
-.itemTitle{
-
-}
-.itemTitle ul li{
-    font-size: 20px;
-    font-weight: 500;
-}
-.item ul li>a {
-    display: inline-block;
-    width: 40%;
-    height: 30px;
-    text-align: center;
-    margin-top: 10px;
-    box-sizing: border-box;
-    line-height: 30px;
-    color: #000;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-wrap: none;
-}
-.item .boderRight{
-    border-right: 1px #ccc solid;
-}
-.optionBox{
-    width: 100%;
-    height: 30px;
-    margin-top: 20px;
-    text-align: left;
-}
-.optionBox a{
-    display: inline-block;
-    width: auto;
-    height: 30px;
-    color: #fff;
-    background: #88bbd6;
-    border-radius: 3px;
-    margin-left: 10px;
-    line-height: 30px;
-    font-size: 14px;
-    padding: 0 10px 0 10px;
 }
