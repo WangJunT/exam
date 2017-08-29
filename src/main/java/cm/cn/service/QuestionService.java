@@ -28,4 +28,6 @@ public interface QuestionService {
 	public List<StuDoneQues> selStuDeonQues();
 	//添加批量删除
 	public int delQuesBatch(String[] array);
+	//根据层级删除题目
+	public int delQuesByLevel(String reserveSix);
 }

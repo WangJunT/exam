@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cm.cn.mapper.QuestionStuMapper" >
+  <resultMap type="cm.cn.po.StuDoneQues" id="stuDoneQuesMap">
+  	<result column="first" property="first" jdbcType="VARCHAR" />
+  	<result column="second" property="second" jdbcType="VARCHAR" />
+  	<result column="total" property="total" jdbcType="INTEGER" />
+  	<result column="stuName" property="stuName" jdbcType="VARCHAR" />
+  	<result column="time" property="time" jdbcType="VARCHAR" />
+  	<result column="rate" property="rate" jdbcType="VARCHAR" />
+  </resultMap>
 	<delete id="delStuQues">
 	  	DELETE
 		FROM
@@ -12,4 +20,23 @@
 	          #{id}
 	    </foreach>
     </delete>
+    <!--   查询学生做题总数信息 -->
+  <select id="selStuDeonQues" resultMap="stuDoneQuesMap">
+  	SELECT
+		le1.`name` 'first',
+		le2.`name` 'second',
+		squ.total 'total',
+		squ.reserve_two 'time',
+		squ.reserve_one 'rate',
+		stu.username 'stuName'
+	FROM
+		js_question_stu squ,
+		js_user stu,
+		js_level le1,
+		js_level le2
+	WHERE
+		stu.id = squ.stu_id
+	AND stu.reserve_five = le1.id
+	AND stu.reserve_six = le2.id
+  </select>
 </mapper>

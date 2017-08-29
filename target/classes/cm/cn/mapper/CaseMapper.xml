@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cm.cn.mapper.CaseMapper">
+	<select id="findByLevel" parameterType="String">
+		SELECT
+			id
+		FROM
+			js_case
+		WHERE
+			reserve_six = #{reserveSix}
+	</select>
+<!-- 	删除 主题目 -->
+	<delete id="delCaseByIdArray">
+	DELETE
+	FROM
+		js_case
+	WHERE
+		id IN 
+	<foreach collection="array" item="id" index="index"
+          open="(" close=")" separator=",">
+          #{id}
+    	</foreach>
+	</delete>
+	<!-- 	删除 子题目 -->
+	<delete id="delCaseQuestionByIdArray">
+	DELETE
+	FROM
+		js_casequestion
+	WHERE
+		case_id IN 
+	<foreach collection="array" item="id" index="index"
+          open="(" close=")" separator=",">
+          #{id}
+    	</foreach>
+	</delete>
+</mapper>

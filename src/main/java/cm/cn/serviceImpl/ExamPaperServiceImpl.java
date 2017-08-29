@@ -44,12 +44,12 @@ public class ExamPaperServiceImpl implements cm.cn.service.ExamPaperService {
 	public JsExampaper selectById(int id) {
 		return jsExampaperMapper.selectByPrimaryKey(id);
 	}
-//	@Override
-//	public int delExam(int[] intarray) {
-//		//先刪除外键关联
-//		exampaperStuMapper.delByExamIdArray(intarray);
-//		return exampaperMapper.delByIdArray(intarray);
-//	}
+	@Override
+	public int delExam(String[] intarray) {
+		//先刪除外键关联
+		exampaperStuMapper.delByExamIdArray(intarray);
+		return exampaperMapper.delByIdArray(intarray);
+	}
 	@Override
 	public int delExam(int id) {
 		// TODO Auto-generated method stub
@@ -58,6 +58,11 @@ public class ExamPaperServiceImpl implements cm.cn.service.ExamPaperService {
 		criteria.andExampaperIdEqualTo(id);
 		jsExampaperStuMapper.deleteByExample(example);
 		return jsExampaperMapper.deleteByPrimaryKey(id);
+	}
+	@Override
+	public List<String> findByLevel(String reserveSix) {
+		// TODO Auto-generated method stub
+		return exampaperMapper.findByLevel(reserveSix);
 	}
 
 }

@@ -74,4 +74,12 @@
           #{id}
     </foreach>
   </delete>
+  	<select id="findStuIdByLevel" parameterType="String">
+		SELECT
+			id
+		FROM
+			js_user
+		WHERE
+			reserve_six = #{reserveSix}
+	</select>
   </mapper>

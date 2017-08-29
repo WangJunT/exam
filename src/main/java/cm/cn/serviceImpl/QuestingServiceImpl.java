@@ -70,5 +70,14 @@ public class QuestingServiceImpl implements QuestionService {
 	public int delQuesBatch(String[] array) {
 		return questionMapper.delQuesBatch(array);
 	}
+	@Override
+	public int delQuesByLevel(String reserveSix) {
+		JsQuesionExample example = new JsQuesionExample();
+		JsQuesionExample.Criteria criteria = example.createCriteria();
+		if (!(reserveSix == null ||"".equals(reserveSix))) {
+			criteria.andReserveSixEqualTo(reserveSix);
+		}
+		return jsquestionMapper.deleteByExample(example);
+	}
 
 }

@@ -105,11 +105,16 @@ public class StudentServiceImpl implements StudentService {
 		return jsUserMapper.updateByPrimaryKey(jsUser);
 	}
 	@Override
-	public int delStuBatch(int[] array) {
+	public int delStuBatch(String[] array) {
 		//先删除其做题信息
 		questionStuMapper.delStuQues(array);
 		//再删除其做试卷信息
 		exampaperStuMapper.delByStuIdArray(array);
 		return studentMapper.delStuBatch(array);
+	}
+	@Override
+	public List<String> findStuIdByLevel(String reserveSix) {
+		// TODO Auto-generated method stub
+		return studentMapper.findStuIdByLevel(reserveSix);
 	}
 }

@@ -5,6 +5,20 @@ public class StuDoneQues {
 	private String second;//第二层级
 	private int total ;//做题总数
 	private String stuName;//学生姓名
+	private String time;//做题时间
+	private String rate;//正确率
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getRate() {
+		return rate;
+	}
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
 	public String getFirst() {
 		return first;
 	}

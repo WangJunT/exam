@@ -84,7 +84,7 @@ public class TeacherDelController {
 	//批量删除学生
 	@RequestMapping("/delStuBatch")
 	@ResponseBody
-	public Map<Integer, Object> delStuBatch(int[] array){
+	public Map<Integer, Object> delStuBatch(String[] array){
 		Map<Integer,Object> map = new HashMap<>();
 		int num = studentService.delStuBatch(array);
 		if (num>0) {
