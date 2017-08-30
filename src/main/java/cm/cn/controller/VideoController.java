@@ -71,7 +71,7 @@ public class VideoController {
 	    //文件扩展名  
 	    String newvideoFileName = "video"+UUID.randomUUID()+videoFileName.substring(videoFileName.lastIndexOf("."));  
 	    String newPicName = "pic"+UUID.randomUUID()+picName.substring(picName.lastIndexOf("."));
-	 // 存储视屏的物理路径"/tmp/"、"D:\\"
+	 // 存储视屏的物理路径"D:\\"、"/tmp/"
 	 	 	String video_path = "/tmp/";
 	 	 	String pic_path = "/tmp/";
 	 	// 新视屏

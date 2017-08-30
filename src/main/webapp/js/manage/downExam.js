@@ -29,7 +29,7 @@
         $.get('/SSMDemo/level/selTwo.action?id=' + id, function (data, status) {
             if (status == 'success') { // 成功了
                 op = '';
-                console.log(data);
+                // console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].id + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
                 }

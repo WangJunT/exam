@@ -18,7 +18,7 @@
     height: auto;
 }
 .allBox li>span{
-    width: 20%;
+    width: 16.6%;
     display: inline-block;
     height: 40px;
     line-height: 40px;
@@ -28,6 +28,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.allBox .dle{
+    display: block;
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    border-radius: 3px;
+    background: #88bbd6;
+    text-decoration: none;
 }
 .allBox span > a{
     display: inline-block;

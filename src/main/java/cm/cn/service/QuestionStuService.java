@@ -3,6 +3,7 @@ package cm.cn.service;
 import java.util.List;
 
 import cm.cn.po.JsQuestionStu;
+import cm.cn.po.StuDoneQues;
 
 public interface QuestionStuService {
 	//首先查询数据库是否有该学生的做题记录（如果有查询上次做题记录,没有则从头开始）可用作登陆起点，
@@ -14,4 +15,6 @@ public interface QuestionStuService {
 	public int updateRecord(JsQuestionStu jsQuestionStu);
 	//删除学生时删除对应的做题信息
 	public int delQuesStu(int id);
+	//查询学生做题信息
+	public List<StuDoneQues> selStuDeonQues();
 }

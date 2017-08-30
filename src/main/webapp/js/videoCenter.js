@@ -36,8 +36,12 @@
         //data = JSON.parse(data);
         allRecord = data.totalRecord;
         allpage = data.totalPage;
-        for(var i = 0;i < data.dataList.length; i++) {
-            str += '<li data-id="'+data.dataList[i].id+'"><div class="imgBox"><img src="/pic/'+data.dataList[i].picname+'"></div><div class="nameBox">'+data.dataList[i].name+'</div> </li>';
+        if (current == 1 && data.dataList == undefined){
+            str = '当前工种没有视频课程.';
+        } else {
+            for(var i = 0;i < data.dataList.length; i++) {
+                str += '<li data-id="'+data.dataList[i].id+'"><div class="imgBox"><img src="/pic/'+data.dataList[i].picname+'"></div><div class="nameBox">'+data.dataList[i].name+'</div> </li>';
+            }
         }
         $('#allVideo').html(str);
     });

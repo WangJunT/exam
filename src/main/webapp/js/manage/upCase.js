@@ -30,6 +30,9 @@
     // 点击上传
     $('#upLoad').click(function(){
         if (can) {
+        	if ($('#firstSelect').val()==null || $('#secondSelect').val() == null){
+        		alert('请选择类别');
+        	} else {
             var formData = new FormData();
             formData.append('file', $('#uploadFile')[0].files[0]);
             //var byteSize  = $('#uploadFile')[0].files[0].size;
@@ -51,6 +54,7 @@
                     $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
                 }
             });
+        	}
         }
     });
     // 选择文件

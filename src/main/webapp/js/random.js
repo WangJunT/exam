@@ -36,6 +36,8 @@ var caseques = '';
         }else if (selectOneNum*selectOneScore + selectJudgeNum*selectJudgeScore + selectMoreScore*selectMoreNum + allCaseScore() != 100) {
             alert(selectOneNum*selectOneScore + selectJudgeNum*selectJudgeScore + selectMoreScore*selectMoreNum + allCaseScore());
             alert('请确保试题总分为100分');
+        }else if($('#firstSelect').val()==null || $('#secondSelect').val() == null){
+        	alert('类别不能为空');
         }else{ // 格式均正确，发送数据到服务端
             // 获取多选题
             if (caseques != '') {

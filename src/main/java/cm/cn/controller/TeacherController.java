@@ -2,6 +2,7 @@ package cm.cn.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import cm.cn.po.StuDoneQues;
 import cm.cn.service.ExamPaperService;
 import cm.cn.service.ExampaperStuService;
 import cm.cn.service.QuestionService;
+import cm.cn.service.QuestionStuService;
 import cm.cn.service.StudentService;
 import cm.cn.service.VideoService;
 
@@ -25,6 +27,8 @@ import cm.cn.service.VideoService;
 @RequestMapping("/tea")
 //老师查看各种信息
 public class TeacherController {
+	@Autowired
+	QuestionStuService questionStuService;
 	@Autowired
 	QuestionService questionService;
 	@Autowired
@@ -109,7 +113,7 @@ public class TeacherController {
 	@RequestMapping("/selStuQues")
 	@ResponseBody
 	public Page<StuDoneQues> selStuQues(int current,int pageSize){
-		List<StuDoneQues> list = questionService.selStuDeonQues();
+		List<StuDoneQues> list = questionStuService.selStuDeonQues();
 		Page<StuDoneQues> page= null;
 		if (list.size()>0) {
 			page= new Page<StuDoneQues>(current, pageSize,list);

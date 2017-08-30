@@ -49,28 +49,31 @@ public class QuesExcelUtil {
 				int type_id = (int) row.getCell(0).getNumericCellValue(); // 题型
 				String title_center = row.getCell(1).getStringCellValue(); // 题干
 				row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
-				String an_A = row.getCell(2).getStringCellValue();//A
-				row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
-				String an_B = row.getCell(3).getStringCellValue();
-				row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
-				String an_C = row.getCell(4).getStringCellValue();
-				row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
-				String an_D = row.getCell(5).getStringCellValue();
-				String answer = row.getCell(6).getStringCellValue();
-				if (row.getCell(7)!=null){
+				String strABCD = row.getCell(2).getStringCellValue();//A,B,C,D四个选项内容
+				String[] str = strABCD.split("[A-D]\\、");
+				if (type_id==3) {
+					String an_A = str[1];
+					String an_B = str[2];
+					jsQuesion.setAnA(an_A);
+					jsQuesion.setAnB(an_B);
+				}
+				else{
+					String an_A = str[1];
+					String an_B = str[2];
+					String an_C = str[3];
+					String an_D = str[4];
+					jsQuesion.setAnA(an_A);
+					jsQuesion.setAnB(an_B);
+					jsQuesion.setAnC(an_C);
+					jsQuesion.setAnD(an_D);
+				}
+				String answer = row.getCell(3).getStringCellValue();
+				if (row.getCell(4)!=null){
 					//解析
-					String reserveOne = row.getCell(7).getStringCellValue();
+					String reserveOne = row.getCell(4).getStringCellValue();
 					jsQuesion.setReserveOne(reserveOne);
 				}
-//				int difficult_id = (int)row.getCell(7).getNumericCellValue(); // 难易程度
-//				String exam_type = String.valueOf((int) row.getCell(8).getNumericCellValue());//常规必考
 				jsQuesion.setTitle(title_center);
-				jsQuesion.setAnA(an_A);
-				jsQuesion.setAnB(an_B);
-				jsQuesion.setAnC(an_C);
-				jsQuesion.setAnD(an_D);
-//				jsQuesion.setDifficultType(difficult_id);
-//				jsQuesion.setExamType(exam_type);
 				jsQuesion.setTypeId(type_id);
 				jsQuesion.setAnswer(answer);
 				jsQuesion.setReserveFive(reserveFive);
@@ -99,7 +102,6 @@ public class QuesExcelUtil {
 			// 开始循环表格数据,表格的行索引从 0 开始
 					// employees.xlsx 第一行是标题行，我们从第二行开始, 对应的行索引是 1
 					// sheet.getLastRowNum() : 获取当前表格中最后一行数据对应的行索引
-//			System.out.println(sheet.getLastRowNum());
 			for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
 //					for (int rowIndex = 1; rowIndex <= 1963; rowIndex++) {
 				JsQuesion jsQuesion = new JsQuesion();
@@ -111,28 +113,31 @@ public class QuesExcelUtil {
 				int type_id = (int) row.getCell(0).getNumericCellValue(); // 题型
 				String title_center = row.getCell(1).getStringCellValue(); // 题干
 				row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
-				String an_A = row.getCell(2).getStringCellValue();//A
-				row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
-				String an_B = row.getCell(3).getStringCellValue();
-				row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
-				String an_C = row.getCell(4).getStringCellValue();
-				row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
-				String an_D = row.getCell(5).getStringCellValue();
-				String answer = row.getCell(6).getStringCellValue();
-				if (row.getCell(7)!=null){
+				String strABCD = row.getCell(2).getStringCellValue();//A,B,C,D四个选项内容
+				String[] str = strABCD.split("[A-D]\\、");
+				if (type_id==3) {
+					String an_A = str[1];
+					String an_B = str[2];
+					jsQuesion.setAnA(an_A);
+					jsQuesion.setAnB(an_B);
+				}
+				else{
+					String an_A = str[1];
+					String an_B = str[2];
+					String an_C = str[3];
+					String an_D = str[4];
+					jsQuesion.setAnA(an_A);
+					jsQuesion.setAnB(an_B);
+					jsQuesion.setAnC(an_C);
+					jsQuesion.setAnD(an_D);
+				}
+				String answer = row.getCell(3).getStringCellValue();
+				if (row.getCell(4)!=null){
 					//解析
-					String reserveOne = row.getCell(7).getStringCellValue();
+					String reserveOne = row.getCell(4).getStringCellValue();
 					jsQuesion.setReserveOne(reserveOne);
 				}
-//				int difficult_id = (int)row.getCell(8).getNumericCellValue(); // 难易程度
-//				String exam_type = String.valueOf((int) row.getCell(9).getNumericCellValue());//常规必考
 				jsQuesion.setTitle(title_center);
-				jsQuesion.setAnA(an_A);
-				jsQuesion.setAnB(an_B);
-				jsQuesion.setAnC(an_C);
-				jsQuesion.setAnD(an_D);
-//				jsQuesion.setDifficultType(difficult_id);
-//				jsQuesion.setExamType(exam_type);
 				jsQuesion.setTypeId(type_id);
 				jsQuesion.setAnswer(answer);
 				jsQuesion.setReserveFive(reserveFive);

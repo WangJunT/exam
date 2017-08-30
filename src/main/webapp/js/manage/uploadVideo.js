@@ -19,21 +19,25 @@
     })
     // 上传视频
     $('#upload').click(function () {
-        var name = $('#name').val().replace(/\s/g,'');
-        var desc = $('#desc').val().replace(/\s/g,'');
-        if (!hasVideo){
-            $('#msg').html('请选择视频');
-        }else if (!hasImg) {
-            $('#msg').html('请选择封面图片');
-        } else if(name.length == 0 || desc.length == 0) {
-            $('#msg').html('课程名称或者描述不能为空');
-        } else {
-            if (status == 0) {
-                upload(name,desc);
-            } else {
+    	if ($('#firstSelect').val()==null || $('#secondSelect').val() == null){
+    		alert('请选择类别');
+    	} else {
+    		var name = $('#name').val().replace(/\s/g,'');
+    		var desc = $('#desc').val().replace(/\s/g,'');
+    		if (!hasVideo){
+    			$('#msg').html('请选择视频');
+    		}else if (!hasImg) {
+    			$('#msg').html('请选择封面图片');
+    		} else if(name.length == 0 || desc.length == 0) {
+    			$('#msg').html('课程名称或者描述不能为空');
+    		} else {
+    			if (status == 0) {
+    				upload(name,desc);
+    			} else {
                 upLoadData(name,desc);
-            }
-        }
+    			}
+    		}
+    	}
     });
     //监听视频文件变化
     $(document).on('change','#uploadVideo',function () {

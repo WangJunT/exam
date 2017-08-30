@@ -7,7 +7,9 @@
     var theCase = [],theScore = [];// 记录多选题
     var start = 0, curlP = 0,beginStart = 0,time = 0,
         topicId = 0,nowP = 0 ;// 题目id
+    var lastPosition = 0;// 记录最后一个做题位置
     var ls = sessionStorage.getItem('isLoad');
+    var trueAns = 0,falseAns = 0;// 搜集正确个数
     var M ={};// 用于弹窗应用
     if (ls == 'undefined' || ls == null) { //未登录不可访问
         window.location.href = '/SSMDemo/index/first.action';
@@ -94,18 +96,23 @@
     // 点击交卷
     $('#handIn').click(function () {
         if (from == 0){
-            var n = 0;
-            for (var i = 0 ; i < TheChoose.length; i++){
-                if (TheChoose[i] != undefined) {
-                    n++;
-                }
-            }
-            $.get('/SSMDemo/question/quitPractice.action?start='+n,function (data, status) {
-                if (status == 'success') {
-                    alert('本次做题数为:'+n);
+            var rt = trueAns/(trueAns + falseAns);
+            var data = {start: trueAns + falseAns,rate:rt.toFixed(2),time: time,num : lastPosition};
+            data = JSON.stringify(data);
+            // console.log(data);
+            $.ajax({
+                url: '/SSMDemo/question/quitPractice.action',
+                contentType: "application/json ;charset=utf-8",
+                type: 'POST',
+                crossDomain: true,
+                dataType: 'json',
+                data: data,
+                success: function () {
+                    alert('本次做题数为:'+(trueAns + falseAns));
                     window.location.href = '/SSMDemo/index/first.action';
-                } else {
-                    alert('发生错误，请稍后重试');
+                },
+                error: function (msg) {
+                    alert('请求错误,稍后重试');
                 }
             });
 
@@ -164,11 +171,54 @@
         //console.log(TheChoose[nowP]);
         // 处理练习题
         if (from == 0) {
-            if (ans == examData[curlP].answer) {
-                $('#anMsg').html('恭喜你:<span>答对了!</span>答案为:<span>'+ans+'</span>');
+            var name =  $(this).attr('name');
+            if ($(this).attr('type') == 'radio') { // 单选题
+                $('input[name = ' + name + ']').attr('disabled','true');
+                var p = Number($(this).attr('data-examid'));
+                // 确认最后完成题目位置
+                if (p > lastPosition) {
+                    lastPosition = p;
+                }
+                if (ans == examData[curlP].answer) {
+                    trueAns += 1;
+                    $('#anMsg').html('恭喜你:<span>答对了!</span>答案为:<span>'+ans+'</span>');
+                } else {
+                    falseAns += 1;
+                    $('#anMsg').html('答错了.正确答案为:<span>'+examData[curlP].answer+'</span>');
+                    $('#anMsg span').css('color','#db7d77');
+                }
+                if (examData[curlP].reserveOne != null) {
+                    $('#analyBox').css('display','block');
+                    $('#theAnaly').html(examData[curlP].reserveOne);
+                }
+            } else { // 多选题
+
+            }
+        }
+    });
+    // 多选题确认
+    $('#showAns').click(function () {
+        var index = $(this).attr('data-index');
+        var name =  $(this).attr('data-id');
+        $(this).attr('display','none');
+        if (from == 0) { // 顺序练习
+            $('input[name = ' + name + ']').attr('disabled','true');
+            var p = Number($('input[name = ' + name + ']').attr('data-examid'));
+            // 确认最后完成题目位置
+            if (p > lastPosition) {
+                lastPosition = p;
+            }
+            if (TheChoose[index] == examData[index].answer) {
+                trueAns += 1;
+                $('#anMsg').html('恭喜你:<span>答对了!</span>答案为:<span>'+TheChoose[index]+'</span>');
             } else {
-                $('#anMsg').html('答错了.正确答案为:<span>'+examData[curlP].answer+'</span>');
+                falseAns += 1;
+                $('#anMsg').html('答错了.正确答案为:<span>'+examData[index].answer+'</span>');
                 $('#anMsg span').css('color','#db7d77');
+            }
+            if (examData[index].reserveOne != null) {
+                $('#analyBox').css('display','block');
+                $('#theAnaly').html(examData[index].reserveOne);
             }
         }
     });
@@ -176,6 +226,11 @@
     $.get(url,function (data){
         // 时间框
         ///////////////////
+        console.log(data);
+        setInterval(function () {
+            time = time + 1;
+            $('#time').html(getTime(time));
+        },1000);
         if (from == 0) {
             $('#timeTitle').html('正在顺序练习');
             //
@@ -184,18 +239,23 @@
                 $('#log').click();
             }
             //
-            examData = data;
-
+            //console.log(data);
+            var start = data[0];
+            examData = data[1];
+            if (start <= data[1].length)
+                curlP = start;
+            else
+                curlP = data[1].length;
             var type = 0;
-            if (data[0].typeId == 1) {
+            if (data[1][start].typeId == 1) {
                 type = 0;
-                showExam(data[0],0,type,0);
-            } else if (data[0].typeId == 2) {
+                showExam(data[1][start],start,type,0);
+            } else if (data[1][start].typeId == 2) {
                 type = 1;
-                showExam(data[0],0,type,0);
-            } else if (data[0].typeId == 3) {
+                showExam(data[1][start],start,type,0);
+            } else if (data[1][start].typeId == 3) {
                 type = 2;
-                showExam(data[0],0,type,0);
+                showExam(data[1][start],start,type,0);
             }
             // else {
             //     LinkCase(data[1][0],0,0);
@@ -205,10 +265,6 @@
             loadMenu(data);
             // 获取所有题目答案
             getAns(data);
-            setInterval(function () {
-                time = time + 1;
-                $('#time').html(getTime(time));
-            },1000);
             ////////
             examData = data;
             // console.log(data[1]);
@@ -243,12 +299,17 @@
     // 显示试题
     function showExam(data,index,type,score){
         var theType = '';
+        $('#showAnsBox').css('display','none');
         if (type == 0 ){
             theType = 'radio';
             $('#itemType').html('单选题');
         } else if (type == 1){
             theType = 'checkbox';
             $('#itemType').html('多选题');
+            if (from == 0) {
+                $('#showAnsBox').css('display','block');
+                $('#showAns').attr({'data-id' : data.id, 'data-index' : index});
+            }
         } else if (type == 2) {
             theType = 'radio';
             $('#itemType').html('判断题');
@@ -260,6 +321,7 @@
         $('#itemTitle').css('background','#fff');
         $('#minItem').html('');
         $('#anMsg').html('');
+        $('#analyBox').css('display','none');
         // 加载选项
         // 确定选项
         var theOP = [];
@@ -290,8 +352,24 @@
         //
         if (from == 0) {
             if (TheChoose[index] == examData[index].answer) {
+                // 包含解析，就显示解析
+                if (examData[index].reserveOne != null) {
+                    $('#analyBox').css('display','block');
+                    $('#theAnaly').html(examData[index].reserveOne);
+                }
+                // 按钮不显示
+                $('#showAnsBox').css('display','none');
+                $('input[name = ' + data.id + ']').attr('disabled','true');
                 $('#anMsg').html('恭喜你:<span>答对了!</span>答案为:<span>'+TheChoose[index]+'</span>');
             } else if (TheChoose[index] != undefined){
+                // 包含解析就解析
+                if (examData[index].reserveOne != null) {
+                    $('#analyBox').css('display','block');
+                    $('#theAnaly').html(examData[index].reserveOne);
+                }
+                // 按钮不显示
+                $('#showAnsBox').css('display','none');
+                $('input[name = ' + data.id + ']').attr('disabled','true');
                 $('#anMsg').html('答错了.正确答案为:<span>'+examData[index].answer+'</span>');
                 $('#anMsg span').css('color','#db7d77');
             }
@@ -426,7 +504,20 @@
             }
             return miu +":"+ sec;
         } else {
-            return '超时';
+            var hour,miu, sec;
+            hour = parseInt(time/3600);
+            miu = parseInt((time - hour*3600)/60);
+            sec = time - hour*3600 - min*60;
+            if (0 < hour && hour < 10) {
+                hour = 0 + ':' + hour;
+            }
+            if ( 0 < miu && miu <10) {
+                miu = 0+''+miu;
+            }
+            if (0 < sec && sec < 10){
+                sec = 0+''+sec;
+            }
+            return hour + ':' + miu + ':' + sec;
         }
     }
     // 获得所有试题和答案

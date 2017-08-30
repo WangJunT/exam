@@ -9,7 +9,7 @@
     function getStu(current,size) {
         $.get('/SSMDemo/tea/selStuQues.action?current='+ current + '&pageSize='+ size,function (data,status) {
             if (status == 'success') {
-                 // console.log(data);
+                 console.log(data);
                 totalPage = data.totalPage;
                 if (data.dataList != undefined) {
                     showList(data.dataList);
@@ -48,8 +48,27 @@
         // console.log(data);
         var str = '';
         for (var i = 0; i < data.length; i++) {
-            str += '<li><span >'+data[i].stuName+'</span><span>'+data[i].first+'</span><span >'+data[i].total+'</span></li>';
+            var time = getTime(data[i].time);
+            str += '<li><span >'+data[i].stuName+'</span><span>'+data[i].first+'</span><span >'+data[i].total+'</span><span>'+data[i].rate*100+'%</span><span title="'+time+'">'+time+'</span></li>';
         }
         $('#student').html(str);
+    }
+    //获取时间
+    // 时间
+    function getTime(time) {
+       if (0 < time && time < 60) {
+            return time+'秒';
+        } else if ( 59 < time && time < 60*60) {
+            var miu ,sec;
+            miu = parseInt(time/60);
+            sec = time - miu*60;
+            return miu + "分" + sec + '秒';
+        } else {
+            var hour,miu, sec;
+            hour = parseInt(time/3600);
+            miu = parseInt((time - hour*3600)/60);
+            sec = time - hour*3600 - min*60;
+            return hour + '小时' + miu + '分' + sec+'秒';
+        }
     }
 })($);

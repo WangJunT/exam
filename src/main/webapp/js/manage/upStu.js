@@ -30,6 +30,9 @@
     // 点击上传
     $('#upLoad').click(function(){
         if (can) {
+        	if ($('#firstSelect').val()==null || $('#secondSelect').val() == null){
+        		alert('请选择类别');
+        	} else {
             var formData = new FormData();
             formData.append('file', $('#uploadFile')[0].files[0]);
             //var byteSize  = $('#uploadFile')[0].files[0].size;
@@ -51,6 +54,7 @@
                     $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
                 }
             });
+        	}
         }
     });
     // 选择文件
@@ -85,7 +89,7 @@
     function uploadMsg(filePath,reserveFive,reserveSix){
         var data = {filePath: filePath,reserveFive:reserveFive,reserveSix: reserveSix};
         data = JSON.stringify(data);
-        console.log(data);
+        //console.log(data);
         $.ajax({
             'url': '/SSMDemo/admin/addStuFile.action',
             type:'post',
@@ -119,7 +123,7 @@
         $.get('/SSMDemo/level/selTwo.action?id=' + id, function (data, status) {
             if (status == 'success') { // 成功了
                 op = '';
-                console.log(data);
+                //console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].id + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
                 }

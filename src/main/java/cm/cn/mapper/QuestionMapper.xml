@@ -41,7 +41,8 @@
 	<!--         creater, -->
 	<!--         leibie_type, -->
 	     reserve_five,
-	    reserve_six
+	    reserve_six,
+	    reserve_one
 	<!--         difficult_type, -->
 	<!--         know_type, -->
 	<!--         reserve_one, -->
@@ -61,7 +62,8 @@
         #{item.anD,jdbcType=VARCHAR},
         #{item.answer,jdbcType=VARCHAR},
         #{item.reserveFive,jdbcType=VARCHAR},
-	    #{item.reserveSix,jdbcType=VARCHAR}
+	    #{item.reserveSix,jdbcType=VARCHAR},
+	    #{item.reserveOne,jdbcType=VARCHAR}
 	<!--         #{item.creater,jdbcType=VARCHAR}, -->
 	<!--         #{item.leibieType,jdbcType=VARCHAR}, -->
 	<!--         #{item.difficultType,jdbcType=INTEGER}, -->

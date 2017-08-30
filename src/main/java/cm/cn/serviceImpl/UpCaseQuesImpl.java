@@ -40,7 +40,7 @@ public class UpCaseQuesImpl implements UpCaseQues {
 			}catch(IOException e){
 				e.printStackTrace();
 			}
-			HSSFSheet sheet = workbook.getSheetAt(3);
+			HSSFSheet sheet = workbook.getSheetAt(2);
 			JsCase jsCase = null;
 			JsCasequestion jsCasequestion = null;
 			int id = 0;

@@ -2,7 +2,8 @@
  * Created by Admin on 2017/8/27.
  */
 (function ($) {
-    var totalPage = 0, hasShow = false,stuData = [],changeId=0,positionId=0;
+    var totalPage = 0, hasShow = false,stuData = [],changeId = 0,positionId = 0;
+    var nowPage = 0, choose = [], nowChoose = [];
     // 获得数据
     $.get('/SSMDemo/level/selOne.action', function (data, status) {
         if (status == 'success') {
@@ -25,6 +26,55 @@
         $('#student').html('');
         $('#page').empty();// 清空子元素
         addSecond(id);
+    });
+    $(document).on('change','#secondSelect',function () {
+        hasShow = false;
+        $('#student').html('');
+        $('#page').empty();// 清空子元素
+        getStu(1,10);
+    })
+    // 监听选择
+    $(document).on('change','input[name = moreDelete]',function () {
+        nowChoose = [];
+        $('[name = moreDelete]:checked').each(function () {
+            var position = Number($(this).attr('data-position'));
+            nowChoose[position] = Number($(this).attr('data-id'));
+        });
+        choose[nowPage] = nowChoose;
+    });
+    // 批量删除
+    $('#batchDelete').click(function () {
+        // console.log(choose);
+        var array = [];
+        /// 获得需要删除的数据
+        for (var i = 0; i < choose.length; i++) {
+            if (choose[i] != undefined) {
+                for (var j = 0; j < choose[i].length; j++) {
+                    if (choose[i][j] != undefined) {
+                        array.push(choose[i][j]);
+                    }
+                }
+            }
+        }
+        //////
+        if (array.length == 0) {
+            alert('请至少选择一项');
+        } else {
+            // console.log(array);
+            $.get('/SSMDemo/tea/delStuBatch.action?array=' + array, function (data, status) {
+                if (status == 'success') {
+                    if (data[0] != undefined) {
+                        alert(data[0]);
+                        //重新载入
+                        window.location.reload();
+                    } else {
+                        alert(data[1]);
+                    }
+                } else {
+                    alert('发生错误，请稍后重试');
+                }
+            })
+        }
     });
     // 显示学生信息
     // getStu(1,10);
@@ -142,6 +192,12 @@
                            nextPageText: "下一页",// 下一页文本
                            callback: function(current) {
                                // 回调,current(当前页数)
+                               nowPage = current - 1;
+                               if (choose[nowPage] != undefined) {
+                                   nowChoose = choose[nowPage];
+                               } else {
+                                   nowChoose = [];
+                               }
                                $.get('/SSMDemo/tea/selStu.action?current='+current+'&pageSize='+10+'&reserveFive='+$('#firstSelect').val()+'&reserveSix='+$('#secondSelect').val(),function (data,status) {
                                    if (status == 'success') {
                                        showList(data.dataList);
@@ -165,7 +221,11 @@
         stuData = data;
         var str = '';
         for (var i = 0; i < data.length; i++) {
-            str += '<li><span id="name'+data[i].id+'">'+data[i].username+'</span><span id="phone'+data[i].id+'">'+data[i].phone+'</span><span id="real'+data[i].id+'">'+data[i].realname+'</span><span id="card'+data[i].id+'">'+data[i].idcard+'</span><span><a href="javascript:void(0)" class="left" id="change" data-id="'+data[i].id+'" data-position="'+i+'">修改</a> <a href="javascript:void(0)" id="delete" data-id="'+data[i].id+'">删除</a></span></li>';
+            var checked = '';
+            if (nowChoose[i] != undefined) {
+                checked = 'checked';
+            }
+            str += '<li id="all'+data[i].id+'"><span><input type="checkbox" name="moreDelete" data-id="'+data[i].id+'" data-position="'+i+'" '+checked+'></span><span id="name'+data[i].id+'">'+data[i].username+'</span><span id="phone'+data[i].id+'">'+data[i].phone+'</span><span id="real'+data[i].id+'">'+data[i].realname+'</span><span id="card'+data[i].id+'">'+data[i].idcard+'</span><span><a href="javascript:void(0)" class="left" id="change" data-id="'+data[i].id+'" data-position="'+i+'">修改</a> <a href="javascript:void(0)" id="delete" data-id="'+data[i].id+'">删除</a></span></li>';
         }
         $('#student').html(str);
     }

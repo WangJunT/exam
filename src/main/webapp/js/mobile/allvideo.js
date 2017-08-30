@@ -52,8 +52,12 @@
                 allpage = data.totalPage;
                 now = data.currentPage;
                 var str = '';
-                for(var i = 0;i < data.dataList.length; i++) {
-                    str += '<div class="oneItem" data-id="'+data.dataList[i].id+'"><div class="imgBox"><img src="/pic/'+data.dataList[i].picname+'"></div><div class="courseName">'+data.dataList[i].name+'</div> </div>';
+                if (current == 1 && data.dataList == undefined){
+                    str = '<div style="font-size: 0.36rem;text-align: center">当前工种没有视频课程.</div>';
+                } else {
+                    for(var i = 0;i < data.dataList.length; i++) {
+                        str += '<div class="oneItem" data-id="'+data.dataList[i].id+'"><div class="imgBox"><img src="/pic/'+data.dataList[i].picname+'"></div><div class="courseName">'+data.dataList[i].name+'</div> </div>';
+                    }
                 }
                 $('#videoList').append(str);
             } else {

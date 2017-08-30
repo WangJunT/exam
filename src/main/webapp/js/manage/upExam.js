@@ -30,6 +30,9 @@
     // 点击上传
     $('#upLoad').click(function(){
         if (can) {
+        	if ($('#firstSelect').val()==null || $('#secondSelect').val() == null){
+        		alert('请选择类别');
+        	} else {
             var formData = new FormData();
             formData.append('file', $('#uploadFile')[0].files[0]);
             //var byteSize  = $('#uploadFile')[0].files[0].size;
@@ -43,7 +46,7 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                     uploadMsg(data,$('#firstSelect').val(),$('#secondSelect').val());
                 },
                 error: function (data) {
@@ -51,6 +54,7 @@
                     $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
                 }
             });
+        	}
         }
     });
     // 选择文件
@@ -106,20 +110,13 @@
                 $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
             }
         });
-        // $.get('/SSMDemo/admin/addStuFile.action?filePath='+filePath+'&reserveFive='+reserveFive+'&reserveSix='+reserveSix,function (data) {
-        //     alert('上传成功');
-        //     can = false;
-        //     $('#uploadFile').val('');
-        //     $('#fileName').html('选择文件');
-        //     $('#upLoad').val('上传文件');
-        // });
     }
     /////
     function addSecond(id) {
         $.get('/SSMDemo/level/selTwo.action?id=' + id, function (data, status) {
             if (status == 'success') { // 成功了
                 op = '';
-                console.log(data);
+                // console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].id + '" data-id="' + data[i].id + '">' + data[i].name + '</option>';
                 }

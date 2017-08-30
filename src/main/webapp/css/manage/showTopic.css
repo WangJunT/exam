@@ -18,7 +18,7 @@
     height: auto;
 }
 .allBox li>span{
-    width: 33.3%;
+    width: 25%;
     display: inline-block;
     height: 40px;
     line-height: 40px;
@@ -63,4 +63,15 @@
     line-height: 30px;
     border-left: 8px #88bbd6 solid;
     font-weight: bold;
+}
+.allBox .dle{
+    display: block;
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    border-radius: 3px;
+    background: #88bbd6;
+    text-decoration: none;
 }

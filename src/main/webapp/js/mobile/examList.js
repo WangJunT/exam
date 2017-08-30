@@ -24,7 +24,7 @@
             // console.log('到达底部');
             if (now < allpage ){
                 now += 1;
-                getVideo(now);
+                getList(now);
             }
         }
     });
@@ -40,8 +40,12 @@
                 allpage = data.totalPage;
                 now = data.currentPage;
                 var str = '';
-                for(var i = 0;i < data.dataList.length; i++) {
-                    str += '<li>'+data.dataList[i].name+'<input type="button" id="goTo" data-ExamId="'+data.dataList[i].id+'" value="去考试"></li>';
+                if (data.dataList == undefined && current == 1) {
+                    str = '<li>当前工种没有可做试卷</li>';
+                } else {
+                    for(var i = 0;i < data.dataList.length; i++) {
+                        str += '<li>'+data.dataList[i].name+'<input type="button" id="goTo" data-ExamId="'+data.dataList[i].id+'" value="去考试"></li>';
+                    }
                 }
                 $('#allBox').append(str);
             } else {

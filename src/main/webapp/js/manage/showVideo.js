@@ -26,6 +26,12 @@
         $('#page').empty();// 清空子元素
         addSecond(id);
     });
+    $(document).on('change','#secondSelect',function () {
+        hasShow = false;
+        $('#student').html('');
+        $('#page').empty();// 清空子元素
+        getStu(1,10);
+    })
     // 显示学生信息
     // getStu(1,10);
     // 删除视频

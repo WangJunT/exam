@@ -19,10 +19,13 @@
         } else {
             var str = '';
             //console.log(data);
-            for (var i = 0; i < data.dataList.length; i++) {
-                str += '<li>'+data.dataList[i].name+'<a href="javascript:void(0)" id="goTo" data-ExamId="'+data.dataList[i].id+'">去考试</a></li>';
+            if (data.dataList == undefined) {
+               str = '当前工种没有可做试卷';
+            } else {
+                for (var i = 0; i < data.dataList.length; i++) {
+                    str += '<li>'+data.dataList[i].name+'<a href="javascript:void(0)" id="goTo" data-ExamId="'+data.dataList[i].id+'">去考试</a></li>';
+                }
             }
-
             $('#listBox').html(str);
             // 总页数大于1才显示
             if (allpage > 1) {
