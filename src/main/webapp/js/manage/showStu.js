@@ -228,6 +228,7 @@
             str += '<li id="all'+data[i].id+'"><span><input type="checkbox" name="moreDelete" data-id="'+data[i].id+'" data-position="'+i+'" '+checked+'></span><span id="name'+data[i].id+'">'+data[i].username+'</span><span id="phone'+data[i].id+'">'+data[i].phone+'</span><span id="real'+data[i].id+'">'+data[i].realname+'</span><span id="card'+data[i].id+'">'+data[i].idcard+'</span><span><a href="javascript:void(0)" class="left" id="change" data-id="'+data[i].id+'" data-position="'+i+'">修改</a> <a href="javascript:void(0)" id="delete" data-id="'+data[i].id+'">删除</a></span></li>';
         }
         $('#student').html(str);
+        window.parent.changeFrame($('html').height() + 40);
     }
     // 显示修改界面
     function showChange() {

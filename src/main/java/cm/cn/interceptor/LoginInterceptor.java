@@ -8,6 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import cm.cn.po.JsUser;
+import cm.cn.util.StaticInfo;
 
 public class LoginInterceptor implements HandlerInterceptor{  
 	

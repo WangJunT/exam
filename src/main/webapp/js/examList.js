@@ -15,7 +15,7 @@
     $.get('/SSMDemo/exam/selectAll.action?current='+current+'&pageSize=20',function (data) {
         if (data[1] == '!'){
             alert('登录已失效');
-            window.location.href = 'mobileIndex.html';
+            window.location.href = '/SSMDemo/index/first.action';
         } else {
             var str = '';
             //console.log(data);

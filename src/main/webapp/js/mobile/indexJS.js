@@ -5,6 +5,7 @@
     var login = false,
     ls = sessionStorage.getItem('isLoad'),
     addCSS = false;
+    var how = 0;
     if (ls == 'undefined'|| ls == null) {
         login = false;
     } else {
@@ -78,8 +79,8 @@
         }
         var str = '<div class="wall"><div class="loginBox"><div class="loginHead"><a href="javascript:void(0)" id="mobileLogin">手机号登录</a> <a href="javascript:void(0)" id="otherLogin">账号登录</a></div>' +
             '<div class="loginCurst" id="curst"></div> <form class="loginForm"><div class="inputBox">' +
-            '<div class="loginIcon1"></div><input type="text" id="account" placeholder="请输入账号或手机号"></div><div class="inputBox"><div class="loginIcon2"></div><input type="text" id="password" placeholder="请输入密码或账号"><a href="javascript:void(0)" class="getCode" id="getCode">获取验证码</a> </div> ' +
-            '<div class="lastLoadBox"><input type="radio" name="lastAuto">下次自动登录</div></form> <input type="button" class="loginSubmit" value="登录" id="submit"></div></div>';
+            '<div class="loginIcon1"></div><input type="text" id="account" placeholder="请输入手机号"></div><div class="inputBox"><div class="loginIcon2"></div><input type="text" id="password" placeholder="请输入验证码"><a href="javascript:void(0)" class="getCode" id="getCode">获取验证码</a> </div> ' +
+            '</form> <input type="button" class="loginSubmit" value="登录" id="submit"></div></div>';
         $('body').append(str);
         $('.loginBox').children().click(function (e) {
             e.stopPropagation();
@@ -88,14 +89,16 @@
         $('#mobileLogin').click(function () {
             $('#curst').css('transform','translateX(0rem)');
             $('#getCode').css('display','block');
-            $('#password').attr('type','password').val('');
+            $('#password').attr({'type':'text','placeholder':'请输入验证码'}).val('');
+            $('#account').attr('placeholder','请输入手机号');
             how = 0;
         });
         // 以账号登录
         $('#otherLogin').click(function(){
             $('#curst').css({'transform':'translateX(2.5rem)'});
             $('#getCode').css('display','none');
-            $('#password').attr('type','password').val('');
+            $('#password').attr({'type':'password','placeholder':'请输入密码'}).val('');
+            $('#account').attr('placeholder','请输入账号');
             how = 1;
         });
         // 获取验证码

@@ -67,5 +67,8 @@ function chooseCase() {
 }
 // change iframe
 function changeFrame(height) {
+	if (height < $(window).height() - 80) {
+		height = $(window).height();
+	}
     $("#frameBox").css('height',height+'px');
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cm.cn.po.JsUser;
 import cm.cn.service.StudentService;
+import cm.cn.util.StaticInfo;
 
 @Controller
 @RequestMapping("/stu")

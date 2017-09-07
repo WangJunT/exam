@@ -13,45 +13,52 @@
   </header>
 <!--具体区块-->
   <div class="contentBox" id="content">
-    <div class="leftMenu">
+    <div class="leftMenu" id="menu">
       <!--试卷管理-->
-      <div class="menuTitle">试卷管理</div>
-      <ul>
+      <div class="menuTitle" data-id="menu1">试卷管理</div>
+      <ul id="list1">
         <li><a href="javascript:void(0)" id="examManager">管理试卷</a> </li>
         <li><a href="javascript:void(0)" id="random">随机组卷</a> </li>
       </ul>
       <!--学生管理-->
-      <div class="menuTitle">学生管理</div>
-      <ul>
+      <div class="menuTitle" data-id="menu2">学生管理</div>
+      <ul id="list2">
         <li><a href="javascript:void(0)" id="upStudent">上传学生信息</a> </li>
         <li><a href="javascript:void(0)" id="downStudent">导出学生信息</a> </li>
         <li><a href="javascript:void(0)" id="showStu">查看学生信息</a> </li>
         <li><a href="javascript:void(0)" id="showHistory">学生做题信息</a> </li>
       </ul>
       <!--课程-->
-      <div class="menuTitle">课程管理</div>
-      <ul>
+      <div class="menuTitle" data-id="menu3">课程管理</div>
+      <ul id="list3">
         <!--<li><a href="javascript:void(0)">视频课程管理</a> </li>-->
         <li><a href="javascript:void(0)" id="uploadVideo">上传视频课程</a> </li>
         <li><a href="javascript:void(0)" id="showVideo">查看视频课程</a> </li>
       </ul>
       <!--题库管理-->
-      <div class="menuTitle">题库管理</div>
-      <ul>
+      <div class="menuTitle" data-id="menu4">题库管理</div>
+      <ul id="list4">
         <li><a href="javascript:void(0)" id="uploadExam">上传题目</a> </li>
         <li><a href="javascript:void(0)" id="uploadCase">上传简答题</a> </li>
         <li><a href="javascript:void(0)" id="downExam">导出题目</a> </li>
         <li><a href="javascript:void(0)" id="showTopic">查看题目</a> </li>
       </ul>
       <!--类别管理-->
-      <div class="menuTitle">类别管理</div>
-      <ul>
+      <div class="menuTitle" data-id="menu5">类别管理</div>
+      <ul id="list5">
         <li><a href="javascript:void(0)" id="category">管理类别</a> </li>
       </ul>
     </div>
     <!--frame显示区块-->
     <div class="frameBox">
-      <iframe id="frameBox" frameborder="0" src="../examManage.html"></iframe>
+      <!--头部菜单-->
+      <div class="headMenuBox" id="headMenu">
+        <span class="chooseMenu" data-src="examManager">管理试卷<a href="javacript:void(0)" data-position="0">+</a> </span>
+      </div>
+      <!--具体内容-->
+      <div class="theFrame">
+        <iframe id="frameBox" frameborder="0" src="../examManage.html"></iframe>
+      </div>
     </div>
   </div>
 <script src="../../js/jquery.min.js"></script>

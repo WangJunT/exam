@@ -21,6 +21,7 @@ import cm.cn.po.RandomQuestion;
 import cm.cn.service.QuestionService;
 import cm.cn.service.QuestionStuService;
 import cm.cn.service.UpCaseQues;
+import cm.cn.util.StaticInfo;
 
 @Controller
 @RequestMapping("/question")

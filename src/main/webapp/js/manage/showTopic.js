@@ -183,5 +183,7 @@
             str += '<li id="all'+data[i].id+'"><span><input type="checkbox" name="moreDelete" data-id="'+data[i].id+'" data-position="'+i+'" '+checked+'></span><span>'+type+'</span><span title="'+data[i].title+'">'+data[i].title+'</span><span><a href="javascript:void(0)" id="delete" data-id="'+data[i].id+'">删除</a></span></li>';
         }
         $('#student').html(str);
+        // console.log($('body').height()+100);
+        window.parent.changeFrame($('html').height() + 40);
     }
 })($);

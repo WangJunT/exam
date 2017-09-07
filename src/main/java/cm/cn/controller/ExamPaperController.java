@@ -24,6 +24,7 @@ import cm.cn.service.ExamPaperService;
 import cm.cn.service.QuestionService;
 import cm.cn.util.ListTransfrom;
 import cm.cn.util.RandomAndSpiltUtil;
+import cm.cn.util.StaticInfo;
 
 @Controller
 @RequestMapping("/exam")

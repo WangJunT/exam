@@ -3,6 +3,7 @@
  */
 var caseques = '';
 (function ($) {
+    window.parent.changeFrame($('body').height()+40);
     var data,
         name,total,passScore,selectOneNum,selectMoreNum,selectJudgeNum,selectOneScore,selectMoreScore,caseScore,selectJudgeScore,submit;
     $('#submit').click(function () {
@@ -36,9 +37,9 @@ var caseques = '';
         }else if (selectOneNum*selectOneScore + selectJudgeNum*selectJudgeScore + selectMoreScore*selectMoreNum + allCaseScore() != 100) {
             alert(selectOneNum*selectOneScore + selectJudgeNum*selectJudgeScore + selectMoreScore*selectMoreNum + allCaseScore());
             alert('请确保试题总分为100分');
-        }else if($('#firstSelect').val()==null || $('#secondSelect').val() == null){
-        	alert('类别不能为空');
-        }else{ // 格式均正确，发送数据到服务端
+        } else if ($('#secondSelect').val() == null){
+            alert('请选择类别');
+        } else { // 格式均正确，发送数据到服务端
             // 获取多选题
             if (caseques != '') {
                 casequesNum = Number($('#caseScore').val().replace(/\s/g,''));

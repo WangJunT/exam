@@ -7,6 +7,7 @@
     if (browser.browser.toLowerCase() == 'ie' && Number(browser.version) < 10){
         $('body').append('<div class="wall">上传功能，需IE版本在9以上</div>');
     }
+    window.parent.changeFrame(0);
 //  监听文件框变化
     var can = false;
     $('#upLoad').css('background','#a9a9a9');
@@ -30,31 +31,31 @@
     // 点击上传
     $('#upLoad').click(function(){
         if (can) {
-        	if ($('#firstSelect').val()==null || $('#secondSelect').val() == null){
-        		alert('请选择类别');
-        	} else {
-            var formData = new FormData();
-            formData.append('file', $('#uploadFile')[0].files[0]);
-            //var byteSize  = $('#uploadFile')[0].files[0].size;
-            //console.log(byteSize);
-            $(this).val('文件上传中...').attr('disabled','true').css('background','#a9a9a9');
-            $.ajax({
-                url: '/SSMDemo/admin/addCaseFile.action',
-                type: 'POST',
-                cache: false,
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    console.log(data);
-                    uploadMsg(data,$('#firstSelect').val(),$('#secondSelect').val());
-                },
-                error: function (data) {
-                    alert('上传失败,发生错误,请确认文件是否正确，文件内是否包含空白内容。');
-                    $('#upLoad').val('上传文件').removeAttr('disabled').css('background','#88bbd6');
-                }
-            });
-        	}
+            if ($('#secondSelect').val() == null ){
+                alert('请选择类别');
+            } else {
+                var formData = new FormData();
+                formData.append('file', $('#uploadFile')[0].files[0]);
+                //var byteSize  = $('#uploadFile')[0].files[0].size;
+                //console.log(byteSize);
+                $(this).val('文件上传中...').attr('disabled', 'true').css('background', '#a9a9a9');
+                $.ajax({
+                    url: '/SSMDemo/admin/addCaseFile.action',
+                    type: 'POST',
+                    cache: false,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        console.log(data);
+                        uploadMsg(data, $('#firstSelect').val(), $('#secondSelect').val());
+                    },
+                    error: function (data) {
+                        alert('上传失败,发生错误,请确认文件是否正确，文件内是否包含空白内容。');
+                        $('#upLoad').val('上传文件').removeAttr('disabled').css('background', '#88bbd6');
+                    }
+                });
+            }
         }
     });
     // 选择文件

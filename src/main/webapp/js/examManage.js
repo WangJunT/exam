@@ -16,7 +16,6 @@
         } else {
             alert('发生错误，请稍后重试.');
         }
-
     });
     // 监听变化
     $(document).on('change','#firstSelect',function () {
@@ -26,6 +25,13 @@
         $('#page').empty();// 清空子元素
         addSecond(id);
     });
+    // 第二个区块变化
+    $(document).on('change','#secondSelect',function () {
+        hasShow = false;
+        $('#student').html('');
+        $('#page').empty();// 清空子元素
+        getStu(1,10);
+    })
     // 删除试卷
     $(document).on('click','#delete',function (e) {
         var id = $(this).attr('data-id');
@@ -70,11 +76,13 @@
     // 获得学生信息
     function getStu(current,size) {
         $.get('/SSMDemo/tea/selExam.action?current='+current+'&pageSize='+size+'&reserveFive='+$('#firstSelect').val()+'&reserveSix='+$('#secondSelect').val(),function (data,status) {
-            if (status == 'success') {
+         if (status == 'success') {
                 // console.log(data);
                 totalPage = data.totalPage;
                 if (data.dataList != undefined) {
                     showList(data.dataList);
+                } else {
+                    window.parent.changeFrame($('html').height() + 40);
                 }
                 if (hasShow){
 
@@ -118,5 +126,6 @@
             str = '<li><span>'+data[i].name+'</span><span><a href="javascript:void(0)" id="delete" data-id="'+data[i].id+'">删除</a> </span></li>';
         }
         $('#student').html(str);
+        window.parent.changeFrame($('html').height() + 40);
     }
 })($);

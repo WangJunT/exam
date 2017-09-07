@@ -3,6 +3,7 @@
  */
 (function () {
     var id,show = false;
+    window.parent.changeFrame(0);
     // 获得数据
     $.get('/SSMDemo/level/selOne.action',function (data,status) {
         if (status == 'success'){

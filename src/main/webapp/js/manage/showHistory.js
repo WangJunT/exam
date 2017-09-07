@@ -52,6 +52,7 @@
             str += '<li><span >'+data[i].stuName+'</span><span>'+data[i].first+'</span><span >'+data[i].total+'</span><span>'+data[i].rate*100+'%</span><span title="'+time+'">'+time+'</span></li>';
         }
         $('#student').html(str);
+        window.parent.changeFrame($('html').height() + 40);
     }
     //获取时间
     // 时间

@@ -22,6 +22,7 @@ import cm.cn.po.JsUser;
 import cm.cn.po.JsVideo;
 import cm.cn.po.Page;
 import cm.cn.service.VideoService;
+import cm.cn.util.StaticInfo;
 
 @Controller
 @RequestMapping("/video")
@@ -72,8 +73,8 @@ public class VideoController {
 	    String newvideoFileName = "video"+UUID.randomUUID()+videoFileName.substring(videoFileName.lastIndexOf("."));  
 	    String newPicName = "pic"+UUID.randomUUID()+picName.substring(picName.lastIndexOf("."));
 	 // 存储视屏的物理路径"D:\\"、"/tmp/"
-	 	 	String video_path = "/tmp/";
-	 	 	String pic_path = "/tmp/";
+	 	 	String video_path = "D:\\";
+	 	 	String pic_path = "D:\\";
 	 	// 新视屏
 			File videoFile = new File(video_path + newvideoFileName);
 			File picFile = new File(pic_path+newPicName);

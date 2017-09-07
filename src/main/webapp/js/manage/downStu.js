@@ -2,6 +2,7 @@
  * Created by Admin on 2017/8/25.
  */
 (function () {
+    window.parent.changeFrame(0);
     // 获得数据
     $.get('/SSMDemo/level/selOne.action', function (data, status) {
         if (status == 'success') {

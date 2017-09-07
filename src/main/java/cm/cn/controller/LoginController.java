@@ -18,6 +18,7 @@ import cm.cn.po.JsUser;
 import cm.cn.service.StudentService;
 import cm.cn.util.Base64;
 import cm.cn.util.GetCheckCode;
+import cm.cn.util.StaticInfo;
 
 @Controller
 @RequestMapping("/index")
@@ -67,6 +68,7 @@ public class LoginController {
 			long cha = (nowTime-jsUser.getChenkTime())/1000;
 			if(jsUser.getCheckCode().equals(chenk_code)){
 				if(cha<=300){
+//					StaticInfo.sessionid = jsUser.getId();
 					session.setAttribute("user", jsUser);
 					if(jsUser.getRoleId()==3){
 						map.put(0, "student");
@@ -100,6 +102,7 @@ public class LoginController {
 			JsUser jsUser = list.get(0);
 			String password = Base64.encode(("zjedu"+pass+"cn").getBytes());
 			if (password.equals(jsUser.getPassword())) {
+				StaticInfo.sessionid = jsUser.getId();
 				session.setAttribute("user", jsUser);
 				if(jsUser.getRoleId()==3){
 					map.put(0, "student");
@@ -119,7 +122,8 @@ public class LoginController {
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session){
 		//session失效
-		session.invalidate();
+//		session.invalidate();
+		session.removeAttribute("user");
 		//重定向到商品查询页面
 		return "redirect:/index/first.action";
 	}

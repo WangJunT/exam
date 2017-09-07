@@ -96,7 +96,10 @@
     // 点击交卷
     $('#handIn').click(function () {
         if (from == 0){
-            var rt = trueAns/(trueAns + falseAns);
+            var rt = 0;
+            if ((trueAns + falseAns) != 0) {
+            	rt = trueAns/(trueAns + falseAns);
+            }
             var data = {start: trueAns + falseAns,rate:rt.toFixed(2),time: time,num : lastPosition};
             data = JSON.stringify(data);
             // console.log(data);

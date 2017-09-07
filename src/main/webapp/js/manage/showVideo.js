@@ -122,5 +122,6 @@
             str += '<li><span>'+data[i].name+'</span><span title="'+data[i].content+'">'+data[i].content+'</span><span><a href="javascript:void(0)" id="delete" data-id="'+data[i].id+'">删除</a> </span></li>';
         }
         $('#student').html(str);
+        window.parent.changeFrame($('html').height() + 40);
     }
 })($);
