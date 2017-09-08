@@ -15,7 +15,6 @@ import cm.cn.po.JsExampaperStu;
 import cm.cn.po.JsUser;
 import cm.cn.po.StuDoneExam;
 import cm.cn.service.ExampaperStuService;
-import cm.cn.util.StaticInfo;
 
 @Controller
 @RequestMapping("/sexam")

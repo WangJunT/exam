@@ -79,5 +79,10 @@ public class QuestingServiceImpl implements QuestionService {
 		}
 		return jsquestionMapper.deleteByExample(example);
 	}
+	@Override
+	public int updateByid(JsQuesion jsQuesion) {
+		// TODO Auto-generated method stub
+		return jsquestionMapper.updateByPrimaryKeySelective(jsQuesion);
+	}
 
 }

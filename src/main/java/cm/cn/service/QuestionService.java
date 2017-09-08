@@ -30,4 +30,6 @@ public interface QuestionService {
 	public int delQuesBatch(String[] array);
 	//根据层级删除题目
 	public int delQuesByLevel(String reserveSix);
+	//更改题目
+	public int updateByid(JsQuesion jsQuesion); 
 }

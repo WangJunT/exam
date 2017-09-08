@@ -22,6 +22,7 @@ import cm.cn.service.QuestionService;
 import cm.cn.service.QuestionStuService;
 import cm.cn.service.StudentService;
 import cm.cn.service.VideoService;
+import cm.cn.util.Base64;
 
 @Controller
 @RequestMapping("/tea")
@@ -129,4 +130,20 @@ public class TeacherController {
 	public int upStuInfo(@RequestBody JsUser record){
         return studentService.updateStuInfo(record);
 	}
+	//单个添加学生
+	@RequestMapping("/insertStu")
+	@ResponseBody
+	public int insertStu(@RequestBody JsUser record){
+		String password = Base64.encode(("zjedu"+record.getPassword()+"cn").getBytes());
+		record.setPassword(password);
+		return studentService.insertStu(record);
+	}
+	//更改题目信息
+	@RequestMapping("/updateQues")
+	@ResponseBody
+	public int updateQues(@RequestBody JsQuesion record){
+		return questionService.updateByid(record);
+	}
+	//查看学生考试信息 
+	
 }

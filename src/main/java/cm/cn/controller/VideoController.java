@@ -22,7 +22,6 @@ import cm.cn.po.JsUser;
 import cm.cn.po.JsVideo;
 import cm.cn.po.Page;
 import cm.cn.service.VideoService;
-import cm.cn.util.StaticInfo;
 
 @Controller
 @RequestMapping("/video")
